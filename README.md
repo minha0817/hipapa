@@ -1,34 +1,30 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# HiPapa
 
-## Getting Started
+A daycare web page for teachers and parents.
+They can communicate through the web page about children and what happens at day care center. 
 
-First, run the development server:
+**MVP** : Incident reports 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## 👀 Features 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* Login / Logout with Firebase 
+* Display a list of children
+* Add new incident reports  
+* Upload a picture with Cloudinary 
+* Get existed incident report 
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🌸 Deployed domain
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Coming soon! 🥸
+ 
 
-## Learn More
+## 💻 Tech Stack 
 
-To learn more about Next.js, take a look at the following resources:
+<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"><img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">
+<img src="https://img.shields.io/badge/nextjs-000000?style=for-the-badge&logo=Next.js&logoColor=white"><img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"><img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white">
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## ⭐️ What to improve? 
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Add web speech api
+- Add a feature that can send an email alert to parents when reports created 

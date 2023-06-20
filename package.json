@@ -6,13 +6,24 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "tools": "react-tools"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/server": "^11.11.0",
+    "@mantine/core": "^6.0.13",
+    "@mantine/dates": "^6.0.13",
+    "@mantine/form": "^6.0.13",
+    "@mantine/hooks": "^6.0.13",
+    "@mantine/modals": "^6.0.13",
+    "@mantine/next": "^6.0.13",
+    "@mantine/notifications": "^6.0.13",
     "@supabase/supabase-js": "^2.25.0",
     "@types/node": "20.3.1",
     "@types/react": "18.2.12",
     "@types/react-dom": "18.2.5",
+    "dayjs": "^1.11.8",
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.5",
     "next": "13.4.5",
@@ -22,6 +33,7 @@
     "uuidv4": "^6.2.13"
   },
   "devDependencies": {
-    "@faker-js/faker": "^8.0.2"
+    "@faker-js/faker": "^8.0.2",
+    "@s247kim/react-tools": "^2.2.0"
   }
 }

@@ -1,0 +1,29 @@
+@import "../../variables.module.scss";
+
+.login {
+  :global {
+    .title {
+      color: $primary-color;
+      flex-direction: column;
+      display: flex;
+      align-items: center;
+      margin-top: 13rem;
+      font-size: xx-large;
+    }
+    h1 {
+      margin: 0;
+    }
+    h2 {
+      margin: 0;
+      font-family: var(--font-amaticSc);
+    }
+    .loginButton {
+      display: flex;
+      justify-content: center;
+      margin-top: 3rem;
+    }
+    .googleButton {
+      border-radius: 2rem;
+    }
+  }
+}

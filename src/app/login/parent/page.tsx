@@ -1,9 +1,10 @@
+import { Login } from "@/components/login/login.component";
 
 
 export default function () {
   return (
     <div>
-      <h1>Login Parent</h1>
+      <Login />
     </div>
   )
 }

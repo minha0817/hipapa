@@ -1,7 +1,10 @@
+import { Login } from "@/components/login/login.component";
+import styles from "./page.styles.module.scss";
+
 export default function () {
   return (
-    <div>
-      <h1>Login Admin</h1>
+    <div className={styles.loginAdmin}>
+      <Login />
     </div>
   );
 }

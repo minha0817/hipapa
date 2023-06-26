@@ -12,6 +12,7 @@ import styles from "./login.styles.module.scss";
 import { FcGoogle } from "react-icons/fc";
 import { LuBaby } from "react-icons/lu";
 import { Amatic_SC } from "next/font/google";
+import Link from "next/link";
 
 const amaticSc = Amatic_SC({
   subsets: ["latin"],
@@ -40,7 +41,7 @@ const LoginComponent: FC<PropsWithChildren<LoginProps>> = ({ type }) => {
 
         {/* 여기서 type === "admin" && show the toggle  */}
         {type === "admin" && (
-          <Group position="center" my="xl">
+          <Group position="center" my={20}>
             <SegmentedControl
               // value=["teacher", "admin"]
               // onChange={(value: "light" | "dark") => toggleColorScheme(value)}
@@ -65,10 +66,13 @@ const LoginComponent: FC<PropsWithChildren<LoginProps>> = ({ type }) => {
             />
           </Group>
         )}
-
       </div>
       <div className="loginButton">
-        <GoogleButton className="googleButton">Login with Google</GoogleButton>
+        <Link href={`/home/${type}`}>
+          <GoogleButton className="googleButton">
+            Login with Google
+          </GoogleButton>
+        </Link>
       </div>
     </div>
   );

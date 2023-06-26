@@ -1,10 +1,10 @@
 import { Login } from "@/components/login/login.component";
-
+import styles from "./page.styles.module.scss";
 
 export default function () {
   return (
-    <div>
-      <Login />
+    <div className={styles.loginParent}>
+      <Login type="parent"/>
     </div>
   )
 }

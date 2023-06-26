@@ -4,7 +4,7 @@ import styles from "./page.styles.module.scss";
 export default function () {
   return (
     <div className={styles.loginAdmin}>
-      <Login />
+      <Login type="admin"/>
     </div>
   );
 }

@@ -68,7 +68,7 @@ const LoginComponent: FC<PropsWithChildren<LoginProps>> = ({ type }) => {
         )}
       </div>
       <div className="loginButton">
-        <Link href={`/home/${type}`}>
+        <Link href={`/${type}/home`}>
           <GoogleButton className="googleButton">
             Login with Google
           </GoogleButton>

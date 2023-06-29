@@ -14,8 +14,8 @@ import { useDisclosure } from "@mantine/hooks";
 import { IconChevronDown } from "@tabler/icons-react";
 import globalStyles from "../../variables.module.scss";
 import { LuBaby } from "react-icons/lu";
-import styles from "./navbar.styles.module.scss";
 
+// 파일은 하나 만들어서 거기서 import를 해와야함. 
 import { Amatic_SC } from "next/font/google";
 const amaticSc = Amatic_SC({
   subsets: ["latin"],
@@ -28,11 +28,6 @@ const useStyles = createStyles((theme) => ({
   header: {
     backgroundColor: `${globalStyles.secondaryColor}`,
   },
-
-  // logo: {
-  //   fontFamily: amaticSc.variable,
-  //   fontSize: theme.fontSizes.xl,
-  // },
 
   title: {
     display: "flex",
@@ -72,11 +67,7 @@ const useStyles = createStyles((theme) => ({
     fontWeight: 500,
 
     "&:hover": {
-      backgroundColor: theme.fn.lighten(
-        theme.fn.variant({ variant: "filled", color: theme.primaryColor })
-          .background!,
-        0.1
-      ),
+      backgroundColor: `${globalStyles.primaryColor}`
     },
   },
 
@@ -114,7 +105,7 @@ const NavbarComponent: FC<PropsWithChildren<NavbarProps>> = () => {
 
   const items = adminLinks.map((link) => {
     const menuItems = link.links?.map((item) => (
-      <Menu.Item key={item.link}>{item.label}</Menu.Item>
+      <Menu.Item key={item.label}>{item.label}</Menu.Item>
     ));
 
     if (menuItems) {

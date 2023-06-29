@@ -1,6 +1,18 @@
 'use client';
 import { FC, PropsWithChildren, useEffect, useState } from "react";
-
+import {
+  Avatar,
+  Badge,
+  Table,
+  Group,
+  Text,
+  ActionIcon,
+  Anchor,
+  ScrollArea,
+  useMantineTheme,
+} from "@mantine/core";
+import { RxAvatar } from "react-icons/rx";
+import { TbDoorEnter, TbDoorExit } from "react-icons/tb";
 import styles from "./children.styles.module.scss";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Child } from "@/dbModels/types";

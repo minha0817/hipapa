@@ -1,1 +1,16 @@
-.teachers {}
+@import "../../variables.module.scss";
+
+.teachers {
+
+  :global {
+    .title {
+      color: white;
+      background-color: $primary-color;
+      padding: 1rem;
+      width: min-content;
+      margin: 1rem;
+      border-radius: 1rem;
+    }
+  }
+
+}

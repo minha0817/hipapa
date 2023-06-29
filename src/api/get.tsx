@@ -1,22 +1,20 @@
-import { Daycare, Teacher } from "@/dbModels/types";
+import { Child, Daycare, Teacher } from "@/dbModels/types";
 import { SupabaseClient } from "@supabase/supabase-js";
 
 
-export const getDaycare = async (supabase: SupabaseClient): Promise<Daycare[]> => {
-  const { data: daycare, error } = await supabase.from("daycare").select();
-  if(daycare){
-    return daycare
-  } else {
-    throw new Error("Daycares are not found");
-  }
+export const getDaycares = async (supabase: SupabaseClient): Promise<Daycare[]> => {
+  const { data: daycares, error } = await supabase.from("daycare").select();
+  return daycares || [];
 };
 
 export const getTeachers = async (supabase: SupabaseClient): Promise<Teacher[]> => {
-  const { data: teacher, error } = await supabase.from("teacher").select(`*`);
+  const { data: teachers, error } = await supabase.from("teacher").select(`*`);
+  return teachers || []
+};
 
-  if (teacher) {
-    return teacher;
-  } else {
-    throw new Error("Teachers are not found");
-  }
+
+
+export const getChildren = async (supabase: SupabaseClient): Promise<Child[]> => {
+  const { data: children, error } = await supabase.from("child").select(`*`);
+  return children || []
 };

@@ -16,3 +16,14 @@ export type Teacher = {
   birthday: string;
   name: string;
 }
+
+export type Child = {
+  id: string;
+  name: string;
+  is_active: boolean;
+  allergy: string;
+  daycare_id: string;
+  birthday: string;
+  enrolled_day: string;
+  parent_id: string;
+}

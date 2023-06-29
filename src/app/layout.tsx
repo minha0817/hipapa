@@ -4,7 +4,6 @@ import { Inter, Amatic_SC } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
-
 export const metadata = {
   title: "Hipapa",
   description: "Daycare app",

@@ -21,7 +21,7 @@ const amaticSc = Amatic_SC({
   weight: "700",
 });
 
-export function GoogleButton(props: ButtonProps) {
+function GoogleButton(props: ButtonProps) {
   return (
     <Button leftIcon={<FcGoogle />} variant="light" color="gray" {...props} />
   );

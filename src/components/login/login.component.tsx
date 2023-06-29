@@ -39,7 +39,6 @@ const LoginComponent: FC<PropsWithChildren<LoginProps>> = ({ type }) => {
         <h1>{<LuBaby />}</h1>
         <h2 className={amaticSc.variable}>Hipapa</h2>
 
-        {/* 여기서 type === "admin" && show the toggle  */}
         {type === "admin" && (
           <Group position="center" my={20}>
             <SegmentedControl

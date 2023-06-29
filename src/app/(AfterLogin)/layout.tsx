@@ -1,7 +1,14 @@
+import { Navbar } from "@/components/navbar/navbar.component";
+
 export default function AfterLoginLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <main suppressHydrationWarning={true}>{children}</main>;
+  return (
+    <>
+      <Navbar />
+      <main>{children}</main>
+    </>
+  );
 }

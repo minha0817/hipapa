@@ -1,10 +1,6 @@
-import { getDaycare } from "@/api/get";
 import Link from "next/link";
 
 export default async function Home() {
-  // const daycare = await getDaycare();
-
-  // console.log('daycare', daycare);
 
   return (
     <div>

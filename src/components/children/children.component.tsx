@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { FC, PropsWithChildren, useEffect, useState } from "react";
 import {
   Avatar,
@@ -31,17 +31,35 @@ const ChildrenComponent: FC<PropsWithChildren<ChildrenProps>> = () => {
     getChildren(supabase).then((data) => setChildren(data));
   }, []);
 
+  const rows = children.map((child) => (
+    <tr key={child.name}>
+      <td>
+        <Group spacing="sm">
+          {/* DB 에 image 추가해서 사진이 나올수있도록 추후 변경!!! */}
+          {/* <Avatar size={30} src={teacher.avatar} radius={30} /> */}
+          <RxAvatar />
+          <Text fz="sm" fw={500}>
+            {child.name}
+          </Text>
+        </Group>
+      </td>
+      <td>
+        <Group spacing={0} position="right">
+          <ActionIcon>
+            <TbDoorEnter size={20} />
+          </ActionIcon>
+        </Group>
+      </td>
+    </tr>
+  ));
+
   return (
-    <div className={styles.children}>
-      <h1>chilren list</h1>
-      {children.map((child) => {
-        return (
-          <div key={child.id}>
-            <p>{child.name}</p>
-          </div>
-        );
-      })}
-    </div>
+    <ScrollArea className={styles.children}>
+      <p className="title">Children</p>
+      <Table verticalSpacing="sm">
+        <tbody>{rows}</tbody>
+      </Table>
+    </ScrollArea>
   );
 };
 ChildrenComponent.displayName = "Children";

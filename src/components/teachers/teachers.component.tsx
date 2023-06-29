@@ -35,6 +35,7 @@ const TeachersComponent: FC<PropsWithChildren<TeachersProps>> = () => {
     <tr key={teacher.name}>
       <td>
         <Group spacing="sm">
+          {/* DB 에 image 추가해서 사진이 나올수있도록 추후 변경!!! */}
           {/* <Avatar size={30} src={teacher.avatar} radius={30} /> */}
           <RxAvatar />
           <Text fz="sm" fw={500}>

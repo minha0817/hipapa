@@ -146,7 +146,7 @@ const NavbarComponent: FC<PropsWithChildren<NavbarProps>> = () => {
   });
 
   return (
-    <Header height={56} className={classes.header} mb={120}>
+    <Header height={56} className={classes.header}>
       <Container>
         <div className={classes.inner}>
           <div className={classes.title}>

@@ -76,13 +76,13 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-type NavbarProps = {
-  links: {
-    link: string;
-    label: string;
-    links: { link: string; label: string }[];
-  }[];
-};
+// type NavbarProps = {
+//   links: {
+//     link: string;
+//     label: string;
+//     links: { link: string; label: string }[];
+//   }[];
+// };
 
 const adminLinks = [
   {
@@ -99,7 +99,7 @@ const adminLinks = [
   { link: "", label: "Messages" },
 ];
 
-const NavbarComponent: FC<PropsWithChildren<NavbarProps>> = () => {
+const AdminNavbarComponent = () => {
   const [opened, { toggle }] = useDisclosure(false);
   const { classes } = useStyles();
 
@@ -168,6 +168,6 @@ const NavbarComponent: FC<PropsWithChildren<NavbarProps>> = () => {
     </Header>
   );
 };
-NavbarComponent.displayName = "Navbar";
+AdminNavbarComponent.displayName = "AdminNavbar";
 
-export const Navbar = NavbarComponent;
+export const AdminNavbar = AdminNavbarComponent;

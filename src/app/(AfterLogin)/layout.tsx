@@ -1,4 +1,4 @@
-import { Navbar } from "@/components/navbar/navbar.component";
+import { AdminNavbar } from "@/components/adminNavbar/adminNavbar.component";
 
 export default function AfterLoginLayout({
   children,
@@ -7,7 +7,7 @@ export default function AfterLoginLayout({
 }) {
   return (
     <>
-      <Navbar />
+      <AdminNavbar />
       <main>{children}</main>
     </>
   );

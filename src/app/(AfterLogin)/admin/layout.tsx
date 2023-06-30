@@ -1,6 +1,6 @@
 import { AdminNavbar } from "@/components/adminNavbar/adminNavbar.component";
 
-export default function AfterLoginLayout({
+export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;

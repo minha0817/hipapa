@@ -37,15 +37,17 @@ const LoginComponent: FC<PropsWithChildren<LoginProps>> = ({ type }) => {
   useEffect(() => {
     let value;
     value = localStorage.getItem("value") || "";
+    if(type === "parent"){
+      return setValue("parent")
+    }
     setValue(value);
   }, []);
 
   const saveToLocalStorage = (e: any) => {
     e.preventDefault();
-    console.log("localstorage", value);
     localStorage.setItem("value", value);
   };
-
+  console.log('value', value);
   return (
     <div className={styles.login}>
       <div className="title">

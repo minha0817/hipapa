@@ -1,4 +1,4 @@
-import { AdminNavbar } from "@/components/navbar/adminNavbar/adminNavbar.component";
+import { ParentNavbar } from "@/components/navbar/parentNavbar/parentNavbar.component";
 
 export default function AdminLayout({
   children,
@@ -7,7 +7,7 @@ export default function AdminLayout({
 }) {
   return (
     <>
-      <AdminNavbar />
+      <ParentNavbar />
       <main>{children}</main>
     </>
   );

@@ -11,15 +11,8 @@ import {
 import styles from "./login.styles.module.scss";
 import { FcGoogle } from "react-icons/fc";
 import { LuBaby } from "react-icons/lu";
-import { Amatic_SC } from "next/font/google";
 import Link from "next/link";
-
-const amaticSc = Amatic_SC({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-amaticSc",
-  weight: "700",
-});
+import { amaticScFontClass } from "@/lib/font";
 
 function GoogleButton(props: ButtonProps) {
   return (
@@ -37,7 +30,7 @@ const LoginComponent: FC<PropsWithChildren<LoginProps>> = ({ type }) => {
     <div className={styles.login}>
       <div className="title">
         <h1>{<LuBaby />}</h1>
-        <h2 className={amaticSc.variable}>Hipapa</h2>
+        <h2 className={amaticScFontClass}>Hipapa</h2>
 
         {type === "admin" && (
           <Group position="center" my={20}>

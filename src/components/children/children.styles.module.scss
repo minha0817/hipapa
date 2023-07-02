@@ -3,13 +3,15 @@
 .children {
 
   :global {
-    .title {
+    p {
       color: white;
       background-color: $primary-color;
       padding: 1rem;
       width: min-content;
       margin: 1rem;
       border-radius: 1rem;
+      font-family: var(--font-amaticSc);
+      font-size: xx-large;
     }
   }
 

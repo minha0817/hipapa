@@ -3,6 +3,7 @@ import { FC, PropsWithChildren } from "react";
 import { Title } from "@mantine/core";
 import styles from "./currentTime.styles.module.scss";
 import { DateTime } from "luxon";
+import { amaticScFontClass } from "@/lib/font";
 
 type CurrentTimeProps = {
   // ...
@@ -16,9 +17,7 @@ const CurrentTimeComponent: FC<PropsWithChildren<CurrentTimeProps>> = () => {
 
   return (
     <div className={styles.currentTime}>
-      <Title order={3} weight={300} align="center">
-        {today}
-      </Title>
+      <h1 className={amaticScFontClass}>{today}</h1>
     </div>
   );
 };

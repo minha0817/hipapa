@@ -2,22 +2,19 @@
 import { FC, PropsWithChildren, useEffect, useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import {
-  Avatar,
-  Badge,
   Table,
   Group,
   Text,
   ActionIcon,
-  Anchor,
   ScrollArea,
   useMantineTheme,
 } from "@mantine/core";
-import { IconPencil, IconTrash } from "@tabler/icons-react";
 import styles from "./teachers.styles.module.scss";
 import { getTeachers } from "@/api/get";
 import { Teacher } from "@/dbModels/types";
 import { RxAvatar } from "react-icons/rx";
 import { TbDoorEnter, TbDoorExit } from "react-icons/tb";
+import { amaticScFontClass } from "@/lib/font";
 
 type TeachersProps = {};
 
@@ -61,7 +58,7 @@ const TeachersComponent: FC<PropsWithChildren<TeachersProps>> = () => {
 
   return (
     <ScrollArea className={styles.teachers}>
-      <p className="title">Teachers</p>
+      <p className={amaticScFontClass}>Teachers</p>
       <Table verticalSpacing="sm">
         <tbody>{rows}</tbody>
       </Table>

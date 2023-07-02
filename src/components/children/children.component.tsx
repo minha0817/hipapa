@@ -17,6 +17,7 @@ import styles from "./children.styles.module.scss";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Child } from "@/dbModels/types";
 import { getChildren } from "@/api/get";
+import { amaticScFontClass } from "@/lib/font";
 
 type ChildrenProps = {
   // ...
@@ -55,7 +56,7 @@ const ChildrenComponent: FC<PropsWithChildren<ChildrenProps>> = () => {
 
   return (
     <ScrollArea className={styles.children}>
-      <p className="title">Children</p>
+      <p className={amaticScFontClass}>Children</p>
       <Table verticalSpacing="sm">
         <tbody>{rows}</tbody>
       </Table>

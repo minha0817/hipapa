@@ -1,13 +1,6 @@
 import { createStyles, rem } from "@mantine/core";
 import globalStyles from "../../variables.module.scss";
-import { Amatic_SC } from "next/font/google";
-
-const amaticSc = Amatic_SC({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-amaticSc",
-  weight: "700",
-});
+import { amaticScFontClass } from "@/lib/font";
 
 export const useStyles = createStyles((theme) => ({
   header: {
@@ -18,7 +11,7 @@ export const useStyles = createStyles((theme) => ({
     display: "flex",
     color: `${globalStyles.beige}`,
     alignItems: "center",
-    fontFamily: amaticSc.variable,
+    fontFamily: amaticScFontClass,
     fontSize: theme.fontSizes.xl,
   },
 

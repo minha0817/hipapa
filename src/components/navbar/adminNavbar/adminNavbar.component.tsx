@@ -1,18 +1,12 @@
 "use client";
-import {
-  Header,
-  Menu,
-  Group,
-  Center,
-  Burger,
-  Container,
-} from "@mantine/core";
+import { Header, Menu, Group, Center, Burger, Container } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconChevronDown } from "@tabler/icons-react";
 import { LuBaby } from "react-icons/lu";
 import { useStyles } from "../navbar.styles";
+import { useEffect, useState } from "react";
 
-const adminLinks = [
+const teacherLinks = [
   {
     link: "",
     label: "Reports",
@@ -27,11 +21,35 @@ const adminLinks = [
   { link: "", label: "Messages" },
 ];
 
+const adminLinks = [
+  {
+    link: "",
+    label: "Reports",
+    links: [
+      { link: "", label: "Incidents" },
+      { link: "", label: "Meals" },
+      { link: "", label: "Sleep" },
+      { link: "", label: "Activities" },
+    ],
+  },
+  { link: "", label: "Timer" },
+  { link: "", label: "Messages" },
+  { link: "", label: "Settings" },
+];
+
 const AdminNavbarComponent = () => {
   const [opened, { toggle }] = useDisclosure(false);
+  const [userType, setUserType] = useState("");
   const { classes } = useStyles();
 
-  const items = adminLinks.map((link) => {
+  useEffect(() => {
+    const storedValue = localStorage.getItem("value") || "";
+    setUserType(storedValue);
+  }, []);
+
+  const links = userType === "admin" ? adminLinks : teacherLinks;
+
+  const items = links.map((link) => {
     const menuItems = link.links?.map((item) => (
       <Menu.Item key={item.label}>{item.label}</Menu.Item>
     ));

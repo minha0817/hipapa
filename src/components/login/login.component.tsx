@@ -1,5 +1,5 @@
 "use client";
-import { FC, PropsWithChildren } from "react";
+import { FC, PropsWithChildren, useEffect, useState } from "react";
 import {
   Button,
   ButtonProps,
@@ -14,18 +14,38 @@ import { LuBaby } from "react-icons/lu";
 import Link from "next/link";
 import { amaticScFontClass } from "@/lib/font";
 
-function GoogleButton(props: ButtonProps) {
-  return (
-    <Button leftIcon={<FcGoogle />} variant="light" color="gray" {...props} />
-  );
-}
-
 type LoginProps = {
   // ...
   type: string;
 };
 
+function GoogleButton({ onClick, ...props }: ButtonProps & { onClick: any }) {
+  return (
+    <Button
+      leftIcon={<FcGoogle />}
+      variant="light"
+      color="gray"
+      onClick={onClick}
+      {...props}
+    />
+  );
+}
+
 const LoginComponent: FC<PropsWithChildren<LoginProps>> = ({ type }) => {
+  const [value, setValue] = useState("");
+
+  useEffect(() => {
+    let value;
+    value = localStorage.getItem("value") || "";
+    setValue(value);
+  }, []);
+
+  const saveToLocalStorage = (e: any) => {
+    e.preventDefault();
+    console.log("localstorage", value);
+    localStorage.setItem("value", value);
+  };
+
   return (
     <div className={styles.login}>
       <div className="title">
@@ -35,8 +55,9 @@ const LoginComponent: FC<PropsWithChildren<LoginProps>> = ({ type }) => {
         {type === "admin" && (
           <Group position="center" my={20}>
             <SegmentedControl
-              // value=["teacher", "admin"]
-              // onChange={(value: "light" | "dark") => toggleColorScheme(value)}
+              radius={16}
+              value={value}
+              onChange={setValue}
               data={[
                 {
                   value: "teacher",
@@ -60,11 +81,9 @@ const LoginComponent: FC<PropsWithChildren<LoginProps>> = ({ type }) => {
         )}
       </div>
       <div className="loginButton">
-        <Link href={`/${type}/home`}>
-          <GoogleButton className="googleButton">
-            Login with Google
-          </GoogleButton>
-        </Link>
+        <GoogleButton className="googleButton" onClick={saveToLocalStorage}>
+          <Link href={`/${type}/home`}>Login with Google</Link>
+        </GoogleButton>
       </div>
     </div>
   );

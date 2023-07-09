@@ -47,7 +47,7 @@ const LoginComponent: FC<PropsWithChildren<LoginProps>> = ({ type }) => {
     e.preventDefault();
     localStorage.setItem("value", value);
   };
-  console.log('value', value);
+  
   return (
     <div className={styles.login}>
       <div className="title">

@@ -14,7 +14,6 @@ import { getTeachers } from "@/api/get";
 import { Teacher } from "@/dbModels/types";
 import { RxAvatar } from "react-icons/rx";
 import { TbDoorEnter, TbDoorExit } from "react-icons/tb";
-import { amaticScFontClass } from "@/lib/font";
 
 type TeachersProps = {};
 
@@ -58,7 +57,6 @@ const TeachersComponent: FC<PropsWithChildren<TeachersProps>> = () => {
 
   return (
     <ScrollArea className={styles.teachers}>
-      <p className={amaticScFontClass}>Teachers</p>
       <Table verticalSpacing="sm">
         <tbody>{rows}</tbody>
       </Table>

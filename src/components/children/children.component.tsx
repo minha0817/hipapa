@@ -56,7 +56,6 @@ const ChildrenComponent: FC<PropsWithChildren<ChildrenProps>> = () => {
 
   return (
     <ScrollArea className={styles.children}>
-      <p className={amaticScFontClass}>Children</p>
       <Table verticalSpacing="sm">
         <tbody>{rows}</tbody>
       </Table>

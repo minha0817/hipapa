@@ -1,0 +1,14 @@
+@import "../../variables.module.scss";
+
+.checkinStatus {
+  :global {
+    .box {
+      display: flex;
+      align-items: center;
+    }
+
+    span {
+      margin: 0.5rem;
+    }
+  }
+}

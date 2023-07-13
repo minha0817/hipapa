@@ -13,6 +13,8 @@ import { FcGoogle } from "react-icons/fc";
 import { LuBaby } from "react-icons/lu";
 import Link from "next/link";
 import { amaticScFontClass } from "@/lib/font";
+import AuthForm from "./authForm/authForm";
+
 
 type LoginProps = {
   // ...
@@ -83,9 +85,7 @@ const LoginComponent: FC<PropsWithChildren<LoginProps>> = ({ type }) => {
         )}
       </div>
       <div className="loginButton">
-        <GoogleButton className="googleButton" onClick={saveToLocalStorage}>
-          <Link href={`/${type}/home`}>Login with Google</Link>
-        </GoogleButton>
+        <AuthForm />
       </div>
     </div>
   );

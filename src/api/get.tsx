@@ -8,7 +8,7 @@ export const getDaycares = async (supabase: SupabaseClient): Promise<Daycare[]> 
 };
 
 export const getTeachers = async (supabase: SupabaseClient): Promise<Teacher[]> => {
-  const { data: teachers, error } = await supabase.from("teacher").select(`*`);
+  const { data: teachers, error } = await supabase.from("user").select("*").in('user_type', ['admin', 'teacher'])
   return teachers || []
 };
 

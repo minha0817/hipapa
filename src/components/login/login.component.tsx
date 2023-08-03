@@ -1,17 +1,13 @@
 "use client";
 import { FC, PropsWithChildren, useEffect, useState } from "react";
 import {
-  Button,
-  ButtonProps,
   SegmentedControl,
   Group,
   Center,
   Box,
 } from "@mantine/core";
 import styles from "./login.styles.module.scss";
-import { FcGoogle } from "react-icons/fc";
 import { LuBaby } from "react-icons/lu";
-import Link from "next/link";
 import { amaticScFontClass } from "@/lib/font";
 import AuthForm from "./authForm/authForm";
 
@@ -21,34 +17,20 @@ type LoginProps = {
   type: string;
 };
 
-function GoogleButton({ onClick, ...props }: ButtonProps & { onClick: any }) {
-  return (
-    <Button
-      leftIcon={<FcGoogle />}
-      variant="light"
-      color="gray"
-      onClick={onClick}
-      {...props}
-    />
-  );
-}
-
 const LoginComponent: FC<PropsWithChildren<LoginProps>> = ({ type }) => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(type);
 
   useEffect(() => {
-    let value;
-    value = localStorage.getItem("value") || "";
     if(type === "parent"){
       return setValue("parent")
     }
     setValue(value);
   }, []);
 
-  const saveToLocalStorage = (e: any) => {
-    e.preventDefault();
-    localStorage.setItem("value", value);
-  };
+  // const saveToLocalStorage = (e: any) => {
+  //   e.preventDefault();
+  //   localStorage.setItem("value", value);
+  // };
   
   return (
     <div className={styles.login}>
@@ -85,7 +67,7 @@ const LoginComponent: FC<PropsWithChildren<LoginProps>> = ({ type }) => {
         )}
       </div>
       <div className="loginButton">
-        <AuthForm />
+        <AuthForm value={value}/>
       </div>
     </div>
   );

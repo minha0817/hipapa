@@ -1,8 +1,8 @@
 "use client";
 import { Header, Menu, Group, Center, Burger, Container } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { IconChevronDown } from "@tabler/icons-react";
 import { LuBaby } from "react-icons/lu";
+import {AiFillCaretDown} from "react-icons/ai"
 import { useStyles } from "../navbar.styles";
 import { useEffect, useState } from "react";
 
@@ -70,7 +70,7 @@ const AdminNavbarComponent = () => {
             >
               <Center>
                 <span className={classes.linkLabel}>{link.label}</span>
-                <IconChevronDown size="0.9rem" stroke={1.5} />
+                <AiFillCaretDown size="0.9rem" />
               </Center>
             </a>
           </Menu.Target>

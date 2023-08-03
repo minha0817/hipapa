@@ -12,8 +12,6 @@ export const getTeachers = async (supabase: SupabaseClient): Promise<Teacher[]> 
   return teachers || []
 };
 
-
-
 export const getChildren = async (supabase: SupabaseClient): Promise<Child[]> => {
   const { data: children, error } = await supabase.from("child").select(`*`);
   return children || []

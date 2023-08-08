@@ -14,7 +14,7 @@ export async function middleware(req: NextRequest) {
   const userData = await supabase
     .from("user")
     .select("user_type")
-    .eq("auth_id", user?.id)
+    .eq("user_id", user?.id)
     .single();
   const userType = userData.data?.user_type;
 

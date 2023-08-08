@@ -2,9 +2,10 @@
 import { Header, Menu, Group, Center, Burger, Container } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { LuBaby } from "react-icons/lu";
-import {AiFillCaretDown} from "react-icons/ai"
+import { AiFillCaretDown } from "react-icons/ai";
 import { useStyles } from "../navbar.styles";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 const teacherLinks = [
   {
@@ -51,7 +52,9 @@ const AdminNavbarComponent = () => {
 
   const items = links.map((link) => {
     const menuItems = link.links?.map((item) => (
-      <Menu.Item key={item.label}>{item.label}</Menu.Item>
+      <Menu.Item key={item.label}>
+        <Link href={item.link} className={classes.innerLink}>{item.label}</Link>
+      </Menu.Item>
     ));
 
     if (menuItems) {

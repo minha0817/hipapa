@@ -5,7 +5,8 @@ import { CurrentTime } from "@/components/currentTime/currentTime.component";
 import { amaticScFontClass } from "@/lib/font";
 import { CheckinStatus } from "@/components/checkinStatus/checkinStatus.component";
 
-const AdminHomePage = () => {
+const AdminHomePage = async () => {
+
   return (
     <div className={styles.adminHome}>
       <CurrentTime />

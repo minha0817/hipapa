@@ -49,6 +49,11 @@ export const useStyles = createStyles((theme) => ({
     },
   },
 
+  innerLink: {
+    textDecoration: "none",
+    color: theme.black,
+  },
+
   linkLabel: {
     marginRight: rem(5),
   },

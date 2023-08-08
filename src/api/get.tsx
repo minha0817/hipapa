@@ -8,11 +8,11 @@ export const getDaycares = async (supabase: SupabaseClient): Promise<Daycare[]> 
 };
 
 export const getTeachers = async (supabase: SupabaseClient): Promise<Teacher[]> => {
-  const { data: teachers, error } = await supabase.from("user").select("*").in('user_type', ['admin', 'teacher'])
+  const { data: teachers, error } = await supabase.from("user").select().in('user_type', ['admin', 'teacher'])
   return teachers || []
 };
 
 export const getChildren = async (supabase: SupabaseClient): Promise<Child[]> => {
-  const { data: children, error } = await supabase.from("child").select(`*`);
+  const { data: children, error } = await supabase.from("child").select();
   return children || []
 };

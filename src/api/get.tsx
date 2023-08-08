@@ -3,16 +3,16 @@ import { SupabaseClient } from "@supabase/supabase-js";
 
 
 export const getDaycares = async (supabase: SupabaseClient): Promise<Daycare[]> => {
-  const { data: daycares, error } = await supabase.from("daycare").select();
+  const { data: daycares, error } = await supabase.from("daycares").select();
   return daycares || [];
 };
 
 export const getTeachers = async (supabase: SupabaseClient): Promise<Teacher[]> => {
-  const { data: teachers, error } = await supabase.from("user").select().in('user_type', ['admin', 'teacher'])
+  const { data: teachers, error } = await supabase.from("teachers").select()
   return teachers || []
 };
 
 export const getChildren = async (supabase: SupabaseClient): Promise<Child[]> => {
-  const { data: children, error } = await supabase.from("child").select();
+  const { data: children, error } = await supabase.from("children").select();
   return children || []
 };

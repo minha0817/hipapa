@@ -11,9 +11,9 @@ export type Teacher = {
   id: string;
   phone_number: string;
   email: string;
-  is_active: boolean;
+  // is_active: boolean;
   daycare_id: string;
-  birthday: string;
+  // birthday: string;
   name: string;
 }
 

@@ -1,5 +1,5 @@
 export type Daycare = {
-  id: string;
+  daycare_id: string;
   created_at: string;
   name: string;
   phone_number: string;
@@ -8,17 +8,15 @@ export type Daycare = {
 }
 
 export type Teacher = {
-  id: string;
+  teacher_id: string;
   phone_number: string;
   email: string;
-  // is_active: boolean;
   daycare_id: string;
-  // birthday: string;
   name: string;
 }
 
 export type Child = {
-  id: string;
+  child_id: string;
   name: string;
   is_active: boolean;
   allergy: string;

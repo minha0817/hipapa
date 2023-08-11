@@ -14,6 +14,7 @@ import { getTeachers } from "@/api/get";
 import { Teacher } from "@/dbModels/types";
 import { RxAvatar } from "react-icons/rx";
 import { TbDoorEnter, TbDoorExit } from "react-icons/tb";
+import { createCheckInTeacher, getCheckIn } from "@/api/checkIn/checkIn.apis";
 
 type TeachersProps = {};
 
@@ -23,9 +24,28 @@ const jobColors: Record<string, string> = {
 };
 
 const TeachersComponent: FC<PropsWithChildren<TeachersProps>> = () => {
-  const theme = useMantineTheme();
   const supabase = createClientComponentClient();
   const [teachers, setTeachers] = useState<Teacher[]>([]);
+  const [teacherCheckinData, setTeacherCheckInData] = useState([]);
+
+  useEffect(() => {
+    getCheckIn(supabase).then((data: any) => setTeacherCheckInData(data));
+  }, [supabase]);
+
+  console.log(teacherCheckinData, "teacherCheckInStates");
+
+  const findCurrentTeacherCheckinState = (teacherId: string) => {
+    return teacherCheckinData.find((teacher: any) => {
+      teacher.teacher_id === teacherId;
+    });
+  };
+
+  const handleTeacherCheckIn = (teacher: Teacher) => {
+    const daycareId = teacher.daycare_id;
+    const teacherId = teacher.teacher_id;
+    const isCheckedIn = findCurrentTeacherCheckinState(teacherId);
+    createCheckInTeacher(supabase, daycareId, teacherId, !isCheckedIn)
+  };
 
   const rows = teachers.map((teacher) => (
     <tr key={teacher.name}>
@@ -43,7 +63,7 @@ const TeachersComponent: FC<PropsWithChildren<TeachersProps>> = () => {
       <td></td>
       <td>
         <Group spacing={0} position="right">
-          <ActionIcon>
+          <ActionIcon onClick={() => handleTeacherCheckIn(teacher)}>
             <TbDoorEnter size={20} />
           </ActionIcon>
         </Group>

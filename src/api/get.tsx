@@ -9,7 +9,6 @@ export const getDaycares = async (supabase: SupabaseClient): Promise<Daycare[]> 
 
 export const getTeachers = async (supabase: SupabaseClient): Promise<Teacher[]> => {
   const { data: teachers, error } = await supabase.from("teachers").select()
-  console.log('teachers apiiiiiii', teachers );
   return teachers || []
 };
 

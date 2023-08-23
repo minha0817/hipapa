@@ -7,7 +7,6 @@ import {
   Text,
   ActionIcon,
   ScrollArea,
-  useMantineTheme,
 } from "@mantine/core";
 import styles from "./teachers.styles.module.scss";
 import { getTeachers } from "@/api/get";
@@ -17,7 +16,6 @@ import { TbDoorEnter, TbDoorExit } from "react-icons/tb";
 import { amaticScFontClass } from "@/lib/font";
 import { createCheckInTeacher, getCheckIn } from "@/api/checkIn/checkIn.apis";
 import { CheckinStatus } from "@/components/checkinStatus/checkinStatus.component";
-import { PiClockClockwise } from "react-icons/pi";
 import { v4 } from "uuid";
 
 type TeachersProps = {};

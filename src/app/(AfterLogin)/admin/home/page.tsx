@@ -11,16 +11,12 @@ const AdminHomePage = async () => {
     <div className={styles.adminHome}>
       <CurrentTime />
       <div>
-        <div className="titleBox">
-          <p className={amaticScFontClass}>Teachers</p>
-          <CheckinStatus />
-        </div>
         <Teachers />
       </div>
       <div>
         <div className="titleBox">
           <p className={amaticScFontClass}>Children</p>
-          <CheckinStatus />
+          {/* <CheckinStatus /> */}
         </div>
         <Children />
       </div>

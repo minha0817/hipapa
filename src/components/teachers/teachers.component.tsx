@@ -14,14 +14,13 @@ import { getTeachers } from "@/api/get";
 import { Teacher } from "@/dbModels/types";
 import { RxAvatar } from "react-icons/rx";
 import { TbDoorEnter, TbDoorExit } from "react-icons/tb";
+import { amaticScFontClass } from "@/lib/font";
 import { createCheckInTeacher, getCheckIn } from "@/api/checkIn/checkIn.apis";
+import { CheckinStatus } from "@/components/checkinStatus/checkinStatus.component";
+import { PiClockClockwise } from "react-icons/pi";
+import { v4 } from "uuid";
 
 type TeachersProps = {};
-
-const jobColors: Record<string, string> = {
-  teacher: "blue",
-  admin: "pink",
-};
 
 const TeachersComponent: FC<PropsWithChildren<TeachersProps>> = () => {
   const supabase = createClientComponentClient();
@@ -29,22 +28,74 @@ const TeachersComponent: FC<PropsWithChildren<TeachersProps>> = () => {
   const [teacherCheckinData, setTeacherCheckInData] = useState([]);
 
   useEffect(() => {
-    getCheckIn(supabase).then((data: any) => setTeacherCheckInData(data));
+    getTeachers(supabase).then((data) => setTeachers(data));
+    getCheckIn(supabase).then((data: any) => {
+      return setTeacherCheckInData(data);
+    });
+  }, []);
+
+  useEffect(() => {
+    const checkIn = supabase
+      .channel("custom-all-channel")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "check_in" },
+        () => {
+          getCheckIn(supabase).then((data: any) => {
+            return setTeacherCheckInData(data);
+          });
+        }
+      )
+      .subscribe();
+
+    return () => {
+      checkIn.unsubscribe();
+    };
   }, [supabase]);
 
-  console.log(teacherCheckinData, "teacherCheckInStates");
-
   const findCurrentTeacherCheckinState = (teacherId: string) => {
-    return teacherCheckinData.find((teacher: any) => {
-      teacher.teacher_id === teacherId;
+    const clickedTeacher = teacherCheckinData.find((checkindata: any) => {
+      return checkindata.teacher_id === teacherId;
     });
+    return clickedTeacher;
   };
 
   const handleTeacherCheckIn = (teacher: Teacher) => {
     const daycareId = teacher.daycare_id;
     const teacherId = teacher.teacher_id;
-    const isCheckedIn = findCurrentTeacherCheckinState(teacherId);
-    createCheckInTeacher(supabase, daycareId, teacherId, !isCheckedIn)
+    const checkedInObj: any = findCurrentTeacherCheckinState(teacherId);
+    if(!checkedInObj) {
+      const inputValues = {
+        check_in_id: v4(),
+        daycare_id: daycareId,
+        teacher_id: teacherId,
+        is_checked_in: true,
+      }
+      createCheckInTeacher(supabase, inputValues);
+      return;
+    }
+    
+    const checkInId = checkedInObj?.check_in_id;
+    const isCheckedIn = () => {
+      if (checkedInObj?.is_checked_in) {
+        return false;
+      }
+      return true;
+    };
+
+    const inputValues = {
+      check_in_id: checkInId,
+      daycare_id: daycareId,
+      teacher_id: teacherId,
+      is_checked_in: isCheckedIn(),
+    };
+
+    createCheckInTeacher(supabase, inputValues);
+  };
+
+  const isTeacherCheckedIn = (teacherId: string) => {
+    const foundTeacher: any = findCurrentTeacherCheckinState(teacherId);
+    return foundTeacher?.is_checked_in
   };
 
   const rows = teachers.map((teacher) => (
@@ -59,24 +110,35 @@ const TeachersComponent: FC<PropsWithChildren<TeachersProps>> = () => {
           </Text>
         </Group>
       </td>
-
       <td></td>
-      <td>
-        <Group spacing={0} position="right">
-          <ActionIcon onClick={() => handleTeacherCheckIn(teacher)}>
-            <TbDoorEnter size={20} />
-          </ActionIcon>
-        </Group>
-      </td>
+      {isTeacherCheckedIn(teacher.teacher_id) ? (
+        // Show check out button.
+        <td>
+          <Group spacing={0} position="right">
+            <ActionIcon onClick={() => handleTeacherCheckIn(teacher)}>
+              <TbDoorExit size={20} />
+            </ActionIcon>
+          </Group>
+        </td>
+      ) : (
+        // Show check in button.
+        <td>
+          <Group spacing={0} position="right">
+            <ActionIcon onClick={() => handleTeacherCheckIn(teacher)}>
+              <TbDoorEnter size={20} />
+            </ActionIcon>
+          </Group>
+        </td>
+      )}
     </tr>
   ));
 
-  useEffect(() => {
-    getTeachers(supabase).then((data) => setTeachers(data));
-  }, []);
-
   return (
     <ScrollArea className={styles.teachers}>
+      <div className="titleBox">
+        <p className={amaticScFontClass}>Teachers</p>
+        <CheckinStatus data={teachers} checkInData={teacherCheckinData} />
+      </div>
       <Table verticalSpacing="sm">
         <tbody>{rows}</tbody>
       </Table>

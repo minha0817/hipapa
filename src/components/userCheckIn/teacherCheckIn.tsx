@@ -1,26 +1,19 @@
 "use client";
 import { FC, PropsWithChildren, useEffect, useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import {
-  Table,
-  Group,
-  Text,
-  ActionIcon,
-  ScrollArea,
-} from "@mantine/core";
+import { Table,ScrollArea } from "@mantine/core";
 import styles from "./teachers.styles.module.scss";
 import { getTeachers } from "@/api/get";
 import { Teacher } from "@/dbModels/types";
-import { RxAvatar } from "react-icons/rx";
-import { TbDoorEnter, TbDoorExit } from "react-icons/tb";
 import { amaticScFontClass } from "@/lib/font";
 import { createCheckInTeacher, getCheckIn } from "@/api/checkIn/checkIn.apis";
 import { CheckinStatus } from "@/components/checkinStatus/checkinStatus.component";
 import { v4 } from "uuid";
+import { GetRows } from "./getRows";
 
-type TeachersProps = {};
+type TeacherCheckInProps = {};
 
-const TeachersComponent: FC<PropsWithChildren<TeachersProps>> = () => {
+const TeacherCheckInComponent: FC<PropsWithChildren<TeacherCheckInProps>> = () => {
   const supabase = createClientComponentClient();
   const [teachers, setTeachers] = useState<Teacher[]>([]);
   const [teacherCheckinData, setTeacherCheckInData] = useState([]);
@@ -51,7 +44,7 @@ const TeachersComponent: FC<PropsWithChildren<TeachersProps>> = () => {
     };
   }, [supabase]);
 
-  const findCurrentTeacherCheckinState = (teacherId: string) => {
+  const findCurrentUserCheckinState = (teacherId: string) => {
     const clickedTeacher = teacherCheckinData.find((checkindata: any) => {
       return checkindata.teacher_id === teacherId;
     });
@@ -61,18 +54,18 @@ const TeachersComponent: FC<PropsWithChildren<TeachersProps>> = () => {
   const handleTeacherCheckIn = (teacher: Teacher) => {
     const daycareId = teacher.daycare_id;
     const teacherId = teacher.teacher_id;
-    const checkedInObj: any = findCurrentTeacherCheckinState(teacherId);
-    if(!checkedInObj) {
+    const checkedInObj: any = findCurrentUserCheckinState(teacherId);
+    if (!checkedInObj) {
       const inputValues = {
         check_in_id: v4(),
         daycare_id: daycareId,
         teacher_id: teacherId,
         is_checked_in: true,
-      }
+      };
       createCheckInTeacher(supabase, inputValues);
       return;
     }
-    
+
     const checkInId = checkedInObj?.check_in_id;
     const isCheckedIn = () => {
       if (checkedInObj?.is_checked_in) {
@@ -91,45 +84,10 @@ const TeachersComponent: FC<PropsWithChildren<TeachersProps>> = () => {
     createCheckInTeacher(supabase, inputValues);
   };
 
-  const isTeacherCheckedIn = (teacherId: string) => {
-    const foundTeacher: any = findCurrentTeacherCheckinState(teacherId);
-    return foundTeacher?.is_checked_in
+  const isUserCheckedIn = (userId: string) => {
+    const foundUser: any = findCurrentUserCheckinState(userId);
+    return foundUser?.is_checked_in;
   };
-
-  const rows = teachers.map((teacher) => (
-    <tr key={teacher.name}>
-      <td>
-        <Group spacing="sm">
-          {/* DB 에 image 추가해서 사진이 나올수있도록 추후 변경!!! */}
-          {/* <Avatar size={30} src={teacher.avatar} radius={30} /> */}
-          <RxAvatar />
-          <Text fz="sm" fw={500}>
-            {teacher.name}
-          </Text>
-        </Group>
-      </td>
-      <td></td>
-      {isTeacherCheckedIn(teacher.teacher_id) ? (
-        // Show check out button.
-        <td>
-          <Group spacing={0} position="right">
-            <ActionIcon onClick={() => handleTeacherCheckIn(teacher)}>
-              <TbDoorExit size={20} style={{color: "orange"}}/>
-            </ActionIcon>
-          </Group>
-        </td>
-      ) : (
-        // Show check in button.
-        <td>
-          <Group spacing={0} position="right">
-            <ActionIcon onClick={() => handleTeacherCheckIn(teacher)}>
-              <TbDoorEnter size={20} style={{color: "skyblue"}}/>
-            </ActionIcon>
-          </Group>
-        </td>
-      )}
-    </tr>
-  ));
 
   return (
     <ScrollArea className={styles.teachers}>
@@ -138,11 +96,17 @@ const TeachersComponent: FC<PropsWithChildren<TeachersProps>> = () => {
         <CheckinStatus data={teachers} checkInData={teacherCheckinData} />
       </div>
       <Table verticalSpacing="sm">
-        <tbody>{rows}</tbody>
+        <tbody>
+          <GetRows
+            users={teachers}
+            isUserCheckedIn={isUserCheckedIn}
+            handleUserCheckIn={handleTeacherCheckIn}
+          />
+        </tbody>
       </Table>
     </ScrollArea>
   );
 };
-TeachersComponent.displayName = "Teachers";
+TeacherCheckInComponent.displayName = "TeacherCheckIn";
 
-export const Teachers = TeachersComponent;
+export const TeacherCheckIn = TeacherCheckInComponent;

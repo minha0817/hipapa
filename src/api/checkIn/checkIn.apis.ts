@@ -1,6 +1,4 @@
 import { SupabaseClient } from "@supabase/supabase-js";
-import { DateTime } from "luxon";
-import { v4 } from "uuid";
 
 export const createCheckInTeacher = async (
   supabase: SupabaseClient,

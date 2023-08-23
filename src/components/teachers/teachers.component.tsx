@@ -114,7 +114,7 @@ const TeachersComponent: FC<PropsWithChildren<TeachersProps>> = () => {
         <td>
           <Group spacing={0} position="right">
             <ActionIcon onClick={() => handleTeacherCheckIn(teacher)}>
-              <TbDoorExit size={20} />
+              <TbDoorExit size={20} style={{color: "orange"}}/>
             </ActionIcon>
           </Group>
         </td>
@@ -123,7 +123,7 @@ const TeachersComponent: FC<PropsWithChildren<TeachersProps>> = () => {
         <td>
           <Group spacing={0} position="right">
             <ActionIcon onClick={() => handleTeacherCheckIn(teacher)}>
-              <TbDoorEnter size={20} />
+              <TbDoorEnter size={20} style={{color: "skyblue"}}/>
             </ActionIcon>
           </Group>
         </td>

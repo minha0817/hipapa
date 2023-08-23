@@ -6,7 +6,7 @@ import styles from "./teachers.styles.module.scss";
 import { getTeachers } from "@/api/get";
 import { Teacher } from "@/dbModels/types";
 import { amaticScFontClass } from "@/lib/font";
-import { createCheckInTeacher, getCheckIn } from "@/api/checkIn/checkIn.apis";
+import { createCheckIn, getTeacherCheckIn } from "@/api/checkIn/checkIn.apis";
 import { CheckinStatus } from "@/components/checkinStatus/checkinStatus.component";
 import { v4 } from "uuid";
 import { GetRows } from "./getRows";
@@ -20,7 +20,7 @@ const TeacherCheckInComponent: FC<PropsWithChildren<TeacherCheckInProps>> = () =
 
   useEffect(() => {
     getTeachers(supabase).then((data) => setTeachers(data));
-    getCheckIn(supabase).then((data: any) => {
+    getTeacherCheckIn(supabase).then((data: any) => {
       return setTeacherCheckInData(data);
     });
   }, []);
@@ -32,7 +32,7 @@ const TeacherCheckInComponent: FC<PropsWithChildren<TeacherCheckInProps>> = () =
         "postgres_changes",
         { event: "*", schema: "public", table: "check_in" },
         () => {
-          getCheckIn(supabase).then((data: any) => {
+          getTeacherCheckIn(supabase).then((data: any) => {
             return setTeacherCheckInData(data);
           });
         }
@@ -62,7 +62,7 @@ const TeacherCheckInComponent: FC<PropsWithChildren<TeacherCheckInProps>> = () =
         teacher_id: teacherId,
         is_checked_in: true,
       };
-      createCheckInTeacher(supabase, inputValues);
+      createCheckIn(supabase, inputValues);
       return;
     }
 
@@ -81,11 +81,11 @@ const TeacherCheckInComponent: FC<PropsWithChildren<TeacherCheckInProps>> = () =
       is_checked_in: isCheckedIn(),
     };
 
-    createCheckInTeacher(supabase, inputValues);
+    createCheckIn(supabase, inputValues);
   };
 
-  const isUserCheckedIn = (userId: string) => {
-    const foundUser: any = findCurrentUserCheckinState(userId);
+  const isUserCheckedIn = (user: any) => {
+    const foundUser: any = findCurrentUserCheckinState(user.teacher_id);
     return foundUser?.is_checked_in;
   };
 

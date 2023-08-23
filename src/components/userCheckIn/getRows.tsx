@@ -23,7 +23,7 @@ export const GetRows: FC<PropsWithChildren<Rows>> = ({users, isUserCheckedIn, ha
         </Group>
       </td>
       <td></td>
-      {isUserCheckedIn(user.teacher_id) ? (
+      {isUserCheckedIn(user) ? (
         <td>
           <Group spacing={0} position="right">
             <ActionIcon onClick={() => handleUserCheckIn(user)}>

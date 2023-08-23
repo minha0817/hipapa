@@ -1,53 +1,27 @@
 "use client";
-import { FC, PropsWithChildren, useEffect, useState } from "react";
+import { FC, PropsWithChildren } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Table, ScrollArea } from "@mantine/core";
 import styles from "./teachers.styles.module.scss";
-import { getChildren } from "@/api/get";
 import { Child } from "@/dbModels/types";
 import { amaticScFontClass } from "@/lib/font";
-import { createCheckIn, getChildrenCheckIn } from "@/api/checkIn/checkIn.apis";
+import { createCheckIn } from "@/api/checkIn/checkIn.apis";
 import { CheckinStatus } from "@/components/checkinStatus/checkinStatus.component";
 import { v4 } from "uuid";
 import { GetRows } from "./getRows";
 
-type ChildrenCheckInProps = {};
+type ChildrenCheckInProps = {
+  children: Child[],
+  checkInData: any
+};
 
 const ChildrenCheckInComponent: FC<
   PropsWithChildren<ChildrenCheckInProps>
-> = () => {
+> = ({children, checkInData}) => {
   const supabase = createClientComponentClient();
-  const [children, setChildren] = useState<Child[]>([]);
-  const [childrenCheckInData, setChildrenCheckInData] = useState([]);
-
-  useEffect(() => {
-    getChildren(supabase).then((data) => setChildren(data));
-    getChildrenCheckIn(supabase).then((data: any) => {
-      return setChildrenCheckInData(data);
-    });
-  }, []);
-
-  useEffect(() => {
-    const checkIn = supabase
-      .channel("custom-all-channel")
-      .on(
-        "postgres_changes",
-        { event: "*", schema: "public", table: "check_in" },
-        () => {
-          getChildrenCheckIn(supabase).then((data: any) => {
-            return setChildrenCheckInData(data);
-          });
-        }
-      )
-      .subscribe();
-
-    return () => {
-      checkIn.unsubscribe();
-    };
-  }, [supabase]);
 
   const findCurrentUserCheckinState = (childId: string) => {
-    const clickedChild = childrenCheckInData.find((checkindata: any) => {
+    const clickedChild = checkInData.find((checkindata: any) => {
       return checkindata.child_id === childId;
     });
     return clickedChild;
@@ -95,7 +69,7 @@ const ChildrenCheckInComponent: FC<
     <ScrollArea className={styles.teachers}>
       <div className="titleBox">
         <p className={amaticScFontClass}>Children</p>
-        <CheckinStatus data={children} checkInData={childrenCheckInData} />
+        <CheckinStatus data={children} checkInData={checkInData} />
       </div>
       <Table verticalSpacing="sm">
         <tbody>

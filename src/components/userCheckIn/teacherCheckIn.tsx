@@ -1,56 +1,30 @@
 "use client";
-import { FC, PropsWithChildren, useEffect, useState } from "react";
+import { FC, PropsWithChildren } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Table,ScrollArea } from "@mantine/core";
 import styles from "./teachers.styles.module.scss";
-import { getTeachers } from "@/api/get";
 import { Teacher } from "@/dbModels/types";
 import { amaticScFontClass } from "@/lib/font";
-import { createCheckIn, getTeacherCheckIn } from "@/api/checkIn/checkIn.apis";
+import { createCheckIn } from "@/api/checkIn/checkIn.apis";
 import { CheckinStatus } from "@/components/checkinStatus/checkinStatus.component";
 import { v4 } from "uuid";
 import { GetRows } from "./getRows";
 
-type TeacherCheckInProps = {};
+type TeacherCheckInProps = {
+  teachers: Teacher[],
+  checkInData: any
+};
 
-const TeacherCheckInComponent: FC<PropsWithChildren<TeacherCheckInProps>> = () => {
+const TeacherCheckInComponent: FC<PropsWithChildren<TeacherCheckInProps>> = ({teachers, checkInData}) => {
   const supabase = createClientComponentClient();
-  const [teachers, setTeachers] = useState<Teacher[]>([]);
-  const [teacherCheckinData, setTeacherCheckInData] = useState([]);
-
-  useEffect(() => {
-    getTeachers(supabase).then((data) => setTeachers(data));
-    getTeacherCheckIn(supabase).then((data: any) => {
-      return setTeacherCheckInData(data);
-    });
-  }, []);
-
-  useEffect(() => {
-    const checkIn = supabase
-      .channel("custom-all-channel")
-      .on(
-        "postgres_changes",
-        { event: "*", schema: "public", table: "check_in" },
-        () => {
-          getTeacherCheckIn(supabase).then((data: any) => {
-            return setTeacherCheckInData(data);
-          });
-        }
-      )
-      .subscribe();
-
-    return () => {
-      checkIn.unsubscribe();
-    };
-  }, [supabase]);
 
   const findCurrentUserCheckinState = (teacherId: string) => {
-    const clickedTeacher = teacherCheckinData.find((checkindata: any) => {
+    const clickedTeacher = checkInData.find((checkindata: any) => {
       return checkindata.teacher_id === teacherId;
     });
     return clickedTeacher;
   };
-
+  
   const handleTeacherCheckIn = (teacher: Teacher) => {
     const daycareId = teacher.daycare_id;
     const teacherId = teacher.teacher_id;
@@ -93,7 +67,7 @@ const TeacherCheckInComponent: FC<PropsWithChildren<TeacherCheckInProps>> = () =
     <ScrollArea className={styles.teachers}>
       <div className="titleBox">
         <p className={amaticScFontClass}>Teachers</p>
-        <CheckinStatus data={teachers} checkInData={teacherCheckinData} />
+        <CheckinStatus data={teachers} checkInData={checkInData} />
       </div>
       <Table verticalSpacing="sm">
         <tbody>

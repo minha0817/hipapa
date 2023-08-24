@@ -57,4 +57,8 @@ export const useStyles = createStyles((theme) => ({
   linkLabel: {
     marginRight: rem(5),
   },
+
+  a: {
+    color: `${globalStyles.beige}`
+  }
 }));

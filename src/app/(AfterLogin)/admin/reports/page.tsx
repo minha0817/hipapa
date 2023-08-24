@@ -33,7 +33,6 @@ const ReportsPage = () => {
         </Button>
       </Button.Group>
 
-      {/* Display different reports of component depends on the state */}
       {selectedReport === "incident" && <Incident />}
       {selectedReport === "activity" && <Activity />}
       {selectedReport === "meal" && <Meal />}

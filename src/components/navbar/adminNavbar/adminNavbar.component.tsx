@@ -6,6 +6,7 @@ import { AiFillCaretDown } from "react-icons/ai";
 import { useStyles } from "../navbar.styles";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import styles from "./adminNavbar.styles.module.scss";
 
 const teacherLinks = [
   {
@@ -102,7 +103,9 @@ const AdminNavbarComponent = () => {
         <div className={classes.inner}>
           <div className={classes.title}>
             <LuBaby size={30} style={{ marginRight: 5 }} />
-            <p>HIPAPA</p>
+            <Link href="/admin/home">
+              <p className={classes.a}>HIPAPA</p>
+            </Link>
           </div>
           <Group spacing={5} className={classes.links}>
             {items}

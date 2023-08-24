@@ -9,7 +9,7 @@ import Link from "next/link";
 
 const teacherLinks = [
   {
-    link: "",
+    link: "/admin/reports",
     label: "Reports",
     links: [
       { link: "/admin/reports/incident", label: "Incident" },
@@ -24,7 +24,7 @@ const teacherLinks = [
 
 const adminLinks = [
   {
-    link: "",
+    link: "/admin/reports",
     label: "Reports",
     links: [
       { link: "/admin/reports/incident", label: "Incident" },
@@ -53,7 +53,9 @@ const AdminNavbarComponent = () => {
   const items = links.map((link) => {
     const menuItems = link.links?.map((item) => (
       <Menu.Item key={item.label}>
-        <Link href={item.link} className={classes.innerLink}>{item.label}</Link>
+        <Link href={item.link} className={classes.innerLink}>
+          {item.label}
+        </Link>
       </Menu.Item>
     ));
 

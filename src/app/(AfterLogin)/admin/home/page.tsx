@@ -11,6 +11,7 @@ import {
   getChildrenCheckIn,
   getTeacherCheckIn,
 } from "@/api/checkIn/checkIn.apis";
+import { Affix } from "@mantine/core";
 
 const AdminHomePage = () => {
   const supabase = createClientComponentClient();
@@ -61,6 +62,7 @@ const AdminHomePage = () => {
       <div>
         <ChildrenCheckIn children={children} checkInData={childrenCheckInData}/>
       </div>
+      <Affix />
     </div>
   );
 };

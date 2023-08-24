@@ -1,4 +1,5 @@
 "use client";
+import { Affix } from "@/components/affix/affix.component";
 import { Children } from "@/components/children/children.component";
 import { Activity } from "@/components/reports/activity/activity.component";
 import { Incident } from "@/components/reports/incident/incident.component";
@@ -37,6 +38,9 @@ const ReportsPage = () => {
       {selectedReport === "activity" && <Activity />}
       {selectedReport === "meal" && <Meal />}
       {selectedReport === "toilet" && <Toilet />}
+
+      {/* Add back to top button component*/}
+      <Affix />
     </>
   );
 };

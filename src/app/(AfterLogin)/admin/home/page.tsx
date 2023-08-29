@@ -60,7 +60,7 @@ const AdminHomePage = () => {
         <TeacherCheckIn teachers={teachers} checkInData={teacherCheckinData}/>
       </div>
       <div>
-        <ChildrenCheckIn children={children} checkInData={childrenCheckInData}/>
+        <ChildrenCheckIn childrenList={children} checkInData={childrenCheckInData}/>
       </div>
       <Affix />
     </div>

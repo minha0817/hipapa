@@ -1,7 +1,8 @@
+import { Database } from "@/supabase.types";
 import { SupabaseClient } from "@supabase/supabase-js";
 
 export const createCheckIn = async (
-  supabase: SupabaseClient,
+  supabase: SupabaseClient<Database>,
   inputValues: any
 ) => {
   const {
@@ -15,7 +16,7 @@ export const createCheckIn = async (
   if (error) throw error;
 };
 
-export const getTeacherCheckIn = async (supabase: SupabaseClient) => {
+export const getTeacherCheckIn = async (supabase: SupabaseClient<Database>) => {
   const currentDate = new Date().toJSON().slice(0, 10);
 
   const { data, error } = await supabase
@@ -28,7 +29,7 @@ export const getTeacherCheckIn = async (supabase: SupabaseClient) => {
   return data || [];
 };
 
-export const getChildrenCheckIn = async (supabase: SupabaseClient) => {
+export const getChildrenCheckIn = async (supabase: SupabaseClient<Database>) => {
   const currentDate = new Date().toJSON().slice(0, 10);
 
   const { data, error } = await supabase

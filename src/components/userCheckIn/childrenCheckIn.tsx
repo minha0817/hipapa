@@ -11,13 +11,14 @@ import { v4 } from "uuid";
 import { GetRows } from "./getRows";
 
 type ChildrenCheckInProps = {
-  children: Child[],
-  checkInData: any
+  childrenList: Child[];
+  checkInData: any;
 };
 
-const ChildrenCheckInComponent: FC<
-  PropsWithChildren<ChildrenCheckInProps>
-> = ({children, checkInData}) => {
+const ChildrenCheckInComponent: FC<PropsWithChildren<ChildrenCheckInProps>> = ({
+  childrenList: children,
+  checkInData,
+}) => {
   const supabase = createClientComponentClient();
 
   const findCurrentUserCheckinState = (childId: string) => {

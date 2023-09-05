@@ -15,20 +15,15 @@ const CheckinStatusComponent: FC<PropsWithChildren<CheckinStatusProps>> = ({
   checkInData,
 }) => {
   const totalNumber = data.length;
-  const checkedInNumber = () => {
-    const checkedInTrueArr = checkInData.filter(
-      (checkIn: any) => checkIn.is_checked_in === true
-    );
-    return checkedInTrueArr.length;
-  };
+  const checkedInNumber = checkInData.length;
 
   return (
     <div className={styles.checkinStatus}>
       <div className="box">
         <RiCheckboxBlankCircleFill size={20} color="green" />
-        <span>{checkedInNumber()}</span>
+        <span>{checkedInNumber}</span>
         <PiCircleBold size={20} />
-        <span>{totalNumber - checkedInNumber()}</span>
+        <span>{totalNumber - checkedInNumber}</span>
         <PiCircleDashedBold size={20} />
         <span>0</span>
       </div>

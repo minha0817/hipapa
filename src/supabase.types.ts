@@ -15,7 +15,6 @@ export interface Database {
           check_in_out_time: string
           child_id: string | null
           daycare_id: string
-          is_checked_in: boolean
           teacher_id: string | null
         }
         Insert: {
@@ -23,7 +22,6 @@ export interface Database {
           check_in_out_time?: string
           child_id?: string | null
           daycare_id: string
-          is_checked_in?: boolean
           teacher_id?: string | null
         }
         Update: {
@@ -31,7 +29,6 @@ export interface Database {
           check_in_out_time?: string
           child_id?: string | null
           daycare_id?: string
-          is_checked_in?: boolean
           teacher_id?: string | null
         }
         Relationships: [

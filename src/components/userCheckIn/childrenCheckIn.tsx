@@ -5,7 +5,7 @@ import { Table, ScrollArea } from "@mantine/core";
 import styles from "./teachers.styles.module.scss";
 import { Child } from "@/dbModels/types";
 import { amaticScFontClass } from "@/lib/font";
-import { createCheckIn } from "@/api/checkIn/checkIn.apis";
+import { createCheckIn, deleteCheckIn } from "@/api/checkIn/checkIn.apis";
 import { CheckinStatus } from "@/components/checkinStatus/checkinStatus.component";
 import { v4 } from "uuid";
 import { GetRows } from "./getRows";
@@ -37,33 +37,16 @@ const ChildrenCheckInComponent: FC<PropsWithChildren<ChildrenCheckInProps>> = ({
         check_in_id: v4(),
         daycare_id: daycareId,
         child_id: childId,
-        is_checked_in: true,
       };
       createCheckIn(supabase, inputValues);
-      return;
+    } else {
+      deleteCheckIn(supabase, "child_id", childId);
     }
-
-    const checkInId = checkedInObj?.check_in_id;
-    const isCheckedIn = () => {
-      if (checkedInObj?.is_checked_in) {
-        return false;
-      }
-      return true;
-    };
-
-    const inputValues = {
-      check_in_id: checkInId,
-      daycare_id: daycareId,
-      child_id: childId,
-      is_checked_in: isCheckedIn(),
-    };
-
-    createCheckIn(supabase, inputValues);
   };
 
   const isUserCheckedIn = (user: any) => {
     const foundUser: any = findCurrentUserCheckinState(user.child_id);
-    return foundUser?.is_checked_in;
+    return foundUser;
   };
 
   return (

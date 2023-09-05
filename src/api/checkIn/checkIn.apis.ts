@@ -12,7 +12,7 @@ export const createCheckIn = async (
   if (userError) throw userError;
   if (!user) throw new Error("Invalid User");
   
-  const { data, error } = await supabase.from("check_in").upsert(inputValues);
+  const { data, error } = await supabase.from("check_in").insert(inputValues);
   if (error) throw error;
 };
 
@@ -41,3 +41,12 @@ export const getChildrenCheckIn = async (supabase: SupabaseClient<Database>) => 
 
   return data || [];
 };
+
+export const deleteCheckIn = async (supabase: SupabaseClient<Database>, columnName: string, id: string) => {
+  const { data, error } = await supabase
+  .from("check_in")
+  .delete()
+  .eq(`${columnName}`, id)
+if (error) throw error;
+}
+

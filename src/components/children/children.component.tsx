@@ -5,13 +5,13 @@ import { RxAvatar } from "react-icons/rx";
 import { Child } from "@/dbModels/types";
 
 type ChildrenProps = {
-  children: Child[];
+  childrenList: Child[];
 };
 
 const ChildrenComponent: FC<PropsWithChildren<ChildrenProps>> = ({
-  children,
+  childrenList,
 }) => {
-  return children.map((child) => {
+  return childrenList.map((child) => {
     return (
       <Group spacing="sm" key={child.name}>
         {/* DB 에 image 추가해서 사진이 나올수있도록 추후 변경!!! */}

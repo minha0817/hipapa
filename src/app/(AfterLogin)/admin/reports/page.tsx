@@ -10,6 +10,7 @@ import { Child } from "@/dbModels/types";
 import { Button } from "@mantine/core";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
+import styles from "./adminReportsPage.module.scss";
 
 const ReportsPage = () => {
   const [selectedReport, setSelectedReport] = useState("");
@@ -26,24 +27,30 @@ const ReportsPage = () => {
     setSelectedReport(report);
   };
   return (
-    <>
+    <div className={styles.adminReports}>
       <h1>Reports</h1>
-      <Children children={children}/>
-
-      <Button.Group>
-        <Button variant="default" onClick={() => handleButtons("incident")}>
-          Incident
-        </Button>
-        <Button variant="default" onClick={() => handleButtons("activity")}>
-          Activity
-        </Button>
-        <Button variant="default" onClick={() => handleButtons("meal")}>
-          Meal
-        </Button>
-        <Button variant="default" onClick={() => handleButtons("toilet")}>
-          Toilet
-        </Button>
-      </Button.Group>
+      <div className="childrenList">
+        <Children childrenList={children} />
+      </div>
+      <div className="selectAllBtn">
+        <Button>Select All Children</Button>
+      </div>
+      <div className="groupBtn">
+        <Button.Group>
+          <Button variant="default" onClick={() => handleButtons("incident")}>
+            Incident
+          </Button>
+          <Button variant="default" onClick={() => handleButtons("activity")}>
+            Activity
+          </Button>
+          <Button variant="default" onClick={() => handleButtons("meal")}>
+            Meal
+          </Button>
+          <Button variant="default" onClick={() => handleButtons("toilet")}>
+            Toilet
+          </Button>
+        </Button.Group>
+      </div>
 
       {selectedReport === "incident" && <Incident />}
       {selectedReport === "activity" && <Activity />}
@@ -52,7 +59,7 @@ const ReportsPage = () => {
 
       {/* Add back to top button component*/}
       <Affix />
-    </>
+    </div>
   );
 };
 

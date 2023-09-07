@@ -38,7 +38,7 @@ const AdminNavbarComponent = () => {
   const links = userType === "admin" ? adminLinks : teacherLinks;
 
   const items = links.map((item) => (
-    <Link href={item.link} className={classes.link}>
+    <Link href={item.link} className={classes.link} key={item.label}>
     {item.label}
   </Link>
   ))

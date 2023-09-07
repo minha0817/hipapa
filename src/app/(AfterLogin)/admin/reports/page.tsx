@@ -33,7 +33,7 @@ const ReportsPage = () => {
         <Children childrenList={children} />
       </div>
       <div className="selectAllBtn">
-        <Button>Select All Children</Button>
+        <Button variant="light">Select All Children</Button>
       </div>
       <div className="groupBtn">
         <Button.Group>

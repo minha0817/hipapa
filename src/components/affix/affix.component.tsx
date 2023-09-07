@@ -1,7 +1,13 @@
 import { FC, PropsWithChildren } from "react";
 import { IconArrowUp } from "@tabler/icons-react";
 import { useWindowScroll } from "@mantine/hooks";
-import { Affix as BackToTop, Button, Text, Transition, rem } from "@mantine/core";
+import {
+  Affix as BackToTop,
+  Button,
+  Text,
+  Transition,
+  rem,
+} from "@mantine/core";
 
 import styles from "./affix.styles.module.scss";
 
@@ -18,6 +24,8 @@ const AffixComponent: FC<PropsWithChildren<AffixProps>> = () => {
         <Transition transition="slide-up" mounted={scroll.y > 0}>
           {(transitionStyles) => (
             <Button
+              variant="light"
+              color="indigo"
               leftIcon={<IconArrowUp size="1rem" />}
               style={transitionStyles}
               onClick={() => scrollTo({ y: 0 })}

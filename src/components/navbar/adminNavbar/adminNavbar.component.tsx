@@ -1,23 +1,15 @@
 "use client";
-import { Header, Menu, Group, Center, Burger, Container } from "@mantine/core";
+import { Header, Group, Burger, Container } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { LuBaby } from "react-icons/lu";
-import { AiFillCaretDown } from "react-icons/ai";
 import { useStyles } from "../navbar.styles";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import styles from "./adminNavbar.styles.module.scss";
 
 const teacherLinks = [
   {
     link: "/admin/reports",
     label: "Reports",
-    links: [
-      { link: "/admin/reports/incident", label: "Incident" },
-      { link: "/admin/reports/meal", label: "Meal" },
-      { link: "/admin/reports/sleep", label: "Sleep" },
-      { link: "/admin/reports/activity", label: "Activity" },
-    ],
   },
   { link: "", label: "Timer" },
   { link: "", label: "Messages" },
@@ -27,12 +19,6 @@ const adminLinks = [
   {
     link: "/admin/reports",
     label: "Reports",
-    links: [
-      { link: "/admin/reports/incident", label: "Incident" },
-      { link: "/admin/reports/meal", label: "Meal" },
-      { link: "/admin/reports/sleep", label: "Sleep" },
-      { link: "/admin/reports/activity", label: "Activity" },
-    ],
   },
   { link: "", label: "Timer" },
   { link: "", label: "Messages" },
@@ -51,51 +37,11 @@ const AdminNavbarComponent = () => {
 
   const links = userType === "admin" ? adminLinks : teacherLinks;
 
-  const items = links.map((link) => {
-    const menuItems = link.links?.map((item) => (
-      <Menu.Item key={item.label}>
-        <Link href={item.link} className={classes.innerLink}>
-          {item.label}
-        </Link>
-      </Menu.Item>
-    ));
-
-    if (menuItems) {
-      return (
-        <Menu
-          key={link.label}
-          trigger="hover"
-          transitionProps={{ exitDuration: 0 }}
-          withinPortal
-        >
-          <Menu.Target>
-            <a
-              href={link.link}
-              className={classes.link}
-              onClick={(event) => event.preventDefault()}
-            >
-              <Center>
-                <span className={classes.linkLabel}>{link.label}</span>
-                <AiFillCaretDown size="0.9rem" />
-              </Center>
-            </a>
-          </Menu.Target>
-          <Menu.Dropdown>{menuItems}</Menu.Dropdown>
-        </Menu>
-      );
-    }
-
-    return (
-      <a
-        key={link.label}
-        href={link.link}
-        className={classes.link}
-        onClick={(event) => event.preventDefault()}
-      >
-        {link.label}
-      </a>
-    );
-  });
+  const items = links.map((item) => (
+    <Link href={item.link} className={classes.link}>
+    {item.label}
+  </Link>
+  ))
 
   return (
     <Header height={56} className={classes.header}>

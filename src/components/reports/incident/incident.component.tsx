@@ -1,4 +1,5 @@
-import { FC, PropsWithChildren } from "react";
+"use client";
+import { FC, PropsWithChildren, useState } from "react";
 
 import styles from "./incident.styles.module.scss";
 import { Button, Paper, Textarea, Title } from "@mantine/core";
@@ -10,6 +11,7 @@ type IncidentProps = {
 };
 
 const IncidentComponent: FC<PropsWithChildren<IncidentProps>> = () => {
+
   return (
     <div className={styles.incident}>
       <div style={{ maxWidth: "45rem" }}>

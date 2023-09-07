@@ -14,6 +14,7 @@ import styles from "./adminReportsPage.module.scss";
 
 const ReportsPage = () => {
   const [selectedReport, setSelectedReport] = useState("");
+  const [selectedChildren, setSelectedChildren] = useState<string[]>([]);
 
   const supabase = createClientComponentClient();
 
@@ -26,11 +27,30 @@ const ReportsPage = () => {
   const handleButtons = (report: string) => {
     setSelectedReport(report);
   };
+
+  const handleSelectChildren = (childId: string, index: number) => {
+    setSelectedChildren((prevSelectedChildren) => {
+      // Check if the childId is already in the selectedChild array
+      const isAlreadySelected = prevSelectedChildren.includes(childId);
+
+      // If it's already selected, remove it; otherwise, add it
+      if (isAlreadySelected) {
+        return prevSelectedChildren.filter((id) => id !== childId);
+      } else {
+        return [...prevSelectedChildren, childId];
+      }
+    });
+  };
+
   return (
     <div className={styles.adminReports}>
       <h1>Reports</h1>
       <div className="childrenList">
-        <Children childrenList={children} />
+        <Children
+          childrenList={children}
+          handleSelectChildren={handleSelectChildren}
+          selectedChildren={selectedChildren}
+        />
       </div>
       <div className="selectAllBtn">
         <Button variant="light">Select All Children</Button>

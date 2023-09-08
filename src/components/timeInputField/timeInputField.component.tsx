@@ -5,17 +5,20 @@ import { ActionIcon } from "@mantine/core";
 import { TimeInput } from "@mantine/dates";
 import { IconClock } from "@tabler/icons-react";
 import styles from "./timeInputField.styles.module.scss";
+import { UseFormReturnType } from "@mantine/form";
+import { AddIncidentForm } from "../reports/incident/incident.types";
 
 type TimeInputFieldProps = {
-  // ...
   label: string;
+  form: UseFormReturnType<Partial<AddIncidentForm>>
 };
 
-const TimeInputFieldComponent: FC<
-  PropsWithChildren<TimeInputFieldProps>
-> = ({label}) => {
+const TimeInputFieldComponent: FC<PropsWithChildren<TimeInputFieldProps>> = ({
+  label,
+  form,
+}) => {
   const ref = useRef<HTMLInputElement>(null);
-  
+
   return (
     <TimeInput
       label={label}
@@ -26,7 +29,7 @@ const TimeInputFieldComponent: FC<
         </ActionIcon>
       }
       maw={400}
-      onChange={(e) => console.log("e ---------- ", e.target.value)}
+      {...form.getInputProps("time")}
     />
   );
 };

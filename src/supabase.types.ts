@@ -9,6 +9,30 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
+      activity_reports: {
+        Row: {
+          activity_report_id: string
+          created_at: string
+          description: string
+          photo: string | null
+          time: string | null
+        }
+        Insert: {
+          activity_report_id?: string
+          created_at?: string
+          description: string
+          photo?: string | null
+          time?: string | null
+        }
+        Update: {
+          activity_report_id?: string
+          created_at?: string
+          description?: string
+          photo?: string | null
+          time?: string | null
+        }
+        Relationships: []
+      }
       check_in: {
         Row: {
           check_in_id: string
@@ -43,12 +67,6 @@ export interface Database {
             columns: ["daycare_id"]
             referencedRelation: "daycares"
             referencedColumns: ["daycare_id"]
-          },
-          {
-            foreignKeyName: "check_in_teacher_id_fkey"
-            columns: ["teacher_id"]
-            referencedRelation: "teachers"
-            referencedColumns: ["teacher_id"]
           }
         ]
       }
@@ -62,6 +80,7 @@ export interface Database {
           enrolled_day: string
           is_active: boolean
           name: string
+          parent_id: string
         }
         Insert: {
           allergy?: string | null
@@ -72,6 +91,7 @@ export interface Database {
           enrolled_day: string
           is_active?: boolean
           name: string
+          parent_id: string
         }
         Update: {
           allergy?: string | null
@@ -82,6 +102,7 @@ export interface Database {
           enrolled_day?: string
           is_active?: boolean
           name?: string
+          parent_id?: string
         }
         Relationships: [
           {
@@ -89,6 +110,12 @@ export interface Database {
             columns: ["daycare_id"]
             referencedRelation: "daycares"
             referencedColumns: ["daycare_id"]
+          },
+          {
+            foreignKeyName: "children_parent_id_fkey"
+            columns: ["parent_id"]
+            referencedRelation: "parents"
+            referencedColumns: ["parent_id"]
           }
         ]
       }
@@ -118,6 +145,178 @@ export interface Database {
           phone_number?: string | null
         }
         Relationships: []
+      }
+      incident_reports: {
+        Row: {
+          created_at: string
+          description: string
+          incident_report_id: string
+          photo: string | null
+          time: string | null
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          incident_report_id?: string
+          photo?: string | null
+          time?: string | null
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          incident_report_id?: string
+          photo?: string | null
+          time?: string | null
+        }
+        Relationships: []
+      }
+      meal_reports: {
+        Row: {
+          child_id: string
+          created_at: string
+          description: string
+          meal_report_id: string
+          photo: string | null
+          time: string | null
+        }
+        Insert: {
+          child_id: string
+          created_at?: string
+          description: string
+          meal_report_id?: string
+          photo?: string | null
+          time?: string | null
+        }
+        Update: {
+          child_id?: string
+          created_at?: string
+          description?: string
+          meal_report_id?: string
+          photo?: string | null
+          time?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "meal_reports_child_id_fkey"
+            columns: ["child_id"]
+            referencedRelation: "children"
+            referencedColumns: ["child_id"]
+          }
+        ]
+      }
+      parents: {
+        Row: {
+          created_at: string
+          parent_address: string | null
+          parent_email: string
+          parent_id: string
+          parent_name: string
+          phone_number: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          parent_address?: string | null
+          parent_email: string
+          parent_id?: string
+          parent_name: string
+          phone_number?: string | null
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          parent_address?: string | null
+          parent_email?: string
+          parent_id?: string
+          parent_name?: string
+          phone_number?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "parents_user_id_fkey"
+            columns: ["user_id"]
+            referencedRelation: "users"
+            referencedColumns: ["user_id"]
+          }
+        ]
+      }
+      report_children: {
+        Row: {
+          activity_report_id: string | null
+          child_id: string
+          incident_report_id: string | null
+          report_children_id: string
+        }
+        Insert: {
+          activity_report_id?: string | null
+          child_id: string
+          incident_report_id?: string | null
+          report_children_id?: string
+        }
+        Update: {
+          activity_report_id?: string | null
+          child_id?: string
+          incident_report_id?: string | null
+          report_children_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "report_children_activity_report_id_fkey"
+            columns: ["activity_report_id"]
+            referencedRelation: "activity_reports"
+            referencedColumns: ["activity_report_id"]
+          },
+          {
+            foreignKeyName: "report_children_child_id_fkey"
+            columns: ["child_id"]
+            referencedRelation: "children"
+            referencedColumns: ["child_id"]
+          },
+          {
+            foreignKeyName: "report_children_incident_report_id_fkey"
+            columns: ["incident_report_id"]
+            referencedRelation: "incident_reports"
+            referencedColumns: ["incident_report_id"]
+          }
+        ]
+      }
+      sleep_reports: {
+        Row: {
+          child_id: string
+          created_at: string
+          description: string
+          nap_end_time: string | null
+          nap_start_time: string
+          photo: string | null
+          sleep_report_id: string
+        }
+        Insert: {
+          child_id: string
+          created_at?: string
+          description: string
+          nap_end_time?: string | null
+          nap_start_time: string
+          photo?: string | null
+          sleep_report_id?: string
+        }
+        Update: {
+          child_id?: string
+          created_at?: string
+          description?: string
+          nap_end_time?: string | null
+          nap_start_time?: string
+          photo?: string | null
+          sleep_report_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sleep_reports_child_id_fkey"
+            columns: ["child_id"]
+            referencedRelation: "children"
+            referencedColumns: ["child_id"]
+          }
+        ]
       }
       teachers: {
         Row: {
@@ -150,6 +349,12 @@ export interface Database {
             columns: ["daycare_id"]
             referencedRelation: "daycares"
             referencedColumns: ["daycare_id"]
+          },
+          {
+            foreignKeyName: "teachers_user_id_fkey"
+            columns: ["user_id"]
+            referencedRelation: "users"
+            referencedColumns: ["user_id"]
           }
         ]
       }

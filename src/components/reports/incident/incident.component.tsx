@@ -1,25 +1,50 @@
 "use client";
-import { FC, PropsWithChildren, useRef, useState } from "react";
+import { FC, PropsWithChildren, useState } from "react";
 
 import styles from "./incident.styles.module.scss";
 import { Button, Paper, Textarea, Title } from "@mantine/core";
 import { PhotoUploadButton } from "@/components/photoUploadButton/photoUploadButton.component";
 import { TimeInputField } from "@/components/timeInputField/timeInputField.component";
+import { useForm, zodResolver } from "@mantine/form";
+import { AddIncidentForm, addIncidentSchema } from "./incident.types";
+import { createIncidentReport } from "@/api/reports/incident/incident.apis";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 type IncidentProps = {
-  type: string
+  type: string;
+  selectedChildren: string[];
 };
 
-const IncidentComponent: FC<PropsWithChildren<IncidentProps>> = ({type}) => {
+const IncidentComponent: FC<PropsWithChildren<IncidentProps>> = ({
+  type,
+  selectedChildren,
+}) => {
+  const form = useForm<Partial<AddIncidentForm>>({
+    validate: zodResolver(addIncidentSchema),
+    initialValues: {
+      time: "",
+      description: "",
+    },
+  });
+
+  const supabase = createClientComponentClient();
+
+  const handleAddIncidentReport = (values: AddIncidentForm) => {
+    createIncidentReport(supabase, selectedChildren, values);
+  };
 
   return (
-    <div className={styles.incident}>
+    // Question : handleAddIncidentReport typing???
+    <form
+      className={styles.incident}
+      onSubmit={form.onSubmit(handleAddIncidentReport as any)}
+    >
       <div style={{ maxWidth: "45rem" }}>
         <Paper shadow="xs" radius="md" p="md">
           <Title order={4}>{`${type} Report`}</Title>
           {/* time input */}
           <div className="timeInput">
-            <TimeInputField label="Time"/>
+            <TimeInputField label="Time" form={form} />
           </div>
           {/* description input */}
           <div className="descriptionField">
@@ -28,7 +53,7 @@ const IncidentComponent: FC<PropsWithChildren<IncidentProps>> = ({type}) => {
               label="Description"
               autosize
               minRows={3}
-              onChange={(e) => console.log(e.target.value)}
+              {...form.getInputProps("description")}
             />
           </div>
           {/* photo upload button */}
@@ -37,14 +62,16 @@ const IncidentComponent: FC<PropsWithChildren<IncidentProps>> = ({type}) => {
           </div>
           {/* submit and cancel button */}
           <div className="buttons">
-            <Button className="button">Submit</Button>
+            <Button className="button" type="submit">
+              Submit
+            </Button>
             <Button className="button" variant="outline">
               Clear
             </Button>
           </div>
         </Paper>
       </div>
-    </div>
+    </form>
   );
 };
 IncidentComponent.displayName = "Incident";

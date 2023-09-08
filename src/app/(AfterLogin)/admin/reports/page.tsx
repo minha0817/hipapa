@@ -2,13 +2,12 @@
 import { getChildren } from "@/api/get";
 import { Affix } from "@/components/affix/affix.component";
 import { Children } from "@/components/children/children.component";
-import { Activity } from "@/components/reports/activity/activity.component";
 import { Incident } from "@/components/reports/incident/incident.component";
 import { Meal } from "@/components/reports/meal/meal.component";
 import { Child } from "@/dbModels/types";
-import { Button, Divider, Title } from "@mantine/core";
+import { Button, Divider } from "@mantine/core";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./adminReportsPage.module.scss";
 import { Sleep } from "@/components/reports/sleep/sleep.component";
 
@@ -96,8 +95,8 @@ const ReportsPage = () => {
         </Button.Group>
       </div>
 
-      {selectedReport === "Incident" && <Incident type={selectedReport}/>}
-      {selectedReport === "Activity" && <Incident type={selectedReport}/>}
+      {selectedReport === "Incident" && <Incident type={selectedReport} selectedChildren={selectedChildren}/>}
+      {selectedReport === "Activity" && <Incident type={selectedReport} selectedChildren={selectedChildren}/>}
       {selectedReport === "Meal" && <Meal />}
       {selectedReport === "Sleep" && <Sleep />}
 

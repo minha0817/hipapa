@@ -22,28 +22,29 @@ const mealData = [
 type MealProps = {
   // ...
 };
-
+//Add form!!!!!!
 const MealComponent: FC<PropsWithChildren<MealProps>> = () => {
+  const form = { getInputProps: null };
   return (
     <div className={styles.meal} style={{ maxWidth: "45rem" }}>
       <Paper shadow="xs" radius="md" p="md">
         <Title order={4}>Meal Report</Title>
         {/* time input */}
         <div className="timeInput">
-          <TimeInputField label="Time"/>
+          <TimeInputField label="Time" form={form} />
         </div>
         {/* Meal type */}
         <Select
           label="Meal Type"
           placeholder="Select Meal Type"
           data={mealData}
-          style={{maxWidth: 400}}
+          style={{ maxWidth: 400 }}
         />
         {/* Quantity radio type */}
         <Radio.Group
           // name="favoriteFramework"
           label="Quantity"
-          style={{margin: "1rem 0 1rem 0"}}
+          style={{ margin: "1rem 0 1rem 0" }}
         >
           <Group mt="xs">
             <Radio value="all" label="All" />

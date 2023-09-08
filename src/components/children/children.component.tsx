@@ -1,6 +1,6 @@
 "use client";
 import { FC, PropsWithChildren } from "react";
-import { Button, Group, Text } from "@mantine/core";
+import { Button, Group } from "@mantine/core";
 import { RxAvatar } from "react-icons/rx";
 import { Child } from "@/dbModels/types";
 import styles from "./children.styles.module.scss";

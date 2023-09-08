@@ -16,7 +16,7 @@ const IncidentComponent: FC<PropsWithChildren<IncidentProps>> = () => {
     <div className={styles.incident}>
       <div style={{ maxWidth: "45rem" }}>
         <Paper shadow="xs" radius="md" p="md">
-          <Title order={4}>Incident reports</Title>
+          <Title order={4}>Incident Report</Title>
           {/* time input */}
           <div className="timeInput">
             <TimeInputField />
@@ -38,7 +38,7 @@ const IncidentComponent: FC<PropsWithChildren<IncidentProps>> = () => {
           <div className="buttons">
             <Button className="button">Submit</Button>
             <Button className="button" variant="outline">
-              Cancel
+              Clear
             </Button>
           </div>
         </Paper>

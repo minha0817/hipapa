@@ -24,10 +24,12 @@ const ReportsPage = () => {
     getChildren(supabase).then((data) => setChildren(data));
   }, []);
 
+  //Set a report 
   const handleButtons = (report: string) => {
     setSelectedReport(report);
   };
 
+  //Set childrenIds after clicked
   const handleSelectChildren = (childId: string, index: number) => {
     setSelectedChildren((prevSelectedChildren) => {
       // Check if the childId is already in the selectedChild array
@@ -42,10 +44,12 @@ const ReportsPage = () => {
     });
   };
 
+  //Get all children's id
   const allChildrenIds = children.map((child) => {
     return child.child_id;
   });
 
+  //Handle Select All Children button.
   const handleSelectAllChildren = () => {
     setSelectedChildren((prevSelectedChildren) => {
       if (prevSelectedChildren.length === allChildrenIds.length) {
@@ -93,7 +97,7 @@ const ReportsPage = () => {
       {selectedReport === "meal" && <Meal />}
       {selectedReport === "toilet" && <Toilet />}
 
-      {/* Add back to top button component*/}
+      {/* Scroll to top button */}
       <Affix />
     </div>
   );

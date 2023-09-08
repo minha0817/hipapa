@@ -1,25 +1,27 @@
-"use client";
-import { FC, PropsWithChildren, useRef, useState } from "react";
+import { FC, PropsWithChildren } from "react";
 
-import styles from "./incident.styles.module.scss";
+import styles from "./sleep.styles.module.scss";
 import { Button, Paper, Textarea, Title } from "@mantine/core";
 import { PhotoUploadButton } from "@/components/photoUploadButton/photoUploadButton.component";
 import { TimeInputField } from "@/components/timeInputField/timeInputField.component";
+import { type } from "os";
 
-type IncidentProps = {
-  type: string
+type SleepProps = {
+  // ...
 };
 
-const IncidentComponent: FC<PropsWithChildren<IncidentProps>> = ({type}) => {
-
+const SleepComponent: FC<PropsWithChildren<SleepProps>> = () => {
   return (
-    <div className={styles.incident}>
+    <div className={styles.sleep}>
       <div style={{ maxWidth: "45rem" }}>
         <Paper shadow="xs" radius="md" p="md">
-          <Title order={4}>{`${type} Report`}</Title>
+          <Title order={4}>Sleep Report</Title>
           {/* time input */}
           <div className="timeInput">
-            <TimeInputField label="Time"/>
+            <TimeInputField label="Start Time"/>
+          </div>
+          <div className="timeInput">
+            <TimeInputField label="End Time"/>
           </div>
           {/* description input */}
           <div className="descriptionField">
@@ -47,6 +49,6 @@ const IncidentComponent: FC<PropsWithChildren<IncidentProps>> = ({type}) => {
     </div>
   );
 };
-IncidentComponent.displayName = "Incident";
+SleepComponent.displayName = "Sleep";
 
-export const Incident = IncidentComponent;
+export const Sleep = SleepComponent;

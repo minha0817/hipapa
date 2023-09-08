@@ -15,6 +15,10 @@ export const useStyles = createStyles((theme) => ({
     fontSize: theme.fontSizes.xl,
   },
 
+  container: {
+    maxWidth: "120rem"
+  },
+
   inner: {
     height: rem(56),
     display: "flex",

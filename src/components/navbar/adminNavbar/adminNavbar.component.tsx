@@ -45,7 +45,7 @@ const AdminNavbarComponent = () => {
 
   return (
     <Header height={56} className={classes.header}>
-      <Container>
+      <Container className={classes.container}>
         <div className={classes.inner}>
           <div className={classes.title}>
             <LuBaby size={30} style={{ marginRight: 5 }} />

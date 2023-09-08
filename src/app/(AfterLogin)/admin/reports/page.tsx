@@ -5,12 +5,12 @@ import { Children } from "@/components/children/children.component";
 import { Activity } from "@/components/reports/activity/activity.component";
 import { Incident } from "@/components/reports/incident/incident.component";
 import { Meal } from "@/components/reports/meal/meal.component";
-import { Toilet } from "@/components/reports/toilet/toilet.component";
 import { Child } from "@/dbModels/types";
-import { Button } from "@mantine/core";
+import { Button, Divider, Title } from "@mantine/core";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./adminReportsPage.module.scss";
+import { Sleep } from "@/components/reports/sleep/sleep.component";
 
 const ReportsPage = () => {
   const [selectedReport, setSelectedReport] = useState("");
@@ -19,7 +19,7 @@ const ReportsPage = () => {
   const supabase = createClientComponentClient();
 
   const [children, setChildren] = useState<Child[]>([]);
-
+  
   useEffect(() => {
     getChildren(supabase).then((data) => setChildren(data));
   }, []);
@@ -60,9 +60,13 @@ const ReportsPage = () => {
     });
   };
 
+  const handleIncidentReportInput = (property: string, value: string) => {
+
+  }
+
   return (
     <div className={styles.adminReports}>
-      <h1>Reports</h1>
+      <Divider my="xs" label="Apply to" labelPosition="center" size="xl" style={{maxWidth: 200}}/>
       <div className="childrenList">
         <Children
           childrenList={children}
@@ -71,31 +75,31 @@ const ReportsPage = () => {
         />
       </div>
       <div className="selectAllBtn">
-        <Button variant="light" onClick={handleSelectAllChildren}>
+        <Button variant="light" onClick={handleSelectAllChildren} style={{minWidth: 200}}>
           Select All Children
         </Button>
       </div>
       <div className="groupBtn">
         <Button.Group>
-          <Button variant="default" onClick={() => handleButtons("incident")}>
+          <Button variant="default" onClick={() => handleButtons("Incident")}>
             Incident
           </Button>
-          <Button variant="default" onClick={() => handleButtons("activity")}>
+          <Button variant="default" onClick={() => handleButtons("Activity")}>
             Activity
           </Button>
-          <Button variant="default" onClick={() => handleButtons("meal")}>
+          <Button variant="default" onClick={() => handleButtons("Meal")}>
             Meal
           </Button>
-          <Button variant="default" onClick={() => handleButtons("toilet")}>
-            Toilet
+          <Button variant="default" onClick={() => handleButtons("Sleep")}>
+            Sleep
           </Button>
         </Button.Group>
       </div>
 
-      {selectedReport === "incident" && <Incident />}
-      {selectedReport === "activity" && <Activity />}
-      {selectedReport === "meal" && <Meal />}
-      {selectedReport === "toilet" && <Toilet />}
+      {selectedReport === "Incident" && <Incident type={selectedReport}/>}
+      {selectedReport === "Activity" && <Incident type={selectedReport}/>}
+      {selectedReport === "Meal" && <Meal />}
+      {selectedReport === "Sleep" && <Sleep />}
 
       {/* Scroll to top button */}
       <Affix />

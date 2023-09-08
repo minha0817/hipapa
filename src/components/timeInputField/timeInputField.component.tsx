@@ -8,16 +8,17 @@ import styles from "./timeInputField.styles.module.scss";
 
 type TimeInputFieldProps = {
   // ...
+  label: string;
 };
 
 const TimeInputFieldComponent: FC<
   PropsWithChildren<TimeInputFieldProps>
-> = () => {
+> = ({label}) => {
   const ref = useRef<HTMLInputElement>(null);
-
+  
   return (
     <TimeInput
-      label="Time"
+      label={label}
       ref={ref}
       rightSection={
         <ActionIcon onClick={() => ref.current?.showPicker()}>
@@ -25,6 +26,7 @@ const TimeInputFieldComponent: FC<
         </ActionIcon>
       }
       maw={400}
+      onChange={(e) => console.log("e ---------- ", e.target.value)}
     />
   );
 };

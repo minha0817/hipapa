@@ -42,6 +42,20 @@ const ReportsPage = () => {
     });
   };
 
+  const allChildrenIds = children.map((child) => {
+    return child.child_id;
+  });
+
+  const handleSelectAllChildren = () => {
+    setSelectedChildren((prevSelectedChildren) => {
+      if (prevSelectedChildren.length === allChildrenIds.length) {
+        return [];
+      } else {
+        return allChildrenIds;
+      }
+    });
+  };
+
   return (
     <div className={styles.adminReports}>
       <h1>Reports</h1>
@@ -53,7 +67,9 @@ const ReportsPage = () => {
         />
       </div>
       <div className="selectAllBtn">
-        <Button variant="light">Select All Children</Button>
+        <Button variant="light" onClick={handleSelectAllChildren}>
+          Select All Children
+        </Button>
       </div>
       <div className="groupBtn">
         <Button.Group>

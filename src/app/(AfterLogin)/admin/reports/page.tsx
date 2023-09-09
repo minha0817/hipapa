@@ -97,8 +97,8 @@ const ReportsPage = () => {
 
       {selectedReport === "Incident" && <Incident type={selectedReport} selectedChildren={selectedChildren}/>}
       {selectedReport === "Activity" && <Incident type={selectedReport} selectedChildren={selectedChildren}/>}
-      {selectedReport === "Meal" && <Meal />}
-      {selectedReport === "Sleep" && <Sleep />}
+      {selectedReport === "Meal" && <Meal selectedChildren={selectedChildren}/>}
+      {selectedReport === "Sleep" && <Sleep selectedChildren={selectedChildren}/>}
 
       {/* Scroll to top button */}
       <Affix />

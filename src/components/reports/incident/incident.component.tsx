@@ -29,7 +29,6 @@ const IncidentComponent: FC<PropsWithChildren<IncidentProps>> = ({
 
   const supabase = createClientComponentClient();
 
-  //이 함수안에서 type을 인자로 받아서 타입에 따라 다르게 api 콜할수있도록 만들기.
   const handleAddIncidentReport = (values: AddIncidentForm) => {
       createIncidentReport(supabase, selectedChildren, values, type);
   };

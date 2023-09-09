@@ -1,7 +1,7 @@
 import { AddIncidentForm } from "@/components/reports/incident/incident.types";
 import { Database } from "@/supabase.types";
 import { SupabaseClient } from "@supabase/supabase-js";
-import { DateTime } from "luxon";
+import { formatTime } from "../report.utils";
 
 export const createIncidentReport = async (
   supabase: SupabaseClient<Database>,
@@ -10,14 +10,7 @@ export const createIncidentReport = async (
   type: string
 ) => {
   //Need this to format values.time which is string into timestamptz
-  const [hours, minutes] = values.time.split(":").map(Number);
-  const dt = DateTime.local().set({
-    hour: hours,
-    minute: minutes,
-    second: 0,
-    millisecond: 0,
-  });
-  const formattedDate = dt.toISO();
+  const formattedDate = formatTime(values.time);
 
   //Handle create Incident reports
   if (type === "Incident" && formattedDate) {

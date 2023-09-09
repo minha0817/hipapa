@@ -176,7 +176,9 @@ export interface Database {
           created_at: string
           description: string
           meal_report_id: string
+          meal_type: Database["public"]["Enums"]["meal_type"]
           photo: string | null
+          quantity: Database["public"]["Enums"]["quantity"]
           time: string | null
         }
         Insert: {
@@ -184,7 +186,9 @@ export interface Database {
           created_at?: string
           description: string
           meal_report_id?: string
+          meal_type: Database["public"]["Enums"]["meal_type"]
           photo?: string | null
+          quantity: Database["public"]["Enums"]["quantity"]
           time?: string | null
         }
         Update: {
@@ -192,7 +196,9 @@ export interface Database {
           created_at?: string
           description?: string
           meal_report_id?: string
+          meal_type?: Database["public"]["Enums"]["meal_type"]
           photo?: string | null
+          quantity?: Database["public"]["Enums"]["quantity"]
           time?: string | null
         }
         Relationships: [
@@ -407,6 +413,8 @@ export interface Database {
     }
     Enums: {
       check_in_out: "check_in" | "check_out"
+      meal_type: "morning_snack" | "lunch" | "afternoon_snack"
+      quantity: "all" | "most" | "some" | "none"
       user_type: "admin" | "teacher" | "parent"
     }
     CompositeTypes: {

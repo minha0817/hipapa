@@ -12,21 +12,45 @@ import {
   Title,
 } from "@mantine/core";
 import { PhotoUploadButton } from "@/components/photoUploadButton/photoUploadButton.component";
+import { useForm, zodResolver } from "@mantine/form";
+import { AddMealForm, addMealSchema } from "./meal.types";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createMealReport } from "@/api/reports/meal/meal.apis";
 
 const mealData = [
-  { value: "morningSnack", label: "Morning Snack" },
+  { value: "morning_snack", label: "Morning Snack" },
   { value: "lunch", label: "Lunch" },
-  { value: "afternoonSnack", label: "Afternoon Snack" },
+  { value: "afternoon_snack", label: "Afternoon Snack" },
 ];
 
 type MealProps = {
-  // ...
+  selectedChildren: string[];
 };
 //Add form!!!!!!
-const MealComponent: FC<PropsWithChildren<MealProps>> = () => {
-  const form = { getInputProps: null };
+
+const MealComponent: FC<PropsWithChildren<MealProps>> = ({
+  selectedChildren,
+}) => {
+  const supabase = createClientComponentClient();
+
+  const form = useForm<Partial<AddMealForm>>({
+    validate: zodResolver(addMealSchema),
+    initialValues: {
+      time: "",
+      description: "",
+    },
+  });
+
+  const handleAddMealReport = (values: AddMealForm) => {
+    createMealReport(supabase, selectedChildren, values)
+  };
+
   return (
-    <div className={styles.meal} style={{ maxWidth: "45rem" }}>
+    <form
+      className={styles.meal}
+      style={{ maxWidth: "45rem" }}
+      onSubmit={form.onSubmit(handleAddMealReport as any)}
+    >
       <Paper shadow="xs" radius="md" p="md">
         <Title order={4}>Meal Report</Title>
         {/* time input */}
@@ -39,12 +63,14 @@ const MealComponent: FC<PropsWithChildren<MealProps>> = () => {
           placeholder="Select Meal Type"
           data={mealData}
           style={{ maxWidth: 400 }}
+          {...form.getInputProps("mealType")}
         />
         {/* Quantity radio type */}
         <Radio.Group
           // name="favoriteFramework"
           label="Quantity"
           style={{ margin: "1rem 0 1rem 0" }}
+          {...form.getInputProps("quantity")}
         >
           <Group mt="xs">
             <Radio value="all" label="All" />
@@ -60,7 +86,7 @@ const MealComponent: FC<PropsWithChildren<MealProps>> = () => {
             label="Description"
             autosize
             minRows={3}
-            onChange={(e) => console.log(e.target.value)}
+            {...form.getInputProps("description")}
           />
         </div>
         {/* photo upload button */}
@@ -69,13 +95,13 @@ const MealComponent: FC<PropsWithChildren<MealProps>> = () => {
         </div>
         {/* submit and cancel button */}
         <div className="buttons">
-          <Button className="button">Submit</Button>
+          <Button className="button" type="submit">Submit</Button>
           <Button className="button" variant="outline">
             Clear
           </Button>
         </div>
       </Paper>
-    </div>
+    </form>
   );
 };
 MealComponent.displayName = "Meal";

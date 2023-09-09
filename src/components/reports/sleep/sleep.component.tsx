@@ -8,9 +8,10 @@ import { type } from "os";
 
 type SleepProps = {
   // ...
+  selectedChildren: string[]
 };
 
-const SleepComponent: FC<PropsWithChildren<SleepProps>> = () => {
+const SleepComponent: FC<PropsWithChildren<SleepProps>> = ({selectedChildren}) => {
   return (
     <div className={styles.sleep}>
       <div style={{ maxWidth: "45rem" }}>

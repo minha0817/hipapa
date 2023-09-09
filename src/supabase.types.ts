@@ -291,8 +291,8 @@ export interface Database {
         Row: {
           child_id: string
           created_at: string
-          description: string
-          nap_end_time: string | null
+          description: string | null
+          nap_end_time: string
           nap_start_time: string
           photo: string | null
           sleep_report_id: string
@@ -300,8 +300,8 @@ export interface Database {
         Insert: {
           child_id: string
           created_at?: string
-          description: string
-          nap_end_time?: string | null
+          description?: string | null
+          nap_end_time: string
           nap_start_time: string
           photo?: string | null
           sleep_report_id?: string
@@ -309,8 +309,8 @@ export interface Database {
         Update: {
           child_id?: string
           created_at?: string
-          description?: string
-          nap_end_time?: string | null
+          description?: string | null
+          nap_end_time?: string
           nap_start_time?: string
           photo?: string | null
           sleep_report_id?: string

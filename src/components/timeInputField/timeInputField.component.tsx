@@ -10,12 +10,14 @@ import { AddIncidentForm } from "../reports/incident/incident.types";
 
 type TimeInputFieldProps = {
   label: string;
-  form: UseFormReturnType<Partial<AddIncidentForm>>
+  form: UseFormReturnType<Partial<AddIncidentForm>>;
+  propName: string;
 };
 
 const TimeInputFieldComponent: FC<PropsWithChildren<TimeInputFieldProps>> = ({
   label,
   form,
+  propName,
 }) => {
   const ref = useRef<HTMLInputElement>(null);
 
@@ -29,7 +31,7 @@ const TimeInputFieldComponent: FC<PropsWithChildren<TimeInputFieldProps>> = ({
         </ActionIcon>
       }
       maw={400}
-      {...form.getInputProps("time")}
+      {...form.getInputProps(`${propName}`)}
     />
   );
 };

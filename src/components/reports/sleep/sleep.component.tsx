@@ -4,25 +4,51 @@ import styles from "./sleep.styles.module.scss";
 import { Button, Paper, Textarea, Title } from "@mantine/core";
 import { PhotoUploadButton } from "@/components/photoUploadButton/photoUploadButton.component";
 import { TimeInputField } from "@/components/timeInputField/timeInputField.component";
-import { type } from "os";
+import { AddSleepForm, addSleepSchema } from "./sleep.types";
+import { useForm, zodResolver } from "@mantine/form";
+import { createSleepReport } from "@/api/reports/sleep/sleep.apis";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 type SleepProps = {
-  // ...
-  selectedChildren: string[]
+  selectedChildren: string[];
 };
 
-const SleepComponent: FC<PropsWithChildren<SleepProps>> = ({selectedChildren}) => {
+const SleepComponent: FC<PropsWithChildren<SleepProps>> = ({
+  selectedChildren,
+}) => {
+  const form = useForm<Partial<AddSleepForm>>({
+    validate: zodResolver(addSleepSchema),
+    initialValues: {
+      startTime: "",
+      endTime: "",
+      description: "",
+    },
+  });
+
+  const supabase = createClientComponentClient();
+
+  const handleAddSleepReport = (values: AddSleepForm) => {
+    createSleepReport(supabase, selectedChildren, values);
+  };
+
   return (
-    <div className={styles.sleep}>
+    <form
+      className={styles.sleep}
+      onSubmit={form.onSubmit(handleAddSleepReport as any)}
+    >
       <div style={{ maxWidth: "45rem" }}>
         <Paper shadow="xs" radius="md" p="md">
           <Title order={4}>Sleep Report</Title>
           {/* time input */}
           <div className="timeInput">
-            <TimeInputField label="Start Time"/>
+            <TimeInputField
+              label="Start Time"
+              form={form}
+              propName="startTime"
+            />
           </div>
           <div className="timeInput">
-            <TimeInputField label="End Time"/>
+            <TimeInputField label="End Time" form={form} propName="endTime" />
           </div>
           {/* description input */}
           <div className="descriptionField">
@@ -31,7 +57,7 @@ const SleepComponent: FC<PropsWithChildren<SleepProps>> = ({selectedChildren}) =
               label="Description"
               autosize
               minRows={3}
-              onChange={(e) => console.log(e.target.value)}
+              {...form.getInputProps("description")}
             />
           </div>
           {/* photo upload button */}
@@ -40,14 +66,16 @@ const SleepComponent: FC<PropsWithChildren<SleepProps>> = ({selectedChildren}) =
           </div>
           {/* submit and cancel button */}
           <div className="buttons">
-            <Button className="button">Submit</Button>
+            <Button className="button" type="submit">
+              Submit
+            </Button>
             <Button className="button" variant="outline">
               Clear
             </Button>
           </div>
         </Paper>
       </div>
-    </div>
+    </form>
   );
 };
 SleepComponent.displayName = "Sleep";

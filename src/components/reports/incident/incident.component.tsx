@@ -44,7 +44,7 @@ const IncidentComponent: FC<PropsWithChildren<IncidentProps>> = ({
           <Title order={4}>{`${type} Report`}</Title>
           {/* time input */}
           <div className="timeInput">
-            <TimeInputField label="Time" form={form} />
+            <TimeInputField label="Time" form={form} propName="time"/>
           </div>
           {/* description input */}
           <div className="descriptionField">

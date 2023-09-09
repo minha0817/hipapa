@@ -26,7 +26,6 @@ const mealData = [
 type MealProps = {
   selectedChildren: string[];
 };
-//Add form!!!!!!
 
 const MealComponent: FC<PropsWithChildren<MealProps>> = ({
   selectedChildren,
@@ -55,7 +54,7 @@ const MealComponent: FC<PropsWithChildren<MealProps>> = ({
         <Title order={4}>Meal Report</Title>
         {/* time input */}
         <div className="timeInput">
-          <TimeInputField label="Time" form={form} />
+          <TimeInputField label="Time" form={form} propName="time"/>
         </div>
         {/* Meal type */}
         <Select

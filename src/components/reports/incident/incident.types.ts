@@ -6,6 +6,6 @@ export type AddIncidentForm = {
 }
 
 export const addIncidentSchema = z.object({
-  time:  z.string().optional(),
+  time:  z.string(),
   description: z.string(),
 });

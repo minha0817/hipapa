@@ -53,6 +53,7 @@ const IncidentComponent: FC<PropsWithChildren<IncidentProps>> = ({
               label="Description"
               autosize
               minRows={3}
+              withAsterisk
               {...form.getInputProps("description")}
             />
           </div>

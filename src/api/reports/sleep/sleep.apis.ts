@@ -3,7 +3,6 @@ import { Database } from "@/supabase.types";
 import { SupabaseClient } from "@supabase/supabase-js";
 import { formatTime } from "../report.utils";
 import { AddSleepForm } from "@/components/reports/sleep/sleep.types";
-import { format } from "path";
 
 export const createSleepReport = async(
   supabase: SupabaseClient<Database>,

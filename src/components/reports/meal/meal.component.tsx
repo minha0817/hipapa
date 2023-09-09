@@ -62,12 +62,13 @@ const MealComponent: FC<PropsWithChildren<MealProps>> = ({
           placeholder="Select Meal Type"
           data={mealData}
           style={{ maxWidth: 400 }}
+          withAsterisk
           {...form.getInputProps("mealType")}
         />
         {/* Quantity radio type */}
         <Radio.Group
-          // name="favoriteFramework"
           label="Quantity"
+          withAsterisk
           style={{ margin: "1rem 0 1rem 0" }}
           {...form.getInputProps("quantity")}
         >

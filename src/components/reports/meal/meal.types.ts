@@ -21,7 +21,7 @@ export type AddMealForm = {
 };
 
 export const addMealSchema = z.object({
-  time: z.string().optional(),
+  time: z.string(),
   mealType: z.string(),
   quantity: z.string(),
   description: z.string().optional(),

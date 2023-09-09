@@ -25,6 +25,7 @@ const TimeInputFieldComponent: FC<PropsWithChildren<TimeInputFieldProps>> = ({
     <TimeInput
       label={label}
       ref={ref}
+      withAsterisk
       rightSection={
         <ActionIcon onClick={() => ref.current?.showPicker()}>
           <IconClock size="1rem" stroke={1.5} />

@@ -8,6 +8,6 @@ export type AddSleepForm = {
 
 export const addSleepSchema = z.object({
   startTime: z.string(),
-  endTime: z.string().optional(),
+  endTime: z.string(),
   description: z.string().optional(),
 })

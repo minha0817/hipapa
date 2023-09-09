@@ -15,21 +15,21 @@ export interface Database {
           created_at: string
           description: string
           photo: string | null
-          time: string | null
+          time: string
         }
         Insert: {
           activity_report_id?: string
           created_at?: string
           description: string
           photo?: string | null
-          time?: string | null
+          time?: string
         }
         Update: {
           activity_report_id?: string
           created_at?: string
           description?: string
           photo?: string | null
-          time?: string | null
+          time?: string
         }
         Relationships: []
       }
@@ -152,21 +152,21 @@ export interface Database {
           description: string
           incident_report_id: string
           photo: string | null
-          time: string | null
+          time: string
         }
         Insert: {
           created_at?: string
           description: string
           incident_report_id?: string
           photo?: string | null
-          time?: string | null
+          time?: string
         }
         Update: {
           created_at?: string
           description?: string
           incident_report_id?: string
           photo?: string | null
-          time?: string | null
+          time?: string
         }
         Relationships: []
       }
@@ -174,32 +174,32 @@ export interface Database {
         Row: {
           child_id: string
           created_at: string
-          description: string
+          description: string | null
           meal_report_id: string
           meal_type: Database["public"]["Enums"]["meal_type"]
           photo: string | null
           quantity: Database["public"]["Enums"]["quantity"]
-          time: string | null
+          time: string
         }
         Insert: {
           child_id: string
           created_at?: string
-          description: string
+          description?: string | null
           meal_report_id?: string
           meal_type: Database["public"]["Enums"]["meal_type"]
           photo?: string | null
           quantity: Database["public"]["Enums"]["quantity"]
-          time?: string | null
+          time?: string
         }
         Update: {
           child_id?: string
           created_at?: string
-          description?: string
+          description?: string | null
           meal_report_id?: string
           meal_type?: Database["public"]["Enums"]["meal_type"]
           photo?: string | null
           quantity?: Database["public"]["Enums"]["quantity"]
-          time?: string | null
+          time?: string
         }
         Relationships: [
           {

@@ -29,12 +29,16 @@ const IncidentComponent: FC<PropsWithChildren<IncidentProps>> = ({
 
   const supabase = createClientComponentClient();
 
-  const handleAddIncidentReport = (values: AddIncidentForm) => {
-      createIncidentReport(supabase, selectedChildren, values, type);
+  const handleClearForm = () => {
+    form.reset();
   };
 
+  const handleAddIncidentReport = (values: AddIncidentForm) => {
+      createIncidentReport(supabase, selectedChildren, values, type).then(handleClearForm)
+  };
+
+
   return (
-    // Question : handleAddIncidentReport typing???
     <form
       className={styles.incident}
       onSubmit={form.onSubmit(handleAddIncidentReport as any)}
@@ -66,7 +70,7 @@ const IncidentComponent: FC<PropsWithChildren<IncidentProps>> = ({
             <Button className="button" type="submit">
               Submit
             </Button>
-            <Button className="button" variant="outline">
+            <Button className="button" variant="outline" onClick={handleClearForm}>
               Clear
             </Button>
           </div>

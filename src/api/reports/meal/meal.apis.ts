@@ -13,7 +13,7 @@ export const createMealReport = async (
 
   const mealData = childrenIds.map((childId) => {
     return {
-      time: formattedDate,
+      time: formattedDate!,
       child_id: childId,
       meal_type: values.mealType,
       quantity: values.quantity,

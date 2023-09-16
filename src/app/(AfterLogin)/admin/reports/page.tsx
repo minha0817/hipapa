@@ -11,20 +11,22 @@ import { useEffect, useState } from "react";
 import styles from "./adminReportsPage.module.scss";
 import { Sleep } from "@/components/reports/sleep/sleep.component";
 
+type ReportType = "Incident" | "Activity" | "Meal" | "Sleep";
+
 const ReportsPage = () => {
-  const [selectedReport, setSelectedReport] = useState("");
+  const [selectedReport, setSelectedReport] = useState<ReportType>("Incident");
   const [selectedChildren, setSelectedChildren] = useState<string[]>([]);
 
   const supabase = createClientComponentClient();
 
   const [children, setChildren] = useState<Child[]>([]);
-  
+
   useEffect(() => {
     getChildren(supabase).then((data) => setChildren(data));
   }, []);
 
-  //Set a report 
-  const handleButtons = (report: string) => {
+  //Set a report
+  const handleButtons = (report: ReportType) => {
     setSelectedReport(report);
   };
 
@@ -43,13 +45,13 @@ const ReportsPage = () => {
     });
   };
 
-  //Get all children's id
-  const allChildrenIds = children.map((child) => {
-    return child.child_id;
-  });
-
   //Handle Select All Children button.
   const handleSelectAllChildren = () => {
+    //Get all children's id
+    const allChildrenIds = children.map((child) => {
+      return child.child_id;
+    });
+
     setSelectedChildren((prevSelectedChildren) => {
       if (prevSelectedChildren.length === allChildrenIds.length) {
         return [];
@@ -59,13 +61,15 @@ const ReportsPage = () => {
     });
   };
 
-  const handleIncidentReportInput = (property: string, value: string) => {
-
-  }
-
   return (
     <div className={styles.adminReports}>
-      <Divider my="xs" label="Apply to" labelPosition="center" size="xl" style={{maxWidth: 200}}/>
+      <Divider
+        my="xs"
+        label="Apply to"
+        labelPosition="center"
+        size="xl"
+        style={{ maxWidth: 200 }}
+      />
       <div className="childrenList">
         <Children
           childrenList={children}
@@ -74,7 +78,11 @@ const ReportsPage = () => {
         />
       </div>
       <div className="selectAllBtn">
-        <Button variant="light" onClick={handleSelectAllChildren} style={{minWidth: 200}}>
+        <Button
+          variant="light"
+          onClick={handleSelectAllChildren}
+          style={{ minWidth: 200 }}
+        >
           Select All Children
         </Button>
       </div>
@@ -95,10 +103,18 @@ const ReportsPage = () => {
         </Button.Group>
       </div>
 
-      {selectedReport === "Incident" && <Incident type={selectedReport} selectedChildren={selectedChildren}/>}
-      {selectedReport === "Activity" && <Incident type={selectedReport} selectedChildren={selectedChildren}/>}
-      {selectedReport === "Meal" && <Meal selectedChildren={selectedChildren}/>}
-      {selectedReport === "Sleep" && <Sleep selectedChildren={selectedChildren}/>}
+      {selectedReport === "Incident" && (
+        <Incident type={selectedReport} selectedChildren={selectedChildren} />
+      )}
+      {selectedReport === "Activity" && (
+        <Incident type={selectedReport} selectedChildren={selectedChildren} />
+      )}
+      {selectedReport === "Meal" && (
+        <Meal selectedChildren={selectedChildren} />
+      )}
+      {selectedReport === "Sleep" && (
+        <Sleep selectedChildren={selectedChildren} />
+      )}
 
       {/* Scroll to top button */}
       <Affix />

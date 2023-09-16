@@ -16,6 +16,7 @@ import { useForm, zodResolver } from "@mantine/form";
 import { AddMealForm, addMealSchema } from "./meal.types";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { createMealReport } from "@/api/reports/meal/meal.apis";
+import axios, { AxiosResponse } from "axios";
 
 const mealData = [
   { value: "morning_snack", label: "Morning Snack" },
@@ -42,6 +43,22 @@ const MealComponent: FC<PropsWithChildren<MealProps>> = ({
 
   const handleAddMealReport = (values: AddMealForm) => {
     createMealReport(supabase, selectedChildren, values)
+    // axios
+    //   .post<Response, AxiosResponse<Response>>("/api/reports/meal", {
+    //     childrenIds: selectedChildren,
+    //     values,
+    //   })
+    //   .then((res) => res.data)
+    //   .catch((error) => {
+    //     const {
+    //       response: { data, status },
+    //     } = error;
+    //     console.error(`Failed: ${status}`, data);
+    //   });
+  };
+
+  const handleClearForm = () => {
+    form.reset();
   };
 
   return (
@@ -54,7 +71,7 @@ const MealComponent: FC<PropsWithChildren<MealProps>> = ({
         <Title order={4}>Meal Report</Title>
         {/* time input */}
         <div className="timeInput">
-          <TimeInputField label="Time" form={form} propName="time"/>
+          <TimeInputField label="Time" form={form} propName="time" />
         </div>
         {/* Meal type */}
         <Select
@@ -95,8 +112,10 @@ const MealComponent: FC<PropsWithChildren<MealProps>> = ({
         </div>
         {/* submit and cancel button */}
         <div className="buttons">
-          <Button className="button" type="submit">Submit</Button>
-          <Button className="button" variant="outline">
+          <Button className="button" type="submit">
+            Submit
+          </Button>
+          <Button className="button" variant="outline" onClick={handleClearForm}>
             Clear
           </Button>
         </div>

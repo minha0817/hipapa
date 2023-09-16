@@ -31,6 +31,10 @@ const SleepComponent: FC<PropsWithChildren<SleepProps>> = ({
     createSleepReport(supabase, selectedChildren, values);
   };
 
+  const handleClearForm = () => {
+    form.reset();
+  };
+
   return (
     <form
       className={styles.sleep}
@@ -69,7 +73,7 @@ const SleepComponent: FC<PropsWithChildren<SleepProps>> = ({
             <Button className="button" type="submit">
               Submit
             </Button>
-            <Button className="button" variant="outline">
+            <Button className="button" variant="outline" onClick={handleClearForm}>
               Clear
             </Button>
           </div>

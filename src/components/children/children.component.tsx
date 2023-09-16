@@ -16,8 +16,6 @@ const ChildrenComponent: FC<PropsWithChildren<ChildrenProps>> = ({
   handleSelectChildren,
   selectedChildren,
 }) => {
-
-
   const checkActive = (childId: string) => {
     const isActive = selectedChildren.includes(childId);
     return isActive ? "light" : "subtle";

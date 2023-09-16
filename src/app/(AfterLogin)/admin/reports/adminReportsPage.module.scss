@@ -1,7 +1,18 @@
 .adminReports {
   margin: 1rem;
+  display: flex;
 
   :global {
+    .leftBox {
+      margin-right: 10rem;
+    }
+
+    .rightBox {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+
     .childrenList {
       margin: 1rem 0 1rem 0;
     }

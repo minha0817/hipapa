@@ -26,10 +26,12 @@ const mealData = [
 
 type MealProps = {
   selectedChildren: string[];
+  resetSelectedChildren: () => void;
 };
 
 const MealComponent: FC<PropsWithChildren<MealProps>> = ({
   selectedChildren,
+  resetSelectedChildren,
 }) => {
   const supabase = createClientComponentClient();
 
@@ -41,8 +43,13 @@ const MealComponent: FC<PropsWithChildren<MealProps>> = ({
     },
   });
 
+  const handleClearForm = () => {
+    form.reset();
+    resetSelectedChildren();
+  };
+
   const handleAddMealReport = (values: AddMealForm) => {
-    createMealReport(supabase, selectedChildren, values)
+    createMealReport(supabase, selectedChildren, values).then(handleClearForm);
     // axios
     //   .post<Response, AxiosResponse<Response>>("/api/reports/meal", {
     //     childrenIds: selectedChildren,
@@ -55,10 +62,6 @@ const MealComponent: FC<PropsWithChildren<MealProps>> = ({
     //     } = error;
     //     console.error(`Failed: ${status}`, data);
     //   });
-  };
-
-  const handleClearForm = () => {
-    form.reset();
   };
 
   return (
@@ -115,7 +118,11 @@ const MealComponent: FC<PropsWithChildren<MealProps>> = ({
           <Button className="button" type="submit">
             Submit
           </Button>
-          <Button className="button" variant="outline" onClick={handleClearForm}>
+          <Button
+            className="button"
+            variant="outline"
+            onClick={handleClearForm}
+          >
             Clear
           </Button>
         </div>

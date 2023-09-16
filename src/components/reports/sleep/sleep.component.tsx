@@ -11,10 +11,12 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 type SleepProps = {
   selectedChildren: string[];
+  resetSelectedChildren: () => void;
 };
 
 const SleepComponent: FC<PropsWithChildren<SleepProps>> = ({
   selectedChildren,
+  resetSelectedChildren
 }) => {
   const form = useForm<Partial<AddSleepForm>>({
     validate: zodResolver(addSleepSchema),
@@ -27,13 +29,15 @@ const SleepComponent: FC<PropsWithChildren<SleepProps>> = ({
 
   const supabase = createClientComponentClient();
 
-  const handleAddSleepReport = (values: AddSleepForm) => {
-    createSleepReport(supabase, selectedChildren, values);
-  };
-
   const handleClearForm = () => {
     form.reset();
+    resetSelectedChildren();
   };
+
+  const handleAddSleepReport = (values: AddSleepForm) => {
+    createSleepReport(supabase, selectedChildren, values).then(handleClearForm)
+  };
+
 
   return (
     <form

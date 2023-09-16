@@ -13,11 +13,13 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 type IncidentProps = {
   type: string;
   selectedChildren: string[];
+  resetSelectedChildren: () => void;
 };
 
 const IncidentComponent: FC<PropsWithChildren<IncidentProps>> = ({
   type,
   selectedChildren,
+  resetSelectedChildren
 }) => {
   const form = useForm<Partial<AddIncidentForm>>({
     validate: zodResolver(addIncidentSchema),
@@ -31,6 +33,7 @@ const IncidentComponent: FC<PropsWithChildren<IncidentProps>> = ({
 
   const handleClearForm = () => {
     form.reset();
+    resetSelectedChildren();
   };
 
   const handleAddIncidentReport = (values: AddIncidentForm) => {

@@ -61,60 +61,69 @@ const ReportsPage = () => {
     });
   };
 
+  //Reset selectedChildrenIds to empty.
+  const resetSelectedChildren = () => {
+    setSelectedChildren([]);
+  }
+
   return (
     <div className={styles.adminReports}>
-      <Divider
-        my="xs"
-        label="Apply to"
-        labelPosition="center"
-        size="xl"
-        style={{ maxWidth: 200 }}
-      />
-      <div className="childrenList">
-        <Children
-          childrenList={children}
-          handleSelectChildren={handleSelectChildren}
-          selectedChildren={selectedChildren}
+      <div className="leftBox">
+        <Divider
+          my="xs"
+          label="Apply to"
+          labelPosition="center"
+          size="xl"
+          style={{ maxWidth: 200 }}
         />
+        <div className="childrenList">
+          <Children
+            childrenList={children}
+            handleSelectChildren={handleSelectChildren}
+            selectedChildren={selectedChildren}
+          />
+        </div>
+        <div className="selectAllBtn">
+          <Button
+            variant="light"
+            onClick={handleSelectAllChildren}
+            style={{ minWidth: 200 }}
+          >
+            Select All Children
+          </Button>
+        </div>
       </div>
-      <div className="selectAllBtn">
-        <Button
-          variant="light"
-          onClick={handleSelectAllChildren}
-          style={{ minWidth: 200 }}
-        >
-          Select All Children
-        </Button>
-      </div>
-      <div className="groupBtn">
-        <Button.Group>
-          <Button variant="default" onClick={() => handleButtons("Incident")}>
-            Incident
-          </Button>
-          <Button variant="default" onClick={() => handleButtons("Activity")}>
-            Activity
-          </Button>
-          <Button variant="default" onClick={() => handleButtons("Meal")}>
-            Meal
-          </Button>
-          <Button variant="default" onClick={() => handleButtons("Sleep")}>
-            Sleep
-          </Button>
-        </Button.Group>
-      </div>
+      <div className="rightBox">
+        <div className="groupBtn">
+          <Button.Group>
+            <Button variant="default" onClick={() => handleButtons("Incident")}>
+              Incident
+            </Button>
+            <Button variant="default" onClick={() => handleButtons("Activity")}>
+              Activity
+            </Button>
+            <Button variant="default" onClick={() => handleButtons("Meal")}>
+              Meal
+            </Button>
+            <Button variant="default" onClick={() => handleButtons("Sleep")}>
+              Sleep
+            </Button>
+          </Button.Group>
+        </div>
 
-      {selectedReport === "Incident" && (
-        <Incident type={selectedReport} selectedChildren={selectedChildren} />
-      )}
-      {selectedReport === "Activity" && (
-        <Incident type={selectedReport} selectedChildren={selectedChildren} />
-      )}
-      {selectedReport === "Meal" && (
-        <Meal selectedChildren={selectedChildren} />
-      )}
-      {selectedReport === "Sleep" && (
-        <Sleep selectedChildren={selectedChildren} />
-      )}
+        {selectedReport === "Incident" && (
+          <Incident type={selectedReport} selectedChildren={selectedChildren} resetSelectedChildren={resetSelectedChildren}/>
+        )}
+        {selectedReport === "Activity" && (
+          <Incident type={selectedReport} selectedChildren={selectedChildren} resetSelectedChildren={resetSelectedChildren}/>
+        )}
+        {selectedReport === "Meal" && (
+          <Meal selectedChildren={selectedChildren} resetSelectedChildren={resetSelectedChildren}/>
+        )}
+        {selectedReport === "Sleep" && (
+          <Sleep selectedChildren={selectedChildren} resetSelectedChildren={resetSelectedChildren}/>
+        )}
+      </div>
 
       {/* Scroll to top button */}
       <Affix />

@@ -3,9 +3,9 @@ export type Daycare = {
   created_at: string;
   name: string;
   phone_number: string | null;
-  address: string | null; 
-  is_active: boolean
-}
+  address: string | null;
+  is_active: boolean;
+};
 
 export type Teacher = {
   teacher_id: string;
@@ -13,7 +13,7 @@ export type Teacher = {
   // email: string;
   daycare_id: string;
   name: string;
-}
+};
 
 export type Child = {
   child_id: string;
@@ -23,5 +23,5 @@ export type Child = {
   daycare_id: string;
   birthday: string;
   enrolled_day: string;
-  // parent_id: string;
-}
+  parent_id: string;
+};

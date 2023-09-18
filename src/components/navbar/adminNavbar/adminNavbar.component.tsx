@@ -12,7 +12,7 @@ const teacherLinks = [
     label: "Reports",
   },
   { link: "", label: "Timer" },
-  { link: "", label: "Messages" },
+  { link: "/admin/messages", label: "Messages" },
 ];
 
 const adminLinks = [
@@ -21,7 +21,7 @@ const adminLinks = [
     label: "Reports",
   },
   { link: "", label: "Timer" },
-  { link: "", label: "Messages" },
+  { link: "/admin/messages", label: "Messages" },
   { link: "", label: "Settings" },
 ];
 

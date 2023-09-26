@@ -210,6 +210,83 @@ export interface Database {
           }
         ]
       }
+      messages: {
+        Row: {
+          attatchment: string | null
+          body: string
+          created_at: string
+          message_from: string
+          message_id: string
+          messages_room_id: string
+        }
+        Insert: {
+          attatchment?: string | null
+          body: string
+          created_at?: string
+          message_from: string
+          message_id?: string
+          messages_room_id: string
+        }
+        Update: {
+          attatchment?: string | null
+          body?: string
+          created_at?: string
+          message_from?: string
+          message_id?: string
+          messages_room_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messages_message_from_fkey"
+            columns: ["message_from"]
+            referencedRelation: "users"
+            referencedColumns: ["user_id"]
+          },
+          {
+            foreignKeyName: "messages_messages_room_id_fkey"
+            columns: ["messages_room_id"]
+            referencedRelation: "messages_room"
+            referencedColumns: ["messages_room_id"]
+          }
+        ]
+      }
+      messages_room: {
+        Row: {
+          child_id: string | null
+          created_at: string
+          daycare_id: string
+          messages_room_id: string
+          title: string
+        }
+        Insert: {
+          child_id?: string | null
+          created_at?: string
+          daycare_id: string
+          messages_room_id?: string
+          title: string
+        }
+        Update: {
+          child_id?: string | null
+          created_at?: string
+          daycare_id?: string
+          messages_room_id?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messages_room_child_id_fkey"
+            columns: ["child_id"]
+            referencedRelation: "children"
+            referencedColumns: ["child_id"]
+          },
+          {
+            foreignKeyName: "messages_room_daycare_id_fkey"
+            columns: ["daycare_id"]
+            referencedRelation: "daycares"
+            referencedColumns: ["daycare_id"]
+          }
+        ]
+      }
       parents: {
         Row: {
           created_at: string

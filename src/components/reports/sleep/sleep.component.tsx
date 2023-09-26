@@ -6,7 +6,7 @@ import { PhotoUploadButton } from "@/components/photoUploadButton/photoUploadBut
 import { TimeInputField } from "@/components/timeInputField/timeInputField.component";
 import { AddSleepForm, addSleepSchema } from "./sleep.types";
 import { useForm, zodResolver } from "@mantine/form";
-import { createSleepReport } from "@/api/reports/sleep/sleep.apis";
+import { createSleepReport } from "@/app/api/reports/sleep/sleep.apis";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 type SleepProps = {

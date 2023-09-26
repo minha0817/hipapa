@@ -4,7 +4,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { Modal, Button, Group } from "@mantine/core";
 import { AddAdminMessagesModal } from "@/components/adminMessages/addAdminMessagesModal/addAdminMessagesModal.component";
 import { AdminMessagesTable } from "@/components/adminMessages/adminMessagesTable/adminMessagesTable.component";
-import { getChildren } from "@/api/get";
+import { getChildren } from "@/app/api/get";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
 import { Child } from "@/dbModels/types";

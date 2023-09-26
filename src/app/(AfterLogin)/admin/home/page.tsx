@@ -5,12 +5,12 @@ import { CurrentTime } from "@/components/currentTime/currentTime.component";
 import { ChildrenCheckIn } from "@/components/userCheckIn/childrenCheckIn";
 import { useEffect, useState } from "react";
 import { Child, Teacher } from "@/dbModels/types";
-import { getChildren, getTeachers } from "@/api/get";
+import { getChildren, getTeachers } from "@/app/api/get";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import {
   getChildrenCheckIn,
   getTeacherCheckIn,
-} from "@/api/checkIn/checkIn.apis";
+} from "@/app/api/checkIn/checkIn.apis";
 import { Affix } from "@mantine/core";
 
 const AdminHomePage = () => {

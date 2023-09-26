@@ -1,1 +1,10 @@
-.adminMessagesTable {}
+.adminMessagesTable {
+
+
+  :global {
+    .table {
+      margin: 1rem;
+      max-width: 50rem;
+    }
+  }
+}

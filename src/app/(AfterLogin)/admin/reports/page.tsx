@@ -1,5 +1,5 @@
 "use client";
-import { getChildren } from "@/api/get";
+import { getChildren } from "@/app/api/get";
 import { Affix } from "@/components/affix/affix.component";
 import { Children } from "@/components/children/children.component";
 import { Incident } from "@/components/reports/incident/incident.component";

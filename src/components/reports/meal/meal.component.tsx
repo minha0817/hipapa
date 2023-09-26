@@ -15,7 +15,7 @@ import { PhotoUploadButton } from "@/components/photoUploadButton/photoUploadBut
 import { useForm, zodResolver } from "@mantine/form";
 import { AddMealForm, addMealSchema } from "./meal.types";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { createMealReport } from "@/api/reports/meal/meal.apis";
+import { createMealReport } from "@/app/api/reports/meal/meal.apis";
 import axios, { AxiosResponse } from "axios";
 
 const mealData = [
@@ -49,19 +49,19 @@ const MealComponent: FC<PropsWithChildren<MealProps>> = ({
   };
 
   const handleAddMealReport = (values: AddMealForm) => {
-    createMealReport(supabase, selectedChildren, values).then(handleClearForm);
-    // axios
-    //   .post<Response, AxiosResponse<Response>>("/api/reports/meal", {
-    //     childrenIds: selectedChildren,
-    //     values,
-    //   })
-    //   .then((res) => res.data)
-    //   .catch((error) => {
-    //     const {
-    //       response: { data, status },
-    //     } = error;
-    //     console.error(`Failed: ${status}`, data);
-    //   });
+    // createMealReport(supabase, selectedChildren, values).then(handleClearForm);
+    axios
+      .post<Response, AxiosResponse<Response>>("/api/reports/meal", {
+        childrenIds: selectedChildren,
+        values,
+      })
+      .then((res) => res.data)
+      .catch((error) => {
+        const {
+          response: { data, status },
+        } = error;
+        console.error(`Failed: ${status}`, data);
+      });
   };
 
   return (

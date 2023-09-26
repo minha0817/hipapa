@@ -7,7 +7,7 @@ import { PhotoUploadButton } from "@/components/photoUploadButton/photoUploadBut
 import { TimeInputField } from "@/components/timeInputField/timeInputField.component";
 import { useForm, zodResolver } from "@mantine/form";
 import { AddIncidentForm, addIncidentSchema } from "./incident.types";
-import { createIncidentReport } from "@/api/reports/incident/incident.apis";
+import { createIncidentReport } from "@/app/api/reports/incident/incident.apis";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 type IncidentProps = {

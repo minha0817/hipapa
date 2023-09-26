@@ -5,7 +5,7 @@ import { Table, ScrollArea } from "@mantine/core";
 import styles from "./teachers.styles.module.scss";
 import { Child } from "@/dbModels/types";
 import { amaticScFontClass } from "@/lib/font";
-import { createCheckIn, deleteCheckIn } from "@/api/checkIn/checkIn.apis";
+import { createCheckIn, deleteCheckIn } from "@/app/api/checkIn/checkIn.apis";
 import { CheckinStatus } from "@/components/checkinStatus/checkinStatus.component";
 import { v4 } from "uuid";
 import { GetRows } from "./getRows";

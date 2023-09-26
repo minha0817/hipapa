@@ -1,3 +1,4 @@
+import "server-only";
 import { Database } from "@/supabase.types";
 import { SupabaseClient } from "@supabase/supabase-js";
 import { formatTime } from "../report.utils";

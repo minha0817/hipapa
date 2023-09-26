@@ -33,8 +33,6 @@ const MealComponent: FC<PropsWithChildren<MealProps>> = ({
   selectedChildren,
   resetSelectedChildren,
 }) => {
-  const supabase = createClientComponentClient();
-
   const form = useForm<Partial<AddMealForm>>({
     validate: zodResolver(addMealSchema),
     initialValues: {
@@ -49,7 +47,6 @@ const MealComponent: FC<PropsWithChildren<MealProps>> = ({
   };
 
   const handleAddMealReport = (values: AddMealForm) => {
-    // createMealReport(supabase, selectedChildren, values).then(handleClearForm);
     axios
       .post<Response, AxiosResponse<Response>>("/api/reports/meal", {
         childrenIds: selectedChildren,
@@ -61,7 +58,8 @@ const MealComponent: FC<PropsWithChildren<MealProps>> = ({
           response: { data, status },
         } = error;
         console.error(`Failed: ${status}`, data);
-      });
+      })
+      .then(handleClearForm);
   };
 
   return (

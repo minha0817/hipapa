@@ -15,14 +15,16 @@ import {
   AddAdminMessagsModalForm,
   addAdminMessagsModalSchema,
 } from "./addAdminMessagesModal.types";
+import axios, { AxiosResponse } from "axios";
 
 type AddAdminMessagesModalProps = {
   childrenList: Child[];
+  close: () => void
 };
 
 const AddAdminMessagesModalComponent: FC<
   PropsWithChildren<AddAdminMessagesModalProps>
-> = ({ childrenList }) => {
+> = ({ childrenList,close }) => {
   //get the list of children's id and name
   //Question : select all children 은 어떻게 만들어야 할지, 
   const multiSelectChildren = childrenList.map((child) => {
@@ -43,7 +45,18 @@ const AddAdminMessagesModalComponent: FC<
 
   const handleAddAdminMessages = (values: AddAdminMessagsModalForm) => {
     console.log("AddAdminMessages values", values);
-    // Add api
+    axios
+    .post<Response, AxiosResponse<Response>>("/api/createMessage", {
+      values,
+    })
+    .then((res) => res.data)
+    .catch((error) => {
+      const {
+        response: { data, status },
+      } = error;
+      console.error(`Failed: ${status}`, data);
+    })
+    .then(close)
   };
 
   return (
@@ -51,7 +64,7 @@ const AddAdminMessagesModalComponent: FC<
       className={styles.addAdminMessagesModal}
       onSubmit={form.onSubmit(handleAddAdminMessages as any)}
     >
-      {/* multi select으로 애들 리스트 보여주기 */}
+      {/* multi select */}
       <div className="multiSelect">
         <MultiSelect
           label="Send To"
@@ -90,12 +103,12 @@ const AddAdminMessagesModalComponent: FC<
           {...form.getInputProps("attachments")}
         />
       </div>
+      {/* Send button */}
       <div className="button">
         <Button className="button" type="submit">
           Send
         </Button>
       </div>
-      {/* Send button */}
     </form>
   );
 };

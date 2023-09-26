@@ -22,7 +22,7 @@ const adminMessagesPage = () => {
   return (
     <div className={styles.adminMessages}>
       <Modal opened={opened} onClose={close} title="Compose Messages">
-        <AddAdminMessagesModal childrenList={children}/>
+        <AddAdminMessagesModal childrenList={children} close={close}/>
       </Modal>
       <h1>Messages</h1>
       <Button variant="light" color="green" onClick={open}>

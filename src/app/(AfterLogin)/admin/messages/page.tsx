@@ -11,25 +11,26 @@ import { Child } from "@/dbModels/types";
 
 const adminMessagesPage = () => {
   const [opened, { open, close }] = useDisclosure(false);
-  const [children, setChildren] = useState<Child[]>([])
+  const [children, setChildren] = useState<Child[]>([]);
+
+  const daycareId = children[0]?.daycare_id;
 
   const supabase = createClientComponentClient();
-  
+
   useEffect(() => {
-    getChildren(supabase).then(setChildren)
-  }, [supabase])
+    getChildren(supabase).then(setChildren);
+  }, [supabase]);
 
   return (
     <div className={styles.adminMessages}>
       <Modal opened={opened} onClose={close} title="Compose Messages">
-        <AddAdminMessagesModal childrenList={children} close={close}/>
+        <AddAdminMessagesModal childrenList={children} close={close} />
       </Modal>
       <h1>Messages</h1>
       <Button variant="light" color="green" onClick={open}>
         Compose Messages
       </Button>
-      {/* Messages table component */}
-      <AdminMessagesTable />
+      <AdminMessagesTable daycareId={daycareId}/>
     </div>
   );
 };

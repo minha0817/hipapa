@@ -1,36 +1,25 @@
 import { FC, PropsWithChildren, useEffect, useState } from "react";
 
 import styles from "./adminMessagesTable.styles.module.scss";
-import { Table } from "@mantine/core";
+import { Modal, Table } from "@mantine/core";
 import axios from "axios";
 import { MessagesRoom } from "@/app/api/getMessagesRoom/types";
+import { useDisclosure } from "@mantine/hooks";
+import { AdminMessagesRow } from "../adminMessagesRow/adminMessagesRow.component";
 
 type AdminMessagesTableProps = {
   daycareId: string;
+  messagesRoom: MessagesRoom[];
 };
 
 const AdminMessagesTableComponent: FC<
   PropsWithChildren<AdminMessagesTableProps>
-> = ({ daycareId }) => {
-  const [messagesRoom, setMessagesRoom] = useState<MessagesRoom[]>([]);
+> = ({ daycareId, messagesRoom }) => {
+  const [opened, { open, close }] = useDisclosure(false);
 
-  useEffect(() => {
-    if (daycareId) {
-      axios
-        .post("/api/getMessagesRoom", {
-          daycareId,
-        })
-        .then((res) => setMessagesRoom(res.data))
-        .catch((error) => {
-          const {
-            response: { data, status },
-          } = error;
-          console.error(`Failed: ${status}`, data);
-        });
-    }
-  }, [daycareId]);
-
-  console.log("messagesRoom", messagesRoom);
+  const openModal = () => {
+    open();
+  };
 
   return (
     <div className={styles.adminMessagesTable}>
@@ -38,11 +27,16 @@ const AdminMessagesTableComponent: FC<
         <thead>
           <tr>
             <th>Time</th>
-            <th>From</th>
+            <th>Child</th>
             <th>Subject</th>
           </tr>
         </thead>
-        {/* <tbody>{rows}</tbody> */}
+        <tbody>
+          {/* Question : type  */}
+          {messagesRoom.map((x: any) => (
+            <AdminMessagesRow data={x} openModal={openModal} />
+          ))}
+        </tbody>
       </Table>
     </div>
   );

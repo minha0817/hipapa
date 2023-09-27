@@ -4,4 +4,5 @@ export type MessagesRoom = {
   title: string;
   createdAt: string;
   childId: string;
+  childName: string;
 }[];

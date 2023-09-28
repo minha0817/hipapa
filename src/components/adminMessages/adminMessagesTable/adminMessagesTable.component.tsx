@@ -1,8 +1,7 @@
-import { FC, PropsWithChildren, useEffect, useState } from "react";
+import { FC, PropsWithChildren } from "react";
 
 import styles from "./adminMessagesTable.styles.module.scss";
 import { Modal, Table } from "@mantine/core";
-import axios from "axios";
 import { MessagesRoom } from "@/app/api/getMessagesRoom/types";
 import { useDisclosure } from "@mantine/hooks";
 import { AdminMessagesRow } from "../adminMessagesRow/adminMessagesRow.component";
@@ -20,9 +19,16 @@ const AdminMessagesTableComponent: FC<
   const openModal = () => {
     open();
   };
-
+  const test: any = []
   return (
     <div className={styles.adminMessagesTable}>
+      <Modal
+        opened={opened}
+        onClose={close}
+        title="Modal title"
+      >
+        {/* <AddAdminMessagesModal childrenList={test} close={close}/> */}
+      </Modal>
       <Table className="table">
         <thead>
           <tr>
@@ -34,7 +40,7 @@ const AdminMessagesTableComponent: FC<
         <tbody>
           {/* Question : type  */}
           {messagesRoom.map((x: any) => (
-            <AdminMessagesRow data={x} openModal={openModal} />
+            <AdminMessagesRow data={x} openModal={openModal} key={x.messagesRoomId}/>
           ))}
         </tbody>
       </Table>

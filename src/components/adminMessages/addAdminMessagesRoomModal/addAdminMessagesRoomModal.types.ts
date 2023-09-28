@@ -1,14 +1,13 @@
 import { z } from "zod";
 
-export type AddAdminMessagsModalForm = {
+export type AddAdminMessagsRoomModalForm = {
   childrenIds: string[];
   title: string;
   body: string;
   attachments?: string;
 }
 
-export const addAdminMessagsModalSchema = z.object({
-  // childrenIds: string[];
+export const addAdminMessagsRoomModalSchema = z.object({
   title: z.string(),
   body: z.string(),
   attachments: z.string().optional()

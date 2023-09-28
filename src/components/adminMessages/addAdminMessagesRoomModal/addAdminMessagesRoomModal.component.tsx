@@ -1,7 +1,7 @@
 "use client";
 import { FC, PropsWithChildren } from "react";
 
-import styles from "./addAdminMessagesModal.styles.module.scss";
+import styles from "./addAdminMessagesRoomModal.styles.module.scss";
 import {
   Button,
   FileInput,
@@ -12,18 +12,18 @@ import {
 import { Child } from "@/dbModels/types";
 import { useForm, zodResolver } from "@mantine/form";
 import {
-  AddAdminMessagsModalForm,
-  addAdminMessagsModalSchema,
-} from "./addAdminMessagesModal.types";
+  AddAdminMessagsRoomModalForm,
+  addAdminMessagsRoomModalSchema,
+} from "./addAdminMessagesRoomModal.types";
 import axios, { AxiosResponse } from "axios";
 
-type AddAdminMessagesModalProps = {
+type AddAdminMessagesRoomModalProps = {
   childrenList: Child[];
   close: () => void
 };
 
-const AddAdminMessagesModalComponent: FC<
-  PropsWithChildren<AddAdminMessagesModalProps>
+const AddAdminMessagesRoomModalComponent: FC<
+  PropsWithChildren<AddAdminMessagesRoomModalProps>
 > = ({ childrenList,close }) => {
   //get the list of children's id and name
   //Question : select all children 은 어떻게 만들어야 할지, 
@@ -34,8 +34,8 @@ const AddAdminMessagesModalComponent: FC<
     };
   });
   
-  const form = useForm<Partial<AddAdminMessagsModalForm>>({
-    validate: zodResolver(addAdminMessagsModalSchema),
+  const form = useForm<Partial<AddAdminMessagsRoomModalForm>>({
+    validate: zodResolver(addAdminMessagsRoomModalSchema),
     initialValues: {
       childrenIds: [],
       title: "",
@@ -43,8 +43,7 @@ const AddAdminMessagesModalComponent: FC<
     },
   });
 
-  const handleAddAdminMessages = (values: AddAdminMessagsModalForm) => {
-    console.log("AddAdminMessages values", values);
+  const handleAddAdminRoomMessages = (values: AddAdminMessagsRoomModalForm) => {
     axios
     .post<Response, AxiosResponse<Response>>("/api/createMessage", {
       values,
@@ -61,8 +60,8 @@ const AddAdminMessagesModalComponent: FC<
 
   return (
     <form
-      className={styles.addAdminMessagesModal}
-      onSubmit={form.onSubmit(handleAddAdminMessages as any)}
+      className={styles.addAdminMessagesRoomModal}
+      onSubmit={form.onSubmit(handleAddAdminRoomMessages as any)}
     >
       {/* multi select */}
       <div className="multiSelect">
@@ -112,6 +111,6 @@ const AddAdminMessagesModalComponent: FC<
     </form>
   );
 };
-AddAdminMessagesModalComponent.displayName = "AddAdminMessagesModal";
+AddAdminMessagesRoomModalComponent.displayName = "AddAdminMessagesRoomModal";
 
-export const AddAdminMessagesModal = AddAdminMessagesModalComponent;
+export const AddAdminMessagesRoomModal = AddAdminMessagesRoomModalComponent;

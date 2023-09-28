@@ -1,11 +1,11 @@
-import { AddAdminMessagsModalForm } from "@/components/adminMessages/addAdminMessagesModal/addAdminMessagesModal.types";
+import { AddAdminMessagsRoomModalForm } from "@/components/adminMessages/addAdminMessagesRoomModal/addAdminMessagesRoomModal.types";
 import { Database } from "@/supabase.types";
 import { getCurrentUser } from "@/utils/supabaseHelper.utils";
 import { SupabaseClient } from "@supabase/supabase-js";
 
 export const createMessage = async (
   supabase: SupabaseClient<Database>,
-  body: { values: AddAdminMessagsModalForm }
+  body: { values: AddAdminMessagsRoomModalForm }
 ) => {
   const values = body.values;
   // Get user.

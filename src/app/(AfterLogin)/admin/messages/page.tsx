@@ -2,7 +2,7 @@
 import styles from "./adminMessages.module.scss";
 import { useDisclosure } from "@mantine/hooks";
 import { Modal, Button, Group } from "@mantine/core";
-import { AddAdminMessagesModal } from "@/components/adminMessages/addAdminMessagesModal/addAdminMessagesModal.component";
+import { AddAdminMessagesRoomModal } from "@/components/adminMessages/addAdminMessagesRoomModal/addAdminMessagesRoomModal.component";
 import { AdminMessagesTable } from "@/components/adminMessages/adminMessagesTable/adminMessagesTable.component";
 import { getChildren } from "@/app/api/get";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -64,7 +64,7 @@ const adminMessagesPage = () => {
   return (
     <div className={styles.adminMessages}>
       <Modal opened={opened} onClose={close} title="Compose Messages">
-        <AddAdminMessagesModal childrenList={children} close={close} />
+        <AddAdminMessagesRoomModal childrenList={children} close={close} />
       </Modal>
       <h1>Messages</h1>
       <Button variant="light" color="green" onClick={open}>

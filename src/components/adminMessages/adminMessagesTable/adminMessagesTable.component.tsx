@@ -5,6 +5,7 @@ import { Modal, Table } from "@mantine/core";
 import { MessagesRoom } from "@/app/api/getMessagesRoom/types";
 import { useDisclosure } from "@mantine/hooks";
 import { AdminMessagesRow } from "../adminMessagesRow/adminMessagesRow.component";
+import { AddMessageModal } from "@/components/addMessageModal/addMessageModal.component";
 
 type AdminMessagesTableProps = {
   daycareId: string;
@@ -19,15 +20,15 @@ const AdminMessagesTableComponent: FC<
   const openModal = () => {
     open();
   };
-  const test: any = []
+  
   return (
     <div className={styles.adminMessagesTable}>
       <Modal
         opened={opened}
         onClose={close}
-        title="Modal title"
+        title="Messages"
       >
-        {/* <AddAdminMessagesModal childrenList={test} close={close}/> */}
+        <AddMessageModal />
       </Modal>
       <Table className="table">
         <thead>

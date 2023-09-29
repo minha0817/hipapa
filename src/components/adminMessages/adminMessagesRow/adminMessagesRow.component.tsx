@@ -1,13 +1,10 @@
 import { FC, PropsWithChildren } from "react";
 
 import styles from "./adminMessagesRow.styles.module.scss";
-import { MessagesRoom } from "@/app/api/getMessagesRoom/types";
-import { Modal } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 
 type AdminMessagesRowProps = {
   data: any;
-  openModal: any;
+  openModal: () => void;
 };
 
 const AdminMessagesRowComponent: FC<

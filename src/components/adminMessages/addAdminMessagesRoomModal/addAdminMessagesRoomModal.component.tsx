@@ -45,7 +45,7 @@ const AddAdminMessagesRoomModalComponent: FC<
 
   const handleAddAdminRoomMessages = (values: AddAdminMessagsRoomModalForm) => {
     axios
-    .post<Response, AxiosResponse<Response>>("/api/createMessage", {
+    .post<Response, AxiosResponse<Response>>("/api/createMessageRoom", {
       values,
     })
     .then((res) => res.data)

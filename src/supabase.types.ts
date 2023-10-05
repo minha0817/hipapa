@@ -218,6 +218,7 @@ export interface Database {
           message_from: string
           message_id: string
           messages_room_id: string
+          updated_at: string
         }
         Insert: {
           attatchment?: string | null
@@ -226,6 +227,7 @@ export interface Database {
           message_from: string
           message_id?: string
           messages_room_id: string
+          updated_at?: string
         }
         Update: {
           attatchment?: string | null
@@ -234,6 +236,7 @@ export interface Database {
           message_from?: string
           message_id?: string
           messages_room_id?: string
+          updated_at?: string
         }
         Relationships: [
           {

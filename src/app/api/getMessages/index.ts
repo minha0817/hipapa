@@ -16,7 +16,7 @@ export const getMessages = async (
   return data.map((x) => {
     return {
       messageId: x.message_id,
-      createdAt: DateTime.fromISO(x.created_at, {
+      updatedAt: DateTime.fromISO(x.updated_at, {
         zone: "America/Los_Angeles",
       }).toFormat("yyyy-MM-dd hh:mm"),
       body: x.body,

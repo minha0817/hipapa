@@ -1,0 +1,19 @@
+.message {
+
+  :global {
+    .messageBox {
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .time {
+      color: gray;
+    }
+  }
+}

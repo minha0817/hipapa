@@ -1,10 +1,11 @@
 import { FC, PropsWithChildren } from "react";
 
 import styles from "./adminMessagesRow.styles.module.scss";
+import { MessageRoom } from "@/app/api/getMessagesRoom/types";
 
 type AdminMessagesRowProps = {
-  data: any;
-  openModal: () => void;
+  data: MessageRoom;
+  openModal: (messageRoom: MessageRoom) => void;
 };
 
 const AdminMessagesRowComponent: FC<
@@ -12,8 +13,10 @@ const AdminMessagesRowComponent: FC<
 > = ({ data, openModal }) => {
   return (
     <tr
-      key={data.messagesRoomId}
-      onClick={openModal}
+      key={data.messageRoomId}
+      onClick={() => {
+        openModal(data);
+      }}
       className={styles.adminMessagesRow}
     >
       <td>{data.createdAt}</td>

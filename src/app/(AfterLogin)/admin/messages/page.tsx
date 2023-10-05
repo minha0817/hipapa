@@ -1,27 +1,27 @@
 "use client";
 import styles from "./adminMessages.module.scss";
 import { useDisclosure } from "@mantine/hooks";
-import { Modal, Button, Group } from "@mantine/core";
-import { AddAdminMessagesRoomModal } from "@/components/adminMessages/addAdminMessagesRoomModal/addAdminMessagesRoomModal.component";
-import { AdminMessagesTable } from "@/components/adminMessages/adminMessagesTable/adminMessagesTable.component";
+import { Modal, Button } from "@mantine/core";
 import { getChildren } from "@/app/api/get";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
 import { Child } from "@/dbModels/types";
-import { MessagesRoom } from "@/app/api/getMessagesRoom/types";
+import { MessageRoom } from "@/app/api/getMessagesRoom/types";
 import axios from "axios";
+import { AddAdminMessagesRoomModal } from "@/components/messages/adminMessages/addAdminMessagesRoomModal/addAdminMessagesRoomModal.component";
+import { AdminMessagesTable } from "@/components/messages/adminMessages/adminMessagesTable/adminMessagesTable.component";
 
 const adminMessagesPage = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const [children, setChildren] = useState<Child[]>([]);
-  const [messagesRoom, setMessagesRoom] = useState<MessagesRoom[]>([]);
+  const [messageRooms, setMessageRooms] = useState<MessageRoom[]>([]);
   const daycareId = children[0]?.daycare_id;
   const supabase = createClientComponentClient();
 
   useEffect(() => {
     getChildren(supabase).then(setChildren);
 
-    const messagesRoom = supabase
+    const messageRooms = supabase
       .channel("custom-all-channel")
       .on(
         "postgres_changes",
@@ -31,7 +31,7 @@ const adminMessagesPage = () => {
             .post("/api/getMessagesRoom", {
               daycareId,
             })
-            .then((res) => setMessagesRoom(res.data))
+            .then((res) => setMessageRooms(res.data))
             .catch((error) => {
               const {
                 response: { data, status },
@@ -47,7 +47,7 @@ const adminMessagesPage = () => {
         .post("/api/getMessagesRoom", {
           daycareId,
         })
-        .then((res) => setMessagesRoom(res.data))
+        .then((res) => setMessageRooms(res.data))
         .catch((error) => {
           const {
             response: { data, status },
@@ -57,7 +57,7 @@ const adminMessagesPage = () => {
     }
 
     return () => {
-      messagesRoom.unsubscribe();
+      messageRooms.unsubscribe();
     };
   }, [daycareId, supabase]);
 
@@ -70,7 +70,7 @@ const adminMessagesPage = () => {
       <Button variant="light" color="green" onClick={open}>
         Compose Messages
       </Button>
-      <AdminMessagesTable daycareId={daycareId} messagesRoom={messagesRoom} />
+      <AdminMessagesTable messageRooms={messageRooms} />
     </div>
   );
 };

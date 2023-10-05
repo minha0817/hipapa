@@ -1,0 +1,31 @@
+.addMessageModal {
+  :global {
+    .childInfo {
+      display: flex;
+      align-items: center;
+      padding: 1rem 0.3rem;
+    }
+
+    .childName {
+      margin-left: 0.3rem;
+    }
+
+    .form {
+      background-color: #fbeec1;
+      border-radius: 1rem;
+    }
+
+    .messageInput {
+      padding-top: 1rem;
+      margin: 1rem;
+    }
+
+    .attachments {
+      margin: 1rem;
+    }
+
+    .button {
+      margin: 0 0 1rem 0.5rem;
+    }
+  }
+}

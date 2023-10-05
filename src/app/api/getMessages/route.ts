@@ -6,11 +6,11 @@ import { getMessages } from "./index";
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
   const body = await req.json();
-  const { messageRoomId } = body;
+  const { selectedRoomId } = body;
   const supabase = createRouteHandlerClient<Database>({ cookies });
 
   try {
-    return NextResponse.json(await getMessages(supabase, messageRoomId));
+    return NextResponse.json(await getMessages(supabase, selectedRoomId));
   } catch (error) {
     if (error instanceof NextResponse) {
       return error;

@@ -1,8 +1,8 @@
-export type MessagesRoom = {
-  messagesRoomId: string;
+export type MessageRoom = {
+  messageRoomId: string;
   daycareId: string;
   title: string;
   createdAt: string;
   childId: string;
   childName: string;
-}[];
+};

@@ -15,7 +15,7 @@ export const getMessagesRoom = async (
   if (error) throw error;
   return data.map((x) => {
     return {
-      messagesRoomId: x.messages_room_id,
+      messageRoomId: x.messages_room_id,
       daycareId: x.daycare_id,
       childId: x.children?.child_id,
       childName: x.children?.name,

@@ -11,7 +11,9 @@ export const getMessagesRoom = async (
     .select(
       "messages_room_id, daycare_id, created_at, title, children(child_id, name)"
     )
-    .eq("daycare_id", daycareId);
+    .eq("daycare_id", daycareId)
+    .order("created_at", { ascending: false });
+
   if (error) throw error;
   return data.map((x) => {
     return {
@@ -19,7 +21,9 @@ export const getMessagesRoom = async (
       daycareId: x.daycare_id,
       childId: x.children?.child_id,
       childName: x.children?.name,
-      createdAt: DateTime.fromISO(x.created_at, {zone: 'America/Los_Angeles'}).toFormat('yyyy-MM-dd hh:mm'),
+      createdAt: DateTime.fromISO(x.created_at, {
+        zone: "America/Los_Angeles",
+      }).toFormat("yyyy-MM-dd hh:mm"),
       title: x.title,
     };
   });

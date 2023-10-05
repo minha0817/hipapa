@@ -21,7 +21,7 @@ const MessageComponent: FC<PropsWithChildren<MessageProps>> = ({ message }) => {
   };
 
   return (
-    <Paper className={styles.message} shadow="lg" p="m">
+    <Paper className={styles.message} p="m" withBorder>
       <div className="messageBox">
         <div className="title">
           <Badge

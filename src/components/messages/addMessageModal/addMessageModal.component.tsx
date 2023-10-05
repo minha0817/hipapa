@@ -123,8 +123,7 @@ const AddMessageModalComponent: FC<PropsWithChildren<AddMessageModalProps>> = ({
         <div className="button">
           <Button
             className="button"
-            variant="light"
-            color="green"
+            variant="filled"
             type="submit"
           >
             Send

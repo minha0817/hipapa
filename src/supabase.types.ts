@@ -70,6 +70,37 @@ export interface Database {
           }
         ]
       }
+      check_messages: {
+        Row: {
+          last_read_time: string
+          messages_room_id: string
+          user_id: string
+        }
+        Insert: {
+          last_read_time?: string
+          messages_room_id: string
+          user_id: string
+        }
+        Update: {
+          last_read_time?: string
+          messages_room_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "check_messages_messages_room_id_fkey"
+            columns: ["messages_room_id"]
+            referencedRelation: "messages_room"
+            referencedColumns: ["messages_room_id"]
+          },
+          {
+            foreignKeyName: "check_messages_user_id_fkey"
+            columns: ["user_id"]
+            referencedRelation: "users"
+            referencedColumns: ["user_id"]
+          }
+        ]
+      }
       children: {
         Row: {
           allergy: string | null

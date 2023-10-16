@@ -5,4 +5,5 @@ export type MessageRoom = {
   createdAt: string;
   childId: string;
   childName: string;
+  createdBy: string;
 };

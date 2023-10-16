@@ -26,6 +26,7 @@ export const createMessageRoom = async (
       daycare_id: daycareId.daycare_id,
       title: values.title,
       child_id: id,
+      created_by: user?.id
     };
   });
 

@@ -3,8 +3,12 @@ import { FC, PropsWithChildren, useEffect, useState } from "react";
 import styles from "./adminMessagesRow.styles.module.scss";
 import { MessageRoom } from "@/app/api/getMessagesRoom/types";
 import { BiSolidMessageRoundedCheck } from "react-icons/bi";
-import axios from "axios";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import axios, { AxiosResponse } from "axios";
+import {
+  User,
+  createClientComponentClient,
+} from "@supabase/auth-helpers-nextjs";
+import { RiDeleteBin7Line } from "react-icons/ri";
 
 type AdminMessagesRowProps = {
   data: MessageRoom;
@@ -14,9 +18,19 @@ type AdminMessagesRowProps = {
 const AdminMessagesRowComponent: FC<
   PropsWithChildren<AdminMessagesRowProps>
 > = ({ data, openModal }) => {
-  const [newAlarm, setNewAlarm] = useState(true);
+  const [user, setUser] = useState<User>();
+  const [newAlarm, setNewAlarm] = useState(false);
   const messageRoomId = data.messageRoomId;
   const supabase = createClientComponentClient();
+
+  useEffect(() => {
+    supabase.auth.getUser().then((res) => {
+      const user = res.data.user;
+      if (user) {
+        setUser(user);
+      }
+    });
+  }, [supabase]);
 
   useEffect(() => {
     axios
@@ -24,7 +38,6 @@ const AdminMessagesRowComponent: FC<
         messageRoomId,
       })
       .then((res) => {
-        console.log("result of get check message ----- ", res.data);
         setNewAlarm(res.data);
       })
       .catch((error) => {
@@ -38,26 +51,12 @@ const AdminMessagesRowComponent: FC<
       .channel("custom-all-channel")
       .on(
         "postgres_changes",
-        { event: "*", schema: "public", table: "check_messages" },
-        () => {
-          axios
-            .post("/api/getCheckMessage", {
-              messageRoomId,
-            })
-            .then((res) => {
-              setNewAlarm(res.data);
-            })
-            .catch((error) => {
-              const {
-                response: { data, status },
-              } = error;
-              console.error(`Failed: ${status}`, data);
-            });
-        }
-      )
-      .on(
-        "postgres_changes",
-        { event: "*", schema: "public", table: "messages" },
+        {
+          event: "*",
+          schema: "public",
+          table: "messages",
+          filter: `messages_room_id=eq.${messageRoomId}`,
+        },
         () => {
           axios
             .post("/api/getCheckMessage", {
@@ -79,7 +78,7 @@ const AdminMessagesRowComponent: FC<
     return () => {
       checkMessages.unsubscribe();
     };
-  }, [supabase, messageRoomId]);
+  }, [supabase]);
 
   const handleRowClick = () => {
     openModal(data);
@@ -87,6 +86,91 @@ const AdminMessagesRowComponent: FC<
     axios
       .post("/api/updateCheckMessage", {
         messageRoomId,
+      })
+      .then((res) => res.data)
+      .catch((error) => {
+        const {
+          response: { data, status },
+        } = error;
+        console.error(`Failed: ${status}`, data);
+      })
+      .then(() => {
+        axios
+          .post("/api/getCheckMessage", {
+            messageRoomId,
+          })
+          .then((res) => {
+            setNewAlarm(res.data);
+          })
+          .catch((error) => {
+            const {
+              response: { data, status },
+            } = error;
+            console.error(`Failed: ${status}`, data);
+          });
+      });
+
+    const checkMessages = supabase
+      .channel("custom-all-channel")
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "check_messages",
+          filter: `messages_room_id=eq.${messageRoomId}`,
+        },
+        () => {
+          axios
+            .post("/api/getCheckMessage", {
+              messageRoomId,
+            })
+            .then((res) => {
+              setNewAlarm(res.data);
+            })
+            .catch((error) => {
+              const {
+                response: { data, status },
+              } = error;
+              console.error(`Failed: ${status}`, data);
+            });
+        }
+      )
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "messages",
+          filter: `messages_room_id=eq.${messageRoomId}`,
+        },
+        () => {
+          axios
+            .post("/api/getCheckMessage", {
+              messageRoomId,
+            })
+            .then((res) => {
+              setNewAlarm(res.data);
+            })
+            .catch((error) => {
+              const {
+                response: { data, status },
+              } = error;
+              console.error(`Failed: ${status}`, data);
+            });
+        }
+      )
+      .subscribe();
+
+    return () => {
+      checkMessages.unsubscribe();
+    };
+  };
+
+  const handleDelete = () => {
+    axios
+      .post<Response, AxiosResponse<Response>>("/api/deleteMessageRoom", {
+        messageRoomId: messageRoomId,
       })
       .then((res) => res.data)
       .catch((error) => {
@@ -108,11 +192,18 @@ const AdminMessagesRowComponent: FC<
       {newAlarm ? (
         <td>
           {data.title}
-          <BiSolidMessageRoundedCheck style={{ color: "red" }} />
+          <BiSolidMessageRoundedCheck
+            style={{ color: "red", marginLeft: "5" }}
+          />
         </td>
       ) : (
         <td>{data.title}</td>
       )}
+      {/* {user?.id === data.createdBy && (
+        <td>
+          <RiDeleteBin7Line onClick={handleDelete} />
+        </td>
+      )} */}
     </tr>
   );
 };

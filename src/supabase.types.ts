@@ -288,6 +288,7 @@ export interface Database {
         Row: {
           child_id: string | null
           created_at: string
+          created_by: string | null
           daycare_id: string
           messages_room_id: string
           title: string
@@ -295,6 +296,7 @@ export interface Database {
         Insert: {
           child_id?: string | null
           created_at?: string
+          created_by?: string | null
           daycare_id: string
           messages_room_id?: string
           title: string
@@ -302,6 +304,7 @@ export interface Database {
         Update: {
           child_id?: string | null
           created_at?: string
+          created_by?: string | null
           daycare_id?: string
           messages_room_id?: string
           title?: string
@@ -312,6 +315,12 @@ export interface Database {
             columns: ["child_id"]
             referencedRelation: "children"
             referencedColumns: ["child_id"]
+          },
+          {
+            foreignKeyName: "messages_room_created_by_fkey"
+            columns: ["created_by"]
+            referencedRelation: "users"
+            referencedColumns: ["user_id"]
           },
           {
             foreignKeyName: "messages_room_daycare_id_fkey"

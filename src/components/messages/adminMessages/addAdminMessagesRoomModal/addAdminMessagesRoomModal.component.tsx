@@ -25,8 +25,7 @@ type AddAdminMessagesRoomModalProps = {
 const AddAdminMessagesRoomModalComponent: FC<
   PropsWithChildren<AddAdminMessagesRoomModalProps>
 > = ({ childrenList,close }) => {
-  //get the list of children's id and name
-  //Question : select all children 은 어떻게 만들어야 할지, 
+
   const multiSelectChildren = childrenList.map((child) => {
     return {
       label: child.name,

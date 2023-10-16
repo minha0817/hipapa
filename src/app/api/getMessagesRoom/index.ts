@@ -9,7 +9,7 @@ export const getMessagesRoom = async (
   const { data, error } = await supabase
     .from("messages_room")
     .select(
-      "messages_room_id, daycare_id, created_at, title, children(child_id, name)"
+      "messages_room_id, daycare_id, created_at,created_by, title, children(child_id, name)"
     )
     .eq("daycare_id", daycareId)
     .order("created_at", { ascending: false });
@@ -25,6 +25,7 @@ export const getMessagesRoom = async (
         zone: "America/Los_Angeles",
       }).toFormat("yyyy-MM-dd hh:mm"),
       title: x.title,
+      createdBy: x.created_by,
     };
   });
 };

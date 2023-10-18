@@ -6,7 +6,7 @@ import { TimeInput } from "@mantine/dates";
 import { IconClock } from "@tabler/icons-react";
 import styles from "./timeInputField.styles.module.scss";
 import { UseFormReturnType } from "@mantine/form";
-import { AddIncidentForm } from "../report/incident/incident.types";
+import { AddIncidentForm } from "../reportForm/incidentForm/incident.types";
 
 type TimeInputFieldProps = {
   label: string;

@@ -2,7 +2,7 @@ import "server-only";
 import { Database } from "@/supabase.types";
 import { SupabaseClient } from "@supabase/supabase-js";
 import { formatTime } from "../report.utils";
-import { AddMealForm } from "@/components/report/meal/meal.types";
+import { AddMealForm } from "@/components/reportForm/mealForm/meal.types";
 
 export const createMealReport = async (
   supabase: SupabaseClient<Database>,

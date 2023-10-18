@@ -1,4 +1,4 @@
-import { AddIncidentForm } from "@/components/report/incident/incident.types";
+import { AddIncidentForm } from "@/components/reportForm/incidentForm/incident.types";
 import { Database } from "@/supabase.types";
 import { SupabaseClient } from "@supabase/supabase-js";
 import { formatTime } from "../report.utils";

@@ -1,8 +1,8 @@
-import { AddMealForm } from "@/components/report/meal/meal.types";
+import { AddMealForm } from "@/components/reportForm/mealForm/meal.types";
 import { Database } from "@/supabase.types";
 import { SupabaseClient } from "@supabase/supabase-js";
 import { formatTime } from "../report.utils";
-import { AddSleepForm } from "@/components/report/sleep/sleep.types";
+import { AddSleepForm } from "@/components/reportForm/sleepForm/sleep.types";
 
 export const createSleepReport = async(
   supabase: SupabaseClient<Database>,

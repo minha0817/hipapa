@@ -8,7 +8,7 @@ export default function AdminLayout({
   return (
     <>
       <AdminNavbar />
-      <section>{children}</section>
+      <main>{children}</main>
     </>
   );
 }

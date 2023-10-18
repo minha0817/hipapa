@@ -111,7 +111,7 @@ export interface Database {
           enrolled_day: string
           is_active: boolean
           name: string
-          parent_id: string
+          parent_id: string | null
         }
         Insert: {
           allergy?: string | null
@@ -122,7 +122,7 @@ export interface Database {
           enrolled_day: string
           is_active?: boolean
           name: string
-          parent_id: string
+          parent_id?: string | null
         }
         Update: {
           allergy?: string | null
@@ -133,7 +133,7 @@ export interface Database {
           enrolled_day?: string
           is_active?: boolean
           name?: string
-          parent_id?: string
+          parent_id?: string | null
         }
         Relationships: [
           {
@@ -146,7 +146,7 @@ export interface Database {
             foreignKeyName: "children_parent_id_fkey"
             columns: ["parent_id"]
             referencedRelation: "parents"
-            referencedColumns: ["parent_id"]
+            referencedColumns: ["user_id"]
           }
         ]
       }
@@ -335,7 +335,6 @@ export interface Database {
           created_at: string
           parent_address: string | null
           parent_email: string
-          parent_id: string
           parent_name: string
           phone_number: string | null
           user_id: string
@@ -344,7 +343,6 @@ export interface Database {
           created_at?: string
           parent_address?: string | null
           parent_email: string
-          parent_id?: string
           parent_name: string
           phone_number?: string | null
           user_id?: string
@@ -353,7 +351,6 @@ export interface Database {
           created_at?: string
           parent_address?: string | null
           parent_email?: string
-          parent_id?: string
           parent_name?: string
           phone_number?: string | null
           user_id?: string

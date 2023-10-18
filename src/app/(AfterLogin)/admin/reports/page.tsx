@@ -2,14 +2,14 @@
 import { getChildren } from "@/app/api/get";
 import { Affix } from "@/components/affix/affix.component";
 import { Children } from "@/components/children/children.component";
-import { Incident } from "@/components/reports/incident/incident.component";
-import { Meal } from "@/components/reports/meal/meal.component";
+import { Incident } from "@/components/report/incident/incident.component";
+import { Meal } from "@/components/report/meal/meal.component";
 import { Child } from "@/dbModels/types";
 import { Button, Divider } from "@mantine/core";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
 import styles from "./adminReportsPage.module.scss";
-import { Sleep } from "@/components/reports/sleep/sleep.component";
+import { Sleep } from "@/components/report/sleep/sleep.component";
 
 type ReportType = "Incident" | "Activity" | "Meal" | "Sleep";
 

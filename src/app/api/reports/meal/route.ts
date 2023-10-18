@@ -4,7 +4,7 @@ import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { Database } from "@/supabase.types";
 import { cookies } from "next/headers";
 import { formatTime } from "../report.utils";
-import { AddMealForm } from "@/components/reports/meal/meal.types";
+import { AddMealForm } from "@/components/report/meal/meal.types";
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
   const body = await req.json();

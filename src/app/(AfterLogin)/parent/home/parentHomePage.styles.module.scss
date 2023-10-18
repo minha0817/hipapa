@@ -1,0 +1,11 @@
+.parentHome {
+  :global {
+    .title {
+      display: flex;
+      align-items: center;
+      margin-left: 1rem;;
+      max-width: max-content;
+      padding: 0.5rem;
+    }
+  }
+}

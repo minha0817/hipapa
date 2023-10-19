@@ -368,18 +368,21 @@ export interface Database {
         Row: {
           activity_report_id: string | null
           child_id: string
+          created_at: string | null
           incident_report_id: string | null
           report_children_id: string
         }
         Insert: {
           activity_report_id?: string | null
           child_id: string
+          created_at?: string | null
           incident_report_id?: string | null
           report_children_id?: string
         }
         Update: {
           activity_report_id?: string | null
           child_id?: string
+          created_at?: string | null
           incident_report_id?: string | null
           report_children_id?: string
         }

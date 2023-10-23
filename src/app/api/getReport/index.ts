@@ -56,8 +56,6 @@ export const getReport = async (supabase: SupabaseClient<Database>) => {
       DateTime.now().setZone("America/Vancouver").startOf("day").toISO()
     );
 
-  console.log("sleepReports", sleepReports);
-
   const { data: mealReports, error: mealReportError } = await supabase
     .from("meal_reports")
     .select()
@@ -66,8 +64,6 @@ export const getReport = async (supabase: SupabaseClient<Database>) => {
       "created_at",
       DateTime.now().setZone("America/Vancouver").startOf("day").toISO()
     );
-
-  console.log("mealReports", mealReports);
 
   return {
     activityReports: activityReports?.map((acReport) => ({

@@ -30,6 +30,7 @@ const ParentHomePage = () => {
     axios
       .post("/api/getReport")
       .then((res) => {
+        
         setReports(res.data);
       })
       .catch((error) => {
@@ -81,5 +82,3 @@ const ParentHomePage = () => {
 };
 
 export default ParentHomePage;
-
-// getReport

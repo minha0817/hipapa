@@ -40,7 +40,6 @@ const IncidentComponent: FC<PropsWithChildren<IncidentProps>> = ({
       createIncidentReport(supabase, selectedChildren, values, type).then(handleClearForm)
   };
 
-
   return (
     <form
       className={styles.incident}

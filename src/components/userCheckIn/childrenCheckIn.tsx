@@ -3,12 +3,12 @@ import { FC, PropsWithChildren } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Table, ScrollArea } from "@mantine/core";
 import styles from "./teachers.styles.module.scss";
-import { Child } from "@/dbModels/types";
 import { amaticScFontClass } from "@/lib/font";
 import { createCheckIn, deleteCheckIn } from "@/app/api/checkIn/checkIn.apis";
 import { CheckinStatus } from "@/components/checkinStatus/checkinStatus.component";
 import { v4 } from "uuid";
 import { GetRows } from "./getRows";
+import {Child} from "@/app/api/getChild/types";
 
 type ChildrenCheckInProps = {
   childrenList: Child[];
@@ -29,8 +29,8 @@ const ChildrenCheckInComponent: FC<PropsWithChildren<ChildrenCheckInProps>> = ({
   };
 
   const handleChildrenCheckIn = (child: Child) => {
-    const daycareId = child.daycare_id;
-    const childId = child.child_id;
+    const daycareId = child.daycareId;
+    const childId = child.childId;
     const checkedInObj: any = findCurrentUserCheckinState(childId);
     if (!checkedInObj) {
       const inputValues = {

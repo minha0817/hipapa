@@ -1,13 +1,12 @@
-import { AddAdminMessagsRoomModalForm } from "@/components/messages/adminMessages/addAdminMessagesRoomModal/addAdminMessagesRoomModal.types";
+import { AddAdminMessagsRoomModalForm } from "@/components/messages/adminMessage/addAdminMessagesRoomModal/addAdminMessagesRoomModal.types";
 import { Database } from "@/supabase.types";
 import { getCurrentUser } from "@/utils/supabaseHelper.utils";
 import { SupabaseClient } from "@supabase/supabase-js";
 
 export const createMessageRoom = async (
   supabase: SupabaseClient<Database>,
-  body: { values: AddAdminMessagsRoomModalForm }
+  body: AddAdminMessagsRoomModalForm
 ) => {
-  const values = body.values;
   // Get user.
   const user = await getCurrentUser(supabase);
 
@@ -15,18 +14,18 @@ export const createMessageRoom = async (
   const { data: daycareId, error: daycareIdError } = await supabase
     .from("children")
     .select("daycare_id")
-    .eq("child_id", values.childrenIds[0])
+    .eq("child_id", body.childrenIds[0])
     .single();
 
   if (daycareIdError) throw daycareIdError;
 
   // Transform data to insert into messages_room table.
-  const messagesRoomData = values.childrenIds.map((id) => {
+  const messagesRoomData = body.childrenIds.map((id) => {
     return {
       daycare_id: daycareId.daycare_id,
-      title: values.title,
+      title: body.title,
       child_id: id,
-      created_by: user?.id
+      created_by: user?.id,
     };
   });
 
@@ -44,7 +43,7 @@ export const createMessageRoom = async (
       return {
         messages_room_id: idObj.messages_room_id,
         message_from: user!.id,
-        body: values.body,
+        body: body.body,
       };
     }
   );

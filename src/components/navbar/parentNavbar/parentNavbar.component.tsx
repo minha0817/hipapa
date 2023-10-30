@@ -1,37 +1,28 @@
 "use client";
-import {
-  Header,
-  Group,
-  Burger,
-  Container,
-} from "@mantine/core";
+import { Header, Group, Burger, Container } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { LuBaby } from "react-icons/lu";
 import styles from "./parentNavbar.styles.module.scss";
 import { useStyles } from "../navbar.styles";
+import Link from "next/link";
 
 const parentLinks = [
   {
     link: "",
     label: "Reports",
   },
-  { link: "", label: "Messages" },
+  { link: "/parent/messages", label: "Messages" },
 ];
 
 const ParentNavbarComponent = () => {
   const [opened, { toggle }] = useDisclosure(false);
   const { classes } = useStyles();
 
-  const items = parentLinks.map((link) => {
+  const items = parentLinks.map((item) => {
     return (
-      <a
-        key={link.label}
-        href={link.link}
-        className={classes.link}
-        onClick={(event) => event.preventDefault()}
-      >
-        {link.label}
-      </a>
+      <Link key={item.label} href={item.link} className={classes.link}>
+        {item.label}
+      </Link>
     );
   });
 
@@ -41,7 +32,10 @@ const ParentNavbarComponent = () => {
         <div className={classes.inner}>
           <div className={classes.title}>
             <LuBaby size={30} style={{ marginRight: 5 }} />
-            <p>HIPAPA</p>
+
+            <Link href="/parent/home">
+              <p className={classes.a}>HIPAPA</p>
+            </Link>
           </div>
           <Group spacing={5} className={classes.links}>
             {items}

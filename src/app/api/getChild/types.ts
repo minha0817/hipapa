@@ -1,6 +1,6 @@
 export type Child = {
   childId: string;
-  childName: string;
+  name: string;
   isActive: boolean;
   daycareId: string;
   parentId: string;

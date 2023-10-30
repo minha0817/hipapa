@@ -5,17 +5,17 @@ import { Modal, Button } from "@mantine/core";
 import { getChildren } from "@/app/api/get";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
-import { Child } from "@/dbModels/types";
+import { Child } from "@/app/api/getChild/types";
 import { MessageRoom } from "@/app/api/getMessagesRoom/types";
 import axios from "axios";
-import { AddAdminMessagesRoomModal } from "@/components/messages/adminMessages/addAdminMessagesRoomModal/addAdminMessagesRoomModal.component";
-import { AdminMessagesTable } from "@/components/messages/adminMessages/adminMessagesTable/adminMessagesTable.component";
+import { AddAdminMessagesRoomModal } from "@/components/messages/adminMessage/addAdminMessagesRoomModal/addAdminMessagesRoomModal.component";
+import { AdminMessagesTable } from "@/components/messages/adminMessage/adminMessagesTable/adminMessagesTable.component";
 
 const adminMessagesPage = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const [children, setChildren] = useState<Child[]>([]);
   const [messageRooms, setMessageRooms] = useState<MessageRoom[]>([]);
-  const daycareId = children[0]?.daycare_id;
+  const daycareId = children[0]?.daycareId;
   const supabase = createClientComponentClient();
 
   useEffect(() => {
@@ -64,7 +64,7 @@ const adminMessagesPage = () => {
   return (
     <div className={styles.adminMessages}>
       <Modal opened={opened} onClose={close} title="Compose Messages">
-        <AddAdminMessagesRoomModal childrenList={children} close={close} />
+        <AddAdminMessagesRoomModal childrenList={children} close={close}/>
       </Modal>
       <h1>Messages</h1>
       <Button variant="light" color="green" onClick={open}>

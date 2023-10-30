@@ -4,7 +4,7 @@ import styles from "./adminHomePage.module.scss";
 import { CurrentTime } from "@/components/currentTime/currentTime.component";
 import { ChildrenCheckIn } from "@/components/userCheckIn/childrenCheckIn";
 import { useEffect, useState } from "react";
-import { Child, Teacher } from "@/dbModels/types";
+import { Teacher } from "@/dbModels/types";
 import { getChildren, getTeachers } from "@/app/api/get";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import {
@@ -12,6 +12,7 @@ import {
   getTeacherCheckIn,
 } from "@/app/api/checkIn/checkIn.apis";
 import { Affix } from "@mantine/core";
+import {Child} from "@/app/api/getChild/types"
 
 const AdminHomePage = () => {
   const supabase = createClientComponentClient();

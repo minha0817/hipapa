@@ -9,7 +9,7 @@ import {
   TextInput,
   Textarea,
 } from "@mantine/core";
-import { Child } from "@/dbModels/types";
+import { Child } from "@/app/api/getChild/types";
 import { useForm, zodResolver } from "@mantine/form";
 import {
   AddAdminMessagsRoomModalForm,
@@ -19,20 +19,19 @@ import axios, { AxiosResponse } from "axios";
 
 type AddAdminMessagesRoomModalProps = {
   childrenList: Child[];
-  close: () => void
+  close: () => void;
 };
 
 const AddAdminMessagesRoomModalComponent: FC<
   PropsWithChildren<AddAdminMessagesRoomModalProps>
-> = ({ childrenList,close }) => {
-
+> = ({ childrenList, close }) => {
   const multiSelectChildren = childrenList.map((child) => {
     return {
       label: child.name,
-      value: child.child_id,
+      value: child.childId,
     };
   });
-  
+
   const form = useForm<Partial<AddAdminMessagsRoomModalForm>>({
     validate: zodResolver(addAdminMessagsRoomModalSchema),
     initialValues: {
@@ -43,18 +42,26 @@ const AddAdminMessagesRoomModalComponent: FC<
   });
 
   const handleAddAdminRoomMessages = (values: AddAdminMessagsRoomModalForm) => {
+    const formattedValues = {
+      childrenIds: values.childrenIds,
+      title: values.title,
+      body: values.body,
+      attachments: values.attachments,
+    }
+
     axios
-    .post<Response, AxiosResponse<Response>>("/api/createMessageRoom", {
-      values,
-    })
-    .then((res) => res.data)
-    .catch((error) => {
-      const {
-        response: { data, status },
-      } = error;
-      console.error(`Failed: ${status}`, data);
-    })
-    .then(close)
+      .post<Response, AxiosResponse<Response>>(
+        "/api/createMessageRoom",
+        formattedValues
+      )
+      .then((res) => res.data)
+      .catch((error) => {
+        const {
+          response: { data, status },
+        } = error;
+        console.error(`Failed: ${status}`, data);
+      })
+      .then(close);
   };
 
   return (

@@ -111,7 +111,7 @@ export interface Database {
           enrolled_day: string
           is_active: boolean
           name: string
-          parent_id: string | null
+          parent_id: string
         }
         Insert: {
           allergy?: string | null
@@ -122,7 +122,7 @@ export interface Database {
           enrolled_day: string
           is_active?: boolean
           name: string
-          parent_id?: string | null
+          parent_id: string
         }
         Update: {
           allergy?: string | null
@@ -133,7 +133,7 @@ export interface Database {
           enrolled_day?: string
           is_active?: boolean
           name?: string
-          parent_id?: string | null
+          parent_id?: string
         }
         Relationships: [
           {

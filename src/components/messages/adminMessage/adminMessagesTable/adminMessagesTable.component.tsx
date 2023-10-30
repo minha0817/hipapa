@@ -2,10 +2,10 @@ import { FC, PropsWithChildren, useState } from "react";
 
 import styles from "./adminMessagesTable.styles.module.scss";
 import { Modal, Table } from "@mantine/core";
-import { MessageRoom } from "@/app/api/getMessagesRoom/types";
 import { useDisclosure } from "@mantine/hooks";
 import { AdminMessagesRow } from "../adminMessagesRow/adminMessagesRow.component";
 import { AddMessageModal } from "@/components/messages/addMessageModal/addMessageModal.component";
+import { MessageRoom } from "@/app/api/getMessagesRoom/types";
 
 type AdminMessagesTableProps = {
   messageRooms: MessageRoom[];

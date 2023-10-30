@@ -1,7 +1,6 @@
-import { FC, PropsWithChildren, useEffect, useState } from "react";
+  import { FC, PropsWithChildren, useEffect, useState } from "react";
 
 import styles from "./adminMessagesRow.styles.module.scss";
-import { MessageRoom } from "@/app/api/getMessagesRoom/types";
 import { BiSolidMessageRoundedCheck } from "react-icons/bi";
 import axios, { AxiosResponse } from "axios";
 import {
@@ -9,6 +8,7 @@ import {
   createClientComponentClient,
 } from "@supabase/auth-helpers-nextjs";
 import { RiDeleteBin7Line } from "react-icons/ri";
+import { MessageRoom } from "@/app/api/getMessagesRoom/types";
 
 type AdminMessagesRowProps = {
   data: MessageRoom;

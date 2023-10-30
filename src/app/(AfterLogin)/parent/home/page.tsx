@@ -48,7 +48,7 @@ const ParentHomePage = () => {
       <CurrentTime />
       <Paper shadow="sm" radius="lg" p="xl" className="title">
         <Avatar src="avatar.png" alt="it's me" />
-        <p>{child.childName}</p>
+        <p>{child.name}</p>
       </Paper>
 
       {/* Reports  */}

@@ -11,8 +11,8 @@ import axios, { AxiosResponse } from "axios";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { RxAvatar } from "react-icons/rx";
 import { MessageType } from "@/app/api/getMessages/types";
-import { MessageRoom } from "@/app/api/getMessagesRoom/types";
 import { Message } from "../message/message.component";
+import { MessageRoom } from "@/app/api/getMessagesRoom/types";
 
 type AddMessageModalProps = {
   selectedRoom: MessageRoom;

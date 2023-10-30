@@ -6,10 +6,10 @@ import { getChildren } from "@/app/api/get";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
 import { Child } from "@/app/api/getChild/types";
-import { MessageRoom } from "@/app/api/getMessagesRoom/types";
 import axios from "axios";
 import { AddAdminMessagesRoomModal } from "@/components/messages/adminMessage/addAdminMessagesRoomModal/addAdminMessagesRoomModal.component";
 import { AdminMessagesTable } from "@/components/messages/adminMessage/adminMessagesTable/adminMessagesTable.component";
+import { MessageRoom } from "@/app/api/getMessagesRoom/types";
 
 const adminMessagesPage = () => {
   const [opened, { open, close }] = useDisclosure(false);

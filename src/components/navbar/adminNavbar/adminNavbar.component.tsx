@@ -39,32 +39,30 @@ const AdminNavbarComponent = () => {
 
   const items = links.map((item) => (
     <Link href={item.link} className={classes.link} key={item.label}>
-    {item.label}
-  </Link>
-  ))
+      {item.label}
+    </Link>
+  ));
 
   return (
     <Header height={56} className={classes.header}>
-      <Container className={classes.container}>
-        <div className={classes.inner}>
-          <div className={classes.title}>
-            <LuBaby size={30} style={{ marginRight: 5 }} />
-            <Link href="/admin/home">
-              <p className={classes.a}>HIPAPA</p>
-            </Link>
-          </div>
-          <Group spacing={5} className={classes.links}>
-            {items}
-          </Group>
-          <Burger
-            opened={opened}
-            onClick={toggle}
-            className={classes.burger}
-            size="sm"
-            color="#fff"
-          />
+      <div className={classes.inner}>
+        <div className={classes.title}>
+          <LuBaby size={30} style={{ marginRight: 5 }} />
+          <Link href="/admin/home">
+            <p className={classes.a}>HIPAPA</p>
+          </Link>
         </div>
-      </Container>
+        <Group spacing={5} className={classes.links}>
+          {items}
+        </Group>
+        <Burger
+          opened={opened}
+          onClick={toggle}
+          className={classes.burger}
+          size="sm"
+          color="#fff"
+        />
+      </div>
     </Header>
   );
 };

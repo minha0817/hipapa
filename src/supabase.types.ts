@@ -295,7 +295,7 @@ export interface Database {
         }
         Insert: {
           child_id?: string | null
-          created_at?: string
+          created_at: string
           created_by?: string | null
           daycare_id: string
           messages_room_id?: string

@@ -5,6 +5,7 @@ import { amaticScFontClass } from "@/lib/font";
 export const useStyles = createStyles((theme) => ({
   header: {
     backgroundColor: `${globalStyles.secondaryColor}`,
+    padding: "0 1rem 0 1rem"
   },
 
   title: {
@@ -16,7 +17,6 @@ export const useStyles = createStyles((theme) => ({
   },
 
   container: {
-    maxWidth: "120rem"
   },
 
   inner: {

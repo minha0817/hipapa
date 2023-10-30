@@ -43,6 +43,8 @@ const ParentHomePage = () => {
 
   if (!child) return;
 
+  console.log('child', child);
+
   return (
     <div className={styles.parentHome}>
       <CurrentTime />

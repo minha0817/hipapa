@@ -18,6 +18,8 @@ export async function middleware(req: NextRequest) {
     .single();
   const userType = userData.data?.user_type;
 
+  console.log("userType in the middleware", userType);
+
   if (!user) {
     if (pathname === "/") {
       return res;

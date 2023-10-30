@@ -1,4 +1,4 @@
-  import { FC, PropsWithChildren, useEffect, useState } from "react";
+import { FC, PropsWithChildren, useEffect, useState } from "react";
 
 import styles from "./adminMessagesRow.styles.module.scss";
 import { BiSolidMessageRoundedCheck } from "react-icons/bi";
@@ -9,6 +9,7 @@ import {
 } from "@supabase/auth-helpers-nextjs";
 import { RiDeleteBin7Line } from "react-icons/ri";
 import { MessageRoom } from "@/app/api/getMessagesRoom/types";
+import { DateTime } from "luxon";
 
 type AdminMessagesRowProps = {
   data: MessageRoom;
@@ -187,18 +188,18 @@ const AdminMessagesRowComponent: FC<
       onClick={handleRowClick}
       className={styles.adminMessagesRow}
     >
-      <td>{data.createdAt}</td>
+      <td>
+        {data.createdAt}
+      </td>
       <td>{data.childName}</td>
-      {newAlarm ? (
-        <td>
-          {data.title}
+      <td>
+        {data.title}
+        {newAlarm && (
           <BiSolidMessageRoundedCheck
             style={{ color: "red", marginLeft: "5" }}
           />
-        </td>
-      ) : (
-        <td>{data.title}</td>
-      )}
+        )}
+      </td>
       {/* {user?.id === data.createdBy && (
         <td>
           <RiDeleteBin7Line onClick={handleDelete} />

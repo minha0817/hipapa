@@ -35,7 +35,7 @@ export const getChild = async (supabase: SupabaseClient<Database>) => {
     childId: data.child_id,
     daycareId: data.daycare_id,
     parentId: data.parent_id,
-    childName: data.name,
+    name: data.name,
     isActive: data.is_active,
     checkIn: checkInData,
   };

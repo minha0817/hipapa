@@ -28,7 +28,6 @@ const ParentNavbarComponent = () => {
 
   return (
     <Header height={56} className={classes.header}>
-      <Container>
         <div className={classes.inner}>
           <div className={classes.title}>
             <LuBaby size={30} style={{ marginRight: 5 }} />
@@ -48,7 +47,6 @@ const ParentNavbarComponent = () => {
             color="#fff"
           />
         </div>
-      </Container>
     </Header>
   );
 };

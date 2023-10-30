@@ -1,16 +1,15 @@
 "use client";
 import { FC, PropsWithChildren } from "react";
-import {
-  Button,
-  FileInput,
-  TextInput,
-  Textarea,
-} from "@mantine/core";
+import { Button, FileInput, TextInput, Textarea } from "@mantine/core";
 import { Child } from "@/app/api/getChild/types";
 import { useForm, zodResolver } from "@mantine/form";
 
 import axios, { AxiosResponse } from "axios";
-import { AddParentMessagsRoomModalForm, addParentMessagsRoomModalSchema } from "./addParentMessageRoomModal.types";
+import {
+  AddParentMessagsRoomModalForm,
+  addParentMessagsRoomModalSchema,
+} from "./addParentMessageRoomModal.types";
+import styles from "./addParentMessageRoomModal.styles.module.scss";
 
 type AddParentMessagesRoomModalProps = {
   childrenList: Child[];
@@ -20,7 +19,6 @@ type AddParentMessagesRoomModalProps = {
 const AddParentMessagesRoomModalComponent: FC<
   PropsWithChildren<AddParentMessagesRoomModalProps>
 > = ({ childrenList, close }) => {
-
   const form = useForm<Partial<AddParentMessagsRoomModalForm>>({
     validate: zodResolver(addParentMessagsRoomModalSchema),
     initialValues: {
@@ -30,14 +28,15 @@ const AddParentMessagesRoomModalComponent: FC<
     },
   });
 
-  const handleAddParentRoomMessages = (values: AddParentMessagsRoomModalForm) => {
-
+  const handleAddParentRoomMessages = (
+    values: AddParentMessagsRoomModalForm
+  ) => {
     const formattedValues = {
-          childrenIds: [childrenList[0].childId],
-          title: values.title,
-          body: values.body,
-          attachments: values.attachments,
-        }
+      childrenIds: [childrenList[0].childId],
+      title: values.title,
+      body: values.body,
+      attachments: values.attachments,
+    };
 
     axios
       .post<Response, AxiosResponse<Response>>(
@@ -56,7 +55,7 @@ const AddParentMessagesRoomModalComponent: FC<
 
   return (
     <form
-      // className={styles.addAdminMessagesRoomModal}
+      className={styles.addParentMessagesRoomModal}
       onSubmit={form.onSubmit(handleAddParentRoomMessages as any)}
     >
       {/* Subject input */}

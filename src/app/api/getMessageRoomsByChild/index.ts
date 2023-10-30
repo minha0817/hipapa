@@ -21,9 +21,7 @@ export const getMessageRoomsByChild = async (
       daycareId: x.daycare_id,
       childId: x.children?.child_id,
       childName: x.children?.name,
-      createdAt: DateTime.fromISO(x.created_at, {
-        zone: "America/Los_Angeles",
-      }).toFormat("yyyy-MM-dd hh:mm"),
+      createdAt: DateTime.fromISO(x.created_at).toFormat("yyyy-MM-dd hh:mm a"),
       title: x.title,
       createdBy: x.created_by,
     };

@@ -10,7 +10,7 @@ export default function AuthForm({ value }: any) {
   const router = useRouter();
 
   useEffect(() => {
-    supabase.auth.onAuthStateChange((event, _session) => {
+    const subscription = supabase.auth.onAuthStateChange((event, _session) => {
       if (event === "SIGNED_IN") {
         if (value === "admin" || value === "teacher") {
           router.replace("/admin/home");
@@ -19,7 +19,11 @@ export default function AuthForm({ value }: any) {
           router.replace("/parent/home");
         }
       }
-    });
+    }).data.subscription;
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, [router, supabase.auth]);
 
   return (

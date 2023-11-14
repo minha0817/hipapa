@@ -59,12 +59,14 @@ export interface Database {
           {
             foreignKeyName: "check_in_child_id_fkey"
             columns: ["child_id"]
+            isOneToOne: false
             referencedRelation: "children"
             referencedColumns: ["child_id"]
           },
           {
             foreignKeyName: "check_in_daycare_id_fkey"
             columns: ["daycare_id"]
+            isOneToOne: false
             referencedRelation: "daycares"
             referencedColumns: ["daycare_id"]
           }
@@ -90,12 +92,14 @@ export interface Database {
           {
             foreignKeyName: "check_messages_messages_room_id_fkey"
             columns: ["messages_room_id"]
+            isOneToOne: false
             referencedRelation: "messages_room"
             referencedColumns: ["messages_room_id"]
           },
           {
             foreignKeyName: "check_messages_user_id_fkey"
             columns: ["user_id"]
+            isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["user_id"]
           }
@@ -139,12 +143,14 @@ export interface Database {
           {
             foreignKeyName: "children_daycare_id_fkey"
             columns: ["daycare_id"]
+            isOneToOne: false
             referencedRelation: "daycares"
             referencedColumns: ["daycare_id"]
           },
           {
             foreignKeyName: "children_parent_id_fkey"
             columns: ["parent_id"]
+            isOneToOne: false
             referencedRelation: "parents"
             referencedColumns: ["user_id"]
           }
@@ -236,6 +242,7 @@ export interface Database {
           {
             foreignKeyName: "meal_reports_child_id_fkey"
             columns: ["child_id"]
+            isOneToOne: false
             referencedRelation: "children"
             referencedColumns: ["child_id"]
           }
@@ -273,12 +280,14 @@ export interface Database {
           {
             foreignKeyName: "messages_message_from_fkey"
             columns: ["message_from"]
+            isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["user_id"]
           },
           {
             foreignKeyName: "messages_messages_room_id_fkey"
             columns: ["messages_room_id"]
+            isOneToOne: false
             referencedRelation: "messages_room"
             referencedColumns: ["messages_room_id"]
           }
@@ -295,7 +304,7 @@ export interface Database {
         }
         Insert: {
           child_id?: string | null
-          created_at: string
+          created_at?: string
           created_by?: string | null
           daycare_id: string
           messages_room_id?: string
@@ -313,18 +322,21 @@ export interface Database {
           {
             foreignKeyName: "messages_room_child_id_fkey"
             columns: ["child_id"]
+            isOneToOne: false
             referencedRelation: "children"
             referencedColumns: ["child_id"]
           },
           {
             foreignKeyName: "messages_room_created_by_fkey"
             columns: ["created_by"]
+            isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["user_id"]
           },
           {
             foreignKeyName: "messages_room_daycare_id_fkey"
             columns: ["daycare_id"]
+            isOneToOne: false
             referencedRelation: "daycares"
             referencedColumns: ["daycare_id"]
           }
@@ -359,6 +371,7 @@ export interface Database {
           {
             foreignKeyName: "parents_user_id_fkey"
             columns: ["user_id"]
+            isOneToOne: true
             referencedRelation: "users"
             referencedColumns: ["user_id"]
           }
@@ -390,18 +403,21 @@ export interface Database {
           {
             foreignKeyName: "report_children_activity_report_id_fkey"
             columns: ["activity_report_id"]
+            isOneToOne: false
             referencedRelation: "activity_reports"
             referencedColumns: ["activity_report_id"]
           },
           {
             foreignKeyName: "report_children_child_id_fkey"
             columns: ["child_id"]
+            isOneToOne: false
             referencedRelation: "children"
             referencedColumns: ["child_id"]
           },
           {
             foreignKeyName: "report_children_incident_report_id_fkey"
             columns: ["incident_report_id"]
+            isOneToOne: false
             referencedRelation: "incident_reports"
             referencedColumns: ["incident_report_id"]
           }
@@ -439,6 +455,7 @@ export interface Database {
           {
             foreignKeyName: "sleep_reports_child_id_fkey"
             columns: ["child_id"]
+            isOneToOne: false
             referencedRelation: "children"
             referencedColumns: ["child_id"]
           }
@@ -473,12 +490,14 @@ export interface Database {
           {
             foreignKeyName: "teachers_daycare_id_fkey"
             columns: ["daycare_id"]
+            isOneToOne: false
             referencedRelation: "daycares"
             referencedColumns: ["daycare_id"]
           },
           {
             foreignKeyName: "teachers_user_id_fkey"
             columns: ["user_id"]
+            isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["user_id"]
           }
@@ -507,18 +526,21 @@ export interface Database {
           {
             foreignKeyName: "user_user_id_fkey"
             columns: ["user_id"]
+            isOneToOne: true
             referencedRelation: "users"
             referencedColumns: ["id"]
           },
           {
             foreignKeyName: "users_daycare_id_fkey"
             columns: ["daycare_id"]
+            isOneToOne: false
             referencedRelation: "daycares"
             referencedColumns: ["daycare_id"]
           },
           {
             foreignKeyName: "users_user_id_fkey"
             columns: ["user_id"]
+            isOneToOne: true
             referencedRelation: "users"
             referencedColumns: ["id"]
           }

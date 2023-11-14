@@ -38,12 +38,14 @@ export const createMessageRoom = async (
   if (messagesRoomError) throw messagesRoomError;
 
   if (!messagesRoomIds) return;
+
   const messagesData = messagesRoomIds.map(
     (idObj: { messages_room_id: string }) => {
       return {
         messages_room_id: idObj.messages_room_id,
         message_from: user!.id,
         body: body.body,
+        updated_at: new Date().toISOString()
       };
     }
   );
@@ -53,4 +55,14 @@ export const createMessageRoom = async (
     .from("messages")
     .insert(messagesData);
   if (messagesError) throw messagesError;
+
+  //Insert into check_message
+  const { error } = await supabase.from("check_messages").insert(
+    messagesRoomIds.map((roomId) => ({
+      user_id: user!.id,
+      last_read_time: new Date().toISOString(),
+      messages_room_id: roomId.messages_room_id,
+    }))
+  );
+  
 };

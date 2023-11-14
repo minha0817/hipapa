@@ -2,17 +2,13 @@
 import styles from "./parentMessages.module.scss";
 import { useDisclosure } from "@mantine/hooks";
 import { Modal, Button } from "@mantine/core";
-import { getChildren } from "@/app/api/get";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
 import { Child } from "@/app/api/getChild/types";
 import axios from "axios";
-import { AddAdminMessagesRoomModal } from "@/components/messages/adminMessage/addAdminMessagesRoomModal/addAdminMessagesRoomModal.component";
 import { AdminMessagesTable } from "@/components/messages/adminMessage/adminMessagesTable/adminMessagesTable.component";
 import { AddParentMessagesRoomModal } from "@/components/messages/parentMessage/addParentMessageRoomModal/addParentMessageRoomModal.component";
 import { MessageRoom } from "@/app/api/getMessagesRoom/types";
-
-//get messageRoom only for certain child.
 
 const parentMessagePage = () => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -22,6 +18,27 @@ const parentMessagePage = () => {
   const childId = child[0]?.childId;
 
   useEffect(() => {
+    const messageRooms = supabase
+      .channel("custom-all-channel")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "messages_room" },
+        () => {
+          axios
+            .post("/api/getMessageRoomsByChild", {
+              childId,
+            })
+            .then((res) => setMessageRooms(res.data))
+            .catch((error) => {
+              const {
+                response: { data, status },
+              } = error;
+              console.error(`Failed: ${status}`, data);
+            });
+        }
+      )
+      .subscribe();
+
     axios
       .post("/api/getChild")
       .then((res) => setChild([res.data]))
@@ -43,6 +60,10 @@ const parentMessagePage = () => {
           console.error(`Failed: ${status}`, data);
         });
     }
+
+    return () => {
+      messageRooms.unsubscribe();
+    };
   }, [supabase, childId]);
 
   return (

@@ -79,7 +79,7 @@ const AdminMessagesRowComponent: FC<
     return () => {
       checkMessages.unsubscribe();
     };
-  }, [supabase]);
+  }, [messageRoomId, supabase]);
 
   const handleRowClick = () => {
     openModal(data);

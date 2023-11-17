@@ -1,37 +1,45 @@
 "use client";
 import { FC, PropsWithChildren, useEffect, useState } from "react";
-import {
-  SegmentedControl,
-  Group,
-  Center,
-  Box,
-} from "@mantine/core";
+import { SegmentedControl, Group, Center, Box } from "@mantine/core";
 import styles from "./login.styles.module.scss";
 import { LuBaby } from "react-icons/lu";
 import { amaticScFontClass } from "@/lib/font";
 import AuthForm from "./authForm/authForm";
 
-
 type LoginProps = {
   // ...
-  type: string;
+  type: "parent" | "admin";
 };
 
 const LoginComponent: FC<PropsWithChildren<LoginProps>> = ({ type }) => {
-  const [value, setValue] = useState(type);
+  const [value, setValue] = useState<string>(type);
 
   useEffect(() => {
-    if(type === "parent"){
-      return setValue("parent")
-    }
-    setValue(value);
-  }, []);
+    setValue(type);
+
+    // if (type === "parent") {
+    //   return setValue("parent");
+    // }
+    // setValue(value);
+
+    // if (type === "parent") {
+    //   setValue("parent")
+    //   return;
+    // }
+
+    // setValue(prevValue => {
+    //   if (prevValue === "parent") return "admin";
+    //   return "parent"
+    // })
+
+    // if (value === "parent") setValue("admin");
+  }, [type]);
 
   // const saveToLocalStorage = (e: any) => {
   //   e.preventDefault();
   //   localStorage.setItem("value", value);
   // };
-  
+
   return (
     <div className={styles.login}>
       <div className="title">
@@ -67,7 +75,7 @@ const LoginComponent: FC<PropsWithChildren<LoginProps>> = ({ type }) => {
         )}
       </div>
       <div className="loginButton">
-        <AuthForm value={value}/>
+        <AuthForm value={value} />
       </div>
     </div>
   );

@@ -24,7 +24,7 @@ export default function AuthForm({ value }: any) {
     return () => {
       subscription.unsubscribe();
     };
-  }, [router, supabase.auth]);
+  }, [router, supabase.auth, value]);
 
   return (
     <Auth

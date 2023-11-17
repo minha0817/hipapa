@@ -14,8 +14,6 @@ type AdminMessagesTableProps = {
 const AdminMessagesTableComponent: FC<
   PropsWithChildren<AdminMessagesTableProps>
 > = ({ messageRooms }) => {
-  if (!messageRooms) return;
-
   const [opened, { open, close }] = useDisclosure(false);
   const [selectedRoom, setSelectedRoom] = useState<MessageRoom>();
 
@@ -25,6 +23,8 @@ const AdminMessagesTableComponent: FC<
       open();
     }
   };
+
+  if (!messageRooms) return null;
 
   return (
     <div className={styles.adminMessagesTable}>

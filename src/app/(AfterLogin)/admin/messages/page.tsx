@@ -4,14 +4,14 @@ import { useDisclosure } from "@mantine/hooks";
 import { Modal, Button } from "@mantine/core";
 import { getChildren } from "@/app/api/get";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Child } from "@/app/api/getChild/types";
 import axios from "axios";
 import { AddAdminMessagesRoomModal } from "@/components/messages/adminMessage/addAdminMessagesRoomModal/addAdminMessagesRoomModal.component";
 import { AdminMessagesTable } from "@/components/messages/adminMessage/adminMessagesTable/adminMessagesTable.component";
 import { MessageRoom } from "@/app/api/getMessagesRoom/types";
 
-const adminMessagesPage = () => {
+const AdminMessagesPage: FC = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const [children, setChildren] = useState<Child[]>([]);
   const [messageRooms, setMessageRooms] = useState<MessageRoom[]>([]);
@@ -75,4 +75,4 @@ const adminMessagesPage = () => {
   );
 };
 
-export default adminMessagesPage;
+export default AdminMessagesPage;

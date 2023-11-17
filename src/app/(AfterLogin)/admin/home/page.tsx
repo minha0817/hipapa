@@ -30,7 +30,7 @@ const AdminHomePage = () => {
     getChildrenCheckIn(supabase).then((data: any) => {
       return setChildrenCheckInData(data);
     });
-  }, []);
+  }, [supabase]);
 
   useEffect(() => {
     const checkIn = supabase

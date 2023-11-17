@@ -4,12 +4,12 @@ import { Affix } from "@/components/affix/affix.component";
 import { Children } from "@/components/children/children.component";
 import { Incident } from "@/components/reportForm/incidentForm/incident.component";
 import { Meal } from "@/components/reportForm/mealForm/meal.component";
-import { Child } from "@/dbModels/types";
 import { Button, Divider } from "@mantine/core";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
 import styles from "./adminReportsPage.module.scss";
 import { Sleep } from "@/components/reportForm/sleepForm/sleep.component";
+import { Child } from "@/app/api/getChild/types";
 
 type ReportType = "Incident" | "Activity" | "Meal" | "Sleep";
 
@@ -23,7 +23,7 @@ const ReportsPage = () => {
 
   useEffect(() => {
     getChildren(supabase).then((data) => setChildren(data));
-  }, []);
+  }, [supabase]);
 
   //Set a report
   const handleButtons = (report: ReportType) => {
@@ -49,7 +49,7 @@ const ReportsPage = () => {
   const handleSelectAllChildren = () => {
     //Get all children's id
     const allChildrenIds = children.map((child) => {
-      return child.child_id;
+      return child.childId;
     });
 
     setSelectedChildren((prevSelectedChildren) => {

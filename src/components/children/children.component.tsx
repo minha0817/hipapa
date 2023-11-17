@@ -2,8 +2,8 @@
 import { FC, PropsWithChildren } from "react";
 import { Button, Group } from "@mantine/core";
 import { RxAvatar } from "react-icons/rx";
-import { Child } from "@/dbModels/types";
 import styles from "./children.styles.module.scss";
+import { Child } from "@/app/api/getChild/types";
 
 type ChildrenProps = {
   childrenList: Child[];
@@ -28,9 +28,9 @@ const ChildrenComponent: FC<PropsWithChildren<ChildrenProps>> = ({
         {/* <Avatar size={30} src={teacher.avatar} radius={30} /> */}
 
         <Button
-          variant={checkActive(child.child_id)}
+          variant={checkActive(child.childId)}
           color="dark"
-          onClick={() => handleSelectChildren(child.child_id, index)}
+          onClick={() => handleSelectChildren(child.childId, index)}
           className="childBtn"
         >
           <RxAvatar />

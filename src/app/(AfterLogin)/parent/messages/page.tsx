@@ -10,7 +10,7 @@ import { AdminMessagesTable } from "@/components/messages/adminMessage/adminMess
 import { AddParentMessagesRoomModal } from "@/components/messages/parentMessage/addParentMessageRoomModal/addParentMessageRoomModal.component";
 import { MessageRoom } from "@/app/api/getMessagesRoom/types";
 
-const parentMessagePage = () => {
+const ParentMessagePage = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const supabase = createClientComponentClient();
   const [child, setChild] = useState<Child[]>([]);
@@ -80,4 +80,4 @@ const parentMessagePage = () => {
   );
 };
 
-export default parentMessagePage;
+export default ParentMessagePage;

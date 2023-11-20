@@ -25,7 +25,7 @@ export const getReport = async (supabase: SupabaseClient<Database>) => {
     .eq("parent_id", user.id)
     .single();
 
-  const childId = childIdObj?.child_id;
+  const childId = childIdObj!.child_id;
   //Get reports
   const { data: activityReports, error: activityReportError } = await supabase
     .from("report_children")

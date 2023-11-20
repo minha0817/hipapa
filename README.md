@@ -7,15 +7,17 @@ They can communicate through the web page about children and what happens at day
 
 ## 👀 Features 
 
-* Login / Logout with Firebase 
-* Display a list of children
+* Login / Logout with Supabase 
+* Display a list of children and teachers
+* Check in / out 
 * Add new incident reports  
-* Upload a picture with Cloudinary 
-* Get existed incident report 
+* Communicate between teachers and parents through messages 
+* Alarm badge for new messages
+
 
 ## 🌸 Deployed domain
 
-Coming soon! 🥸
+https://hipapa.vercel.app/
  
 
 ## 💻 Tech Stack 

@@ -22,9 +22,11 @@ const ChildrenCheckInComponent: FC<PropsWithChildren<ChildrenCheckInProps>> = ({
   const supabase = createClientComponentClient();
 
   const findCurrentUserCheckinState = (childId: string) => {
+  //undefined
     const clickedChild = checkInData.find((checkindata: any) => {
       return checkindata.child_id === childId;
     });
+
     return clickedChild;
   };
 
@@ -45,9 +47,10 @@ const ChildrenCheckInComponent: FC<PropsWithChildren<ChildrenCheckInProps>> = ({
   };
 
   const isUserCheckedIn = (user: any) => {
-    const foundUser: any = findCurrentUserCheckinState(user.child_id);
+    const foundUser: any = findCurrentUserCheckinState(user.childId);
     return foundUser;
   };
+
 
   return (
     <ScrollArea className={styles.teachers}>

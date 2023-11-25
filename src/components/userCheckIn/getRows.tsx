@@ -10,7 +10,8 @@ type Rows = {
 }
 
 export const GetRows: FC<PropsWithChildren<Rows>> = ({users, isUserCheckedIn, handleUserCheckIn }) => {
-  return users.map((user: any) => (
+  return users.map((user: any) => {
+    return (
     <tr key={user.name}>
       <td>
         <Group spacing="sm">
@@ -41,5 +42,5 @@ export const GetRows: FC<PropsWithChildren<Rows>> = ({users, isUserCheckedIn, ha
         </td>
       )}
     </tr>
-  ));
+  )});
 };

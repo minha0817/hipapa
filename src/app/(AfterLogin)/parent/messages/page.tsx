@@ -18,27 +18,6 @@ const ParentMessagePage = () => {
   const childId = child[0]?.childId;
 
   useEffect(() => {
-    const messageRooms = supabase
-      .channel("custom-all-channel")
-      .on(
-        "postgres_changes",
-        { event: "*", schema: "public", table: "messages_room" },
-        () => {
-          axios
-            .post("/api/getMessageRoomsByChild", {
-              childId,
-            })
-            .then((res) => setMessageRooms(res.data))
-            .catch((error) => {
-              const {
-                response: { data, status },
-              } = error;
-              console.error(`Failed: ${status}`, data);
-            });
-        }
-      )
-      .subscribe();
-
     axios
       .post("/api/getChild")
       .then((res) => setChild([res.data]))
@@ -60,6 +39,27 @@ const ParentMessagePage = () => {
           console.error(`Failed: ${status}`, data);
         });
     }
+
+    const messageRooms = supabase
+      .channel("custom-all-channel")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "messages_room" },
+        () => {
+          axios
+            .post("/api/getMessageRoomsByChild", {
+              childId,
+            })
+            .then((res) => setMessageRooms(res.data))
+            .catch((error) => {
+              const {
+                response: { data, status },
+              } = error;
+              console.error(`Failed: ${status}`, data);
+            });
+        }
+      )
+      .subscribe();
 
     return () => {
       messageRooms.unsubscribe();
